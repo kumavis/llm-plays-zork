@@ -1,0 +1,10 @@
+{
+  "name": "play-zork",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {
+    "wasm-ffi": "^0.3.0"
+  }
+}
