@@ -29,42 +29,50 @@ async function main () {
     // console.log(`header: ${msg}`)
     currentLocation = msg
   });
-  let scratchSpace = '', ideaList = '', responseComprehension = '', hintsList = ''
+  let scratchSpace = (
+  `Please use this space to maintain your notes and insights during gameplay
+  Update this section with relevant information as you progress through the game. You can use the following structure as a guideline and modify it according to your needs:
+  
+  - Inventory
+  - Discovered Locations
+  - Non-Player Characters (NPCs)
+  - Scratch Space
+  - To-Do List
+  - Idea List (categorized)
+  - Open Puzzles
+  - General Hints (categorized and prioritized)
+  - Past Mistakes`
+  )
 
   await zork.start();
 
   let template = await fs.readFile('./examples/template.txt', 'utf8');
 
-  const formTemplate = {
-    responseComprehension: 'Game Response comprehension',
-    hintsList: 'Hints and Tips list',
-    scratchSpace: 'Scratch space',
-    ideaList: 'Ideas to progress',
-    nextAction: 'Next action intention',
-    command: 'Game command',
-  }
+  // const formTemplate = {
+  //   responseComprehension: 'Game Response comprehension',
+  //   hintsList: 'Hints and Tips list',
+  //   scratchSpace: 'Scratch space',
+  //   ideaList: 'Ideas to progress',
+  //   nextAction: 'Next action intention',
+  //   command: 'Game command',
+  // }
 
-  const formHints = {
-    responseComprehension: '[understanding of the games response to your action and explain any problems here]',
-    hintsList: '[list general hints and tips for a new player learning how to form commands and explore the game here]',
-    scratchSpace: '[you can save some notes here about things you want to remember]',
-    ideaList: '[list ideas briefly here]',
-    nextAction: '[describe the next action and intention here in plain english]',
-    command: '[command here]',
-  }
+  // const formHints = {
+  //   responseComprehension: '[understanding of the games response to your action and explain any problems here]',
+  //   hintsList: '[list general hints and tips for a new player learning how to form commands and explore the game here]',
+  //   scratchSpace: '[you can save some notes here about things you want to remember]',
+  //   ideaList: '[list ideas briefly here]',
+  //   nextAction: '[describe the next action and intention here in plain english]',
+  //   command: '[command here]',
+  // }
 
-  const promptFormSection = generateStringFromTemplate(formTemplate, formHints);
-  template += `Respond in the following format:\n\`\`\`${promptFormSection}\n\`\`\``
+  // const promptFormSection = generateStringFromTemplate(formTemplate, formHints);
+  // template += `Respond in the following format:\n\`\`\`${promptFormSection}\n\`\`\``
 
   try {
     let rawResponse = ''
     while (true) {
       const recentHistory = history.slice(-36).join('\n============\n')
-      const lastMove = history.slice(-1)[0]
-      console.log(new Array(4).fill().join(`\n`))
-      console.log(`${currentLocation}`)
-      console.log(`${lastMove}\n`)
-      console.log(`${rawResponse}\n`)
 
       rawResponse = await rawPrompt(model, {
         template,
@@ -72,56 +80,116 @@ async function main () {
           recentHistory,
           currentLocation,
           scratchSpace,
-          ideaList,
-          hintsList,
+          // ideaList,
+          // hintsList,
         },
       })
-      const respObj = parseSectionsFromTemplate(rawResponse, formTemplate)
+
+      // const respObj = parseSectionsFromTemplate(rawResponse, formTemplate)
+      const respObj = parseResponse(rawResponse)
+      const {
+        // 'Result of the last attempted action': _responseComprehension,
+        'Updated Player\'s Note Space': _scratchSpace,
+        // 'Intention of the next action': _intention,
+        'Command to perform the next action': _command,
+      } = respObj
+
       // update scratch space and todolist
-      scratchSpace = respObj.scratchSpace
-      ideaList = respObj.ideaList
-      hintsList = respObj.hintsList
-      responseComprehension = respObj.responseComprehension
+      if (_scratchSpace !== undefined) {
+        scratchSpace = _scratchSpace
+      }
+      // responseComprehension = _responseComprehension
       // add move to history and input it
-      history.push(`Player: ${respObj.command}`)
-      await zork.input(respObj.command);
+      history.push(`Player: ${_command}`)
+      await zork.input(_command);
+
+      // log move and result
+      const lastMove = history.slice(-1)[0]
+      console.log(new Array(4).fill().join(`\n`))
+      console.log(`${rawResponse}\n`)
+      console.dir(respObj)
+      console.log(`${currentLocation}`)
+      console.log(`${htmlToTerminal(lastMove)}\n`)
+
     }
   } catch (err) {
     console.log(err && err.toJSON && err.toJSON() || err)
   }
 }
 
-function parseSectionsFromTemplate(str, sectionsTemplate) {
-  const regexMap = {};
+function parseResponse(response) {
+  const lines = response.split('\n');
+  const parsedResponse = {};
+  let currentKey = '';
 
-  // Generate regular expressions for each section in the template object
-  Object.entries(sectionsTemplate).forEach(([key, value]) => {
-    const regex = new RegExp(`${value}:\\s*([\\s\\S]*?)(?:\\n\\n|$)`, 'i');
-    regexMap[key] = regex;
-  });
+  for (let line of lines) {
+    const keyValueMatch = line.match(/^\*\*(.+?):\*\*\s*$/);
 
-  // Use the regular expressions to extract the sections from the input string
-  const sections = {};
-  Object.entries(regexMap).forEach(([key, regex]) => {
-    const match = str.match(regex);
-    sections[key] = match ? match[1].trim() : null;
-  });
+    if (keyValueMatch) {
+      currentKey = keyValueMatch[1].trim();
+      parsedResponse[currentKey] = '';
+    } else {
+      if (currentKey) {
+        parsedResponse[currentKey] += line.trim() + '\n';
+      }
+    }
+  }
 
-  return sections;
+  // Trim trailing newlines from values
+  for (let key in parsedResponse) {
+    parsedResponse[key] = parsedResponse[key].trim();
+  }
+
+  return parsedResponse;
 }
 
+function htmlToTerminal(input) {
+  // Replace <br> tags with newlines
+  let result = input.replace(/<br>/g, '\n');
 
-function generateStringFromTemplate(sectionsTemplate, values) {
-  // Generate an array of strings for each section in the template object
-  const sections = [];
-  Object.entries(sectionsTemplate).forEach(([key, value]) => {
-    const sectionValue = values[key] || '';
-    sections.push(`${value}:\n${sectionValue}\n`);
-  });
+  // Replace <span class="room"> with bold text formatting
+  result = result.replace(/<span class="room">/g, '\x1b[1m');
+  // Replace <span class="object"> with underlined text formatting
+  result = result.replace(/<span class="object">/g, '\x1b[4m');
+  // Replace <span> with no formatting (maintaining the text inside the tag)
+  result = result.replace(/<span>/g, '');
+  // Replace </span> with reset text formatting
+  result = result.replace(/<\/span>/g, '\x1b[0m');
 
-  // Join the section strings together and return the result
-  return sections.join('\n');
+  return result;
 }
+
+// function parseSectionsFromTemplate(str, sectionsTemplate) {
+//   const regexMap = {};
+
+//   // Generate regular expressions for each section in the template object
+//   Object.entries(sectionsTemplate).forEach(([key, value]) => {
+//     const regex = new RegExp(`${value}:\\s*([\\s\\S]*?)(?:\\n\\n|$)`, 'i');
+//     regexMap[key] = regex;
+//   });
+
+//   // Use the regular expressions to extract the sections from the input string
+//   const sections = {};
+//   Object.entries(regexMap).forEach(([key, regex]) => {
+//     const match = str.match(regex);
+//     sections[key] = match ? match[1].trim() : null;
+//   });
+
+//   return sections;
+// }
+
+
+// function generateStringFromTemplate(sectionsTemplate, values) {
+//   // Generate an array of strings for each section in the template object
+//   const sections = [];
+//   Object.entries(sectionsTemplate).forEach(([key, value]) => {
+//     const sectionValue = values[key] || '';
+//     sections.push(`${value}:\n${sectionValue}\n`);
+//   });
+
+//   // Join the section strings together and return the result
+//   return sections.join('\n');
+// }
 
 async function rawPrompt (model, opts) {
   const prompt = new PromptTemplate({
