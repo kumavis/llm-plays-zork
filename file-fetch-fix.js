@@ -1,8 +1,9 @@
 import fs from 'fs';
 
 const oldFetch = globalThis.fetch;
-globalThis.fetch = async (url, ...args) => {
-  if (url.startsWith('file://')) {
+globalThis.fetch = async (requestObj, ...args) => {
+  if (typeof requestObj === 'string' && requestObj.startsWith('file://')) {
+    const url = requestObj;
     console.warn('file fetch fix:', url);
     const buffer = await fs.promises.readFile(url.slice(7));
     return {
@@ -12,5 +13,5 @@ globalThis.fetch = async (url, ...args) => {
       arrayBuffer: async () => buffer,
     }
   }
-  return oldFetch(url, ...args);
+  return oldFetch(requestObj, ...args);
 };

@@ -160,13 +160,13 @@ const onmessage = async (ev) => {
 //   }
 // });
 
-async function main () {
-  api.events.on('header', (msg) => {
-    console.log(`Location: ${msg}`);
-  });
-  api.events.on('print', (msg) => {
-    console.log(msg);
-  });
+async function setup () {
+  // api.events.on('header', (msg) => {
+  //   console.log(`Location: ${msg}`);
+  // });
+  // api.events.on('print', (msg) => {
+  //   console.log(msg);
+  // });
 
   const fileBuffer = await (await fetch('file://./zork1.z3')).arrayBuffer();
   await api.load({
@@ -177,14 +177,18 @@ async function main () {
   // await api.load_savestate(
   //   'Rk9STQAAAS5JRlpTSUZoZAAAAA0AWDg0MDcyNqEpAFkMAFN0a3MAAABOAAAAAAAAAAYkkSSFJH8AtAABAAEAT54aAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAFVNG48AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAKQ01lbQAAALUA'
   // )
-  await api.start()
+  // await api.start()
   // {
 //   "type": "input",
 //   "msg": "look"
 // }
+
+  return api;
 }
 
-main();
+// main();
+
+export { setup };
 
 // {
 //   "type": "load",
