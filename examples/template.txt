@@ -173,6 +173,11 @@ Your ideas for progression:
 {ideaList}
 ```
 
+Your tips and hints for new players:
+```
+{ideaList}
+```
+
 Here are some tips:
   - Think through your move carefully.
   - Only describe your action simply, like: "go north" or "take knife" or "examine table"

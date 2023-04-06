@@ -29,7 +29,7 @@ async function main () {
     // console.log(`header: ${msg}`)
     currentLocation = msg
   });
-  let scratchSpace = '', ideaList = '', responseComprehension = ''
+  let scratchSpace = '', ideaList = '', responseComprehension = '', hintsList = ''
 
   await zork.start();
 
@@ -37,6 +37,7 @@ async function main () {
 
   const formTemplate = {
     responseComprehension: 'Game Response comprehension',
+    hintsList: 'Hints and Tips list',
     scratchSpace: 'Scratch space',
     ideaList: 'Ideas to progress',
     nextAction: 'Next action intention',
@@ -45,6 +46,7 @@ async function main () {
 
   const formHints = {
     responseComprehension: '[understanding of the games response to your action and explain any problems here]',
+    hintsList: '[list general hints and tips for a new player learning how to form commands and explore the game here]',
     scratchSpace: '[you can save some notes here about things you want to remember]',
     ideaList: '[list ideas briefly here]',
     nextAction: '[describe the next action and intention here in plain english]',
@@ -60,9 +62,9 @@ async function main () {
       const recentHistory = history.slice(-36).join('\n============\n')
       const lastMove = history.slice(-1)[0]
       console.log(new Array(4).fill().join(`\n`))
-      console.log(`${rawResponse}\n`)
       console.log(`${currentLocation}`)
-      console.log(`${lastMove}`)
+      console.log(`${lastMove}\n`)
+      console.log(`${rawResponse}\n`)
 
       rawResponse = await rawPrompt(model, {
         template,
@@ -71,12 +73,14 @@ async function main () {
           currentLocation,
           scratchSpace,
           ideaList,
+          hintsList,
         },
       })
       const respObj = parseSectionsFromTemplate(rawResponse, formTemplate)
       // update scratch space and todolist
       scratchSpace = respObj.scratchSpace
       ideaList = respObj.ideaList
+      hintsList = respObj.hintsList
       responseComprehension = respObj.responseComprehension
       // add move to history and input it
       history.push(`Player: ${respObj.command}`)
