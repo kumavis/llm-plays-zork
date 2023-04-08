@@ -12,9 +12,7 @@ main()
 
 async function main () {
   const model = new ChatOpenAI({
-    // temperature: 0,
     openAIApiKey: OPENAI_API_KEY,
-    // vectorStore,
   }, {
     // basePath: "https://oai.hconeai.com/v1",
   });
@@ -47,27 +45,6 @@ async function main () {
   await zork.start();
 
   let template = await fs.readFile('./examples/template.txt', 'utf8');
-
-  // const formTemplate = {
-  //   responseComprehension: 'Game Response comprehension',
-  //   hintsList: 'Hints and Tips list',
-  //   scratchSpace: 'Scratch space',
-  //   ideaList: 'Ideas to progress',
-  //   nextAction: 'Next action intention',
-  //   command: 'Game command',
-  // }
-
-  // const formHints = {
-  //   responseComprehension: '[understanding of the games response to your action and explain any problems here]',
-  //   hintsList: '[list general hints and tips for a new player learning how to form commands and explore the game here]',
-  //   scratchSpace: '[you can save some notes here about things you want to remember]',
-  //   ideaList: '[list ideas briefly here]',
-  //   nextAction: '[describe the next action and intention here in plain english]',
-  //   command: '[command here]',
-  // }
-
-  // const promptFormSection = generateStringFromTemplate(formTemplate, formHints);
-  // template += `Respond in the following format:\n\`\`\`${promptFormSection}\n\`\`\``
 
   try {
     let rawResponse = ''
@@ -158,38 +135,6 @@ function htmlToTerminal(input) {
 
   return result;
 }
-
-// function parseSectionsFromTemplate(str, sectionsTemplate) {
-//   const regexMap = {};
-
-//   // Generate regular expressions for each section in the template object
-//   Object.entries(sectionsTemplate).forEach(([key, value]) => {
-//     const regex = new RegExp(`${value}:\\s*([\\s\\S]*?)(?:\\n\\n|$)`, 'i');
-//     regexMap[key] = regex;
-//   });
-
-//   // Use the regular expressions to extract the sections from the input string
-//   const sections = {};
-//   Object.entries(regexMap).forEach(([key, regex]) => {
-//     const match = str.match(regex);
-//     sections[key] = match ? match[1].trim() : null;
-//   });
-
-//   return sections;
-// }
-
-
-// function generateStringFromTemplate(sectionsTemplate, values) {
-//   // Generate an array of strings for each section in the template object
-//   const sections = [];
-//   Object.entries(sectionsTemplate).forEach(([key, value]) => {
-//     const sectionValue = values[key] || '';
-//     sections.push(`${value}:\n${sectionValue}\n`);
-//   });
-
-//   // Join the section strings together and return the result
-//   return sections.join('\n');
-// }
 
 async function rawPrompt (model, opts) {
   const prompt = new PromptTemplate({
