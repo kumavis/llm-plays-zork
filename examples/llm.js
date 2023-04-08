@@ -95,6 +95,7 @@ async function main () {
 }
 
 function parseResponse(response) {
+  response = response.replaceAll('<br>', '')
   const lines = response.split('\n');
   const parsedResponse = {};
   let currentKey = '';
