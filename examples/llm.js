@@ -31,15 +31,25 @@ async function main () {
   `Please use this space to maintain your notes and insights during gameplay
   Update this section with relevant information as you progress through the game. You can use the following structure as a guideline and modify it according to your needs:
   
-  - Inventory
-  - Discovered Locations
-  - Non-Player Characters (NPCs)
-  - Scratch Space
-  - To-Do List
-  - Idea List (categorized)
-  - Open Puzzles
-  - General Hints (categorized and prioritized)
-  - Past Mistakes`
+  - Inventory:
+  - Discovered Locations:
+  - Turns spent at current location (increment or reset this appropriately): 0
+  - Scratch Space:
+  - To-Do List:
+  - Idea List (categorized):
+  - Open Puzzles:
+  - General Hints (categorized and prioritized):
+    - Think through your move carefully.
+    - Dont include the location of the item you're interacting with
+    - Only perform a single action per turn.
+    - Avoid providing instructions where the game responds like:
+      - "I don't know the word"
+      - "That sentence isn't one I recognize."
+    - Dont repeat the same action over and over again.
+    - Dont use inexact words like "any"
+    - The "game command" section should be a single extremely simple instruction in all caps trying to perform your intended action, like: "GO NORTH" or "TAKE KNIFE" or "EXAMINE TABLE"
+    - If you get stuck and can't find a solution, try exploring other areas. You may find something that will help you progress.
+  - Past Mistakes:`
   )
 
   await zork.start();
@@ -57,12 +67,9 @@ async function main () {
           recentHistory,
           currentLocation,
           scratchSpace,
-          // ideaList,
-          // hintsList,
         },
       })
 
-      // const respObj = parseSectionsFromTemplate(rawResponse, formTemplate)
       const respObj = parseResponse(rawResponse)
       const {
         // 'Result of the last attempted action': _responseComprehension,
@@ -70,24 +77,26 @@ async function main () {
         // 'Intention of the next action': _intention,
         'Command to perform the next action': _command,
       } = respObj
+      if (_command === undefined) {
+        console.info(`>>> Failed to parse response:\n${rawResponse}`)
+        console.dir(respObj)
+      }
 
-      // update scratch space and todolist
+      // update scratch space
       if (_scratchSpace !== undefined) {
         scratchSpace = _scratchSpace
       }
       // responseComprehension = _responseComprehension
       // add move to history and input it
       history.push(`Player: ${_command}`)
-      await zork.input(_command);
+      const messages = await zork.input(_command);
 
       // log move and result
-      const lastMove = history.slice(-1)[0]
+      const lastMove = messages.join('\n')
       console.log(new Array(4).fill().join(`\n`))
       console.log(`${rawResponse}\n`)
-      console.dir(respObj)
       console.log(`${currentLocation}`)
       console.log(`${htmlToTerminal(lastMove)}\n`)
-
     }
   } catch (err) {
     console.log(err && err.toJSON && err.toJSON() || err)
@@ -95,7 +104,9 @@ async function main () {
 }
 
 function parseResponse(response) {
-  response = response.replaceAll('<br>', '')
+  // remove anomalous line endings
+  response = response.replaceAll('<br>', '\n')
+  response = response.replaceAll('\\\n', '\n')
   const lines = response.split('\n');
   const parsedResponse = {};
   let currentKey = '';

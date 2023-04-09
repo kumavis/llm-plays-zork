@@ -54,5 +54,11 @@ Remember to update the Player's Note Space, including the General Hints section,
 **Intention of the next action:**
 [response here]
 
+**First draft of command to perform the next action:**
+[response here]
+
+**Review of first draft of command. is it valid? is it simple? did you try this before and fail? is there more than one action in the command?:**
+[response here]
+
 **Command to perform the next action:**
 [response here]

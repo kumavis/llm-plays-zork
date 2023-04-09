@@ -115,8 +115,13 @@ const api = {
     return 'loaded';
   },
   input: async (msg) => {
+    const messages = [];
+    const onGameMessage = (msg) => messages.push(msg);
+    events.on('print', onGameMessage);
     zmachine.feed(msg);
     step();
+    events.off('print', onGameMessage);
+    return messages;
   },
   undo: async () => {
     const ok = zmachine.undo();
@@ -178,41 +183,8 @@ async function setup () {
   //   'Rk9STQAAAS5JRlpTSUZoZAAAAA0AWDg0MDcyNqEpAFkMAFN0a3MAAABOAAAAAAAAAAYkkSSFJH8AtAABAAEAT54aAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAFVNG48AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAKQ01lbQAAALUA'
   // )
   // await api.start()
-  // {
-//   "type": "input",
-//   "msg": "look"
-// }
 
   return api;
 }
 
-// main();
-
 export { setup };
-
-// {
-//   "type": "load",
-//   "msg": {
-//       "filename": "zork1",
-//       "file": {}
-//   }
-// }
-
-// {
-//   "type": "enable:instructions",
-//   "msg": false
-// }
-
-// {
-//   "type": "load_savestate",
-//   "msg": "Rk9STQAAAS5JRlpTSUZoZAAAAA0AWDg0MDcyNqEpAFkMAFN0a3MAAABOAAAAAAAAAAYkkSSFJH8AtAABAAEAT54aAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAFVNG48AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAKQ01lbQAAALUA/wD/AP8ADLS1AP8A/wD/AP8A/wD/ACkQAASxAP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8AMbQAfqAAAgEATrQAAKAABgQAIAQAAiIA/wAKyG9VAAIob2oAAAH//4DwAAH//4B8AAAB//+AEAC0AQABBAEA6nNuZWsA/wD/AP8A/wBkKiUqJwADKlMqVQABKmsAASqBAP8A/wD/AA=="
-// }
-
-// {
-//   "type": "start"
-// }
-
-// {
-//   "type": "input",
-//   "msg": "look"
-// }
