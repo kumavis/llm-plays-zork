@@ -1,20 +1,17 @@
 import * as fs from 'fs/promises';
-import { LLMChain } from "langchain/chains";
-import { PromptTemplate } from "langchain/prompts";
-import { ChatOpenAI } from "langchain/chat_models";
-import dotenv from "dotenv";
-import { setup } from "../index.js";
+import dotenv from 'dotenv';
+import { ChatOpenAI } from '@langchain/openai';
+import { PromptTemplate } from '@langchain/core/prompts';
+import { setup } from '../index.js';
 
 dotenv.config();
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 main()
 
 async function main () {
+
   const model = new ChatOpenAI({
-    openAIApiKey: OPENAI_API_KEY,
-  }, {
-    // basePath: "https://oai.hconeai.com/v1",
+    model: 'gpt-4o-mini',
   });
 
   const zork = await setup()
@@ -149,17 +146,11 @@ function htmlToTerminal(input) {
 }
 
 async function rawPrompt (model, opts) {
-  const prompt = new PromptTemplate({
-    template: opts.template,
-    inputVariables: Object.keys(opts.inputVariables),
-  })
-  const chain = new LLMChain({
-    prompt: prompt,
-    llm: model,
-  });
-  // console.dir(opts);
-  let response = await chain.call(opts.inputVariables);
-  // console.log('response', response);
-  // console.dir({ response })
-  return response.text;
+  const prompt = PromptTemplate.fromTemplate(
+    opts.template,
+  );
+  const chain = prompt.pipe(model);
+  const response = await chain.invoke(opts.inputVariables);
+
+  return response.content;
 }
