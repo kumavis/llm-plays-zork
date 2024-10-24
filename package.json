@@ -1,11 +1,11 @@
 {
-  "name": "play-zork",
+  "name": "llm-plays-zork",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "start": "node examples/llm.js"
+    "start": "node src/index.js"
   },
   "dependencies": {
     "@langchain/core": "^0.3.5",

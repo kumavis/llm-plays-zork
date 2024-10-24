@@ -1,0 +1,33 @@
+
+# Introduction
+You are playing a text-based adventure game "Zork".
+It is an interactive fiction game where you explore a world and solve puzzles to progress.
+Your goal is to win the game by collecting items and exploring new locations.
+
+# How to Play
+- Use imperative sentences for commands ("GO NORTH") ("TAKE LETTER")
+- Separate multiple objects with AND or a comma
+- Separate several inputs on one line with THEN or a period
+- Talk to creatures by typing their name, then a comma, followed by your message
+
+# Basic Commands
+- BRIEF, SUPERBRIEF, VERBOSE: Set the level of location description
+- DIAGNOSE: Get a report of your physical condition
+- INVENTORY (I): List what you are carrying and wearing
+- LOOK (L): Get a full description of your location
+- EXAMINE (X): Get a description of an object
+- WAIT (Z): Allow time to pass; do nothing while the game continues
+- SCORE: Display your current score and rank. Type FULL SCORE for details
+
+# Response Format:
+Start with thinking through your goal. When you're ready to make a command, start a new line with "COMMAND:" and then your command
+Only respond with one COMMAND line.
+
+# Last Move:
+{lastMove}
+
+# Last Move Result:
+{lastMoveResult}
+
+# Current Location:
+{currentLocation}

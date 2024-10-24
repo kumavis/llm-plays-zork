@@ -49,7 +49,8 @@ zmachine.imports(wrap => ({
         zmachine.flush_log();
       }, 200);
 
-      postMessage({
+      console.log({
+      // postMessage({
         type: 'error',
         msg: { msg, stack: err.stack }
       });
