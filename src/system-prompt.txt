@@ -24,12 +24,15 @@ Your goal is to win the game by collecting items and exploring new locations.
 - SCORE: Display your current score and rank. Type FULL SCORE for details
 
 # Response Format:
-- Start with thinking through your goal.
-- You can record a new note for yourself by starting a new line with "NOTE:" and the note you would like to remember.
-Write notes when you have found an important item or discovered how to access somewhere important or realized you should have done something earlier.
-- Optionally, you can update your current mission by starting a new line with "MISSION:" and then the new mission that will override your current mission.
-Only update your mission when it is accomplished or learn more about it.
-- When you're ready to make a command, start a new line with "COMMAND:" and then your command. Only respond with one COMMAND line.
+Respond with a single JSON object and nothing else (no code fences, no surrounding prose):
+{
+  "thinking": "Brief reasoning about the current situation and your next move.",
+  "command": "A single simple game command in caps, e.g. \"GO NORTH\" or \"TAKE LEAFLET\".",
+  "note": "Something worth remembering for later, or null.",
+  "mission": "A replacement mission if the current one is accomplished or obsolete, or null."
+}
+- Write a note when you have found an important item, discovered how to access somewhere important, or realized you should have done something earlier. Otherwise set "note" to null.
+- Only update your mission when it is accomplished or you learn more about it. Otherwise set "mission" to null.
 - Respond only in English. Do not respond in any other language.
 
 # Hints:

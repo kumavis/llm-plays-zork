@@ -1,20 +1,20 @@
 {
   "name": "llm-plays-zork",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "An LLM plays Zork I through an OpenAI-compatible API and a z-machine WebAssembly interpreter",
   "type": "module",
   "license": "MIT",
+  "repository": "github:kumavis/llm-plays-zork",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "test": "node --test"
   },
   "dependencies": {
-    "@langchain/core": "^0.3.5",
-    "@langchain/openai": "^0.3.4",
-    "langchain": "^0.3.2",
+    "openai": "^7.4.0",
     "wasm-ffi": "^0.3.0"
-  },
-  "devDependencies": {
-    "dotenv": "^16.0.3"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
