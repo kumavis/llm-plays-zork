@@ -19,6 +19,7 @@ await main();
 async function main() {
   const chatHistory = [];
   const agent = createAgent({ systemPrompt });
+  console.log(styleText('blue', `Player backend: ${agent.name} (${agent.model})`));
 
   let currentMission = INITIAL_MISSION;
   const notes = [];
@@ -47,11 +48,11 @@ async function main() {
       continue;
     }
 
-    if (turn.mission) {
+    if (turn.mission && turn.mission !== currentMission) {
       currentMission = turn.mission;
       console.log(styleText('blue', `Mission updated: ${currentMission}`));
     }
-    if (turn.note) {
+    if (turn.note && !notes.includes(turn.note)) {
       notes.push(turn.note);
       console.log(styleText('cyan', `Note: ${turn.note}`));
     }
