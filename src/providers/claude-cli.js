@@ -48,7 +48,6 @@ export function createClaudeCliProvider({ systemPrompt }) {
     async requestCommands(gameOutputs) {
       const prompt = gameOutputs.join('\n')
         || 'Please submit your next command with a COMMAND: line.';
-      history.push({ role: 'user', content: prompt });
 
       let raw;
       if (sessionId === null) {
@@ -60,11 +59,13 @@ export function createClaudeCliProvider({ systemPrompt }) {
           // Session may have expired — start fresh with the full transcript.
           console.warn(`claude CLI resume failed (${err.message}), starting a new session.`);
           sessionId = null;
-          raw = await invoke(formatTranscript(history), { resume: false });
+          raw = await invoke(formatTranscript([...history, { role: 'user', content: prompt }]), { resume: false });
         }
       }
 
-      history.push({ role: 'assistant', content: raw });
+      // Commit only after a successful exchange, so a retried request
+      // rebuilds the same transcript instead of double-appending.
+      history.push({ role: 'user', content: prompt }, { role: 'assistant', content: raw });
       return parseTextTurn(raw);
     },
   };

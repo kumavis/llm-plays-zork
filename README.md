@@ -53,7 +53,9 @@ yarn test
 ```
 
 Runs a smoke test of the z-machine bridge (boots the game and opens the
-mailbox) and unit tests for the response parser.
+mailbox), unit tests for the text protocol and history trimming, and
+stub-server tests of both API providers (tool-result pairing, thinking
+replay, failure recovery, and the tools fallback).
 
 ## How it works
 

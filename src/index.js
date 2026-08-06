@@ -1,4 +1,5 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { setTimeout as sleep } from 'node:timers/promises';
 import { styleText } from 'node:util';
 import { createAgent } from './agent.js';
 import { setup } from './zork.js';
@@ -13,6 +14,9 @@ const LOG_DIR = new URL('../logs/', import.meta.url);
 
 // Consecutive turns without a submitted command before giving up.
 const MAX_IDLE_TURNS = 5;
+// Consecutive failed model requests (each already retried by the SDK)
+// before giving up.
+const MAX_REQUEST_FAILURES = 5;
 
 const systemPrompt = await readFile(new URL('system-prompt.txt', import.meta.url), 'utf8');
 
@@ -23,6 +27,14 @@ async function main() {
   console.log(styleText('blue', `Player backend: ${agent.name} (${agent.model})`));
 
   const zork = await setup();
+
+  // The interpreter halts when the game truly ends (e.g. the model confirms
+  // QUIT, or dies past the end-of-game prompt). In-game text like SCORE
+  // output is never treated as the end.
+  let halted = false;
+  zork.events.on('quit', () => {
+    halted = true;
+  });
 
   let aborted = false;
   process.on('SIGINT', async () => {
@@ -38,9 +50,25 @@ async function main() {
   printGame(intro);
   let pendingOutputs = [toModelText(intro)];
   let idleTurns = 0;
+  let requestFailures = 0;
 
   while (!aborted) {
-    const { commands, commentary } = await agent.requestCommands(pendingOutputs);
+    let turn;
+    try {
+      turn = await agent.requestCommands(pendingOutputs);
+      requestFailures = 0;
+    } catch (err) {
+      requestFailures += 1;
+      console.warn(`>>> Model request failed (${requestFailures}/${MAX_REQUEST_FAILURES}): ${err.message}`);
+      if (requestFailures >= MAX_REQUEST_FAILURES) {
+        await writeDebugLog(agent);
+        throw err;
+      }
+      await sleep(2 ** requestFailures * 1000);
+      continue;
+    }
+
+    const { commands, commentary } = turn;
     pendingOutputs = [];
 
     if (commentary) {
@@ -57,7 +85,17 @@ async function main() {
     }
     idleTurns = 0;
 
+    let restarted = false;
     for (const command of commands) {
+      if (restarted) {
+        pendingOutputs.push('(command skipped: the game restarted)');
+        continue;
+      }
+      if (command === '') {
+        pendingOutputs.push('(the submit_command call did not include a command)');
+        continue;
+      }
+
       console.log(styleText('magenta', `> ${command}`));
 
       let rawMessages;
@@ -72,9 +110,11 @@ async function main() {
       let output = toModelText(rawMessages);
       printGame(rawMessages);
 
-      if (output.includes('Your score is ')) {
-        console.log(styleText('green', 'Game ended, restarting...'));
+      if (halted) {
+        console.log(styleText('green', 'Game over, restarting...'));
         const restartIntro = await captureOutput(zork, () => zork.restart());
+        halted = false;
+        restarted = true;
         printGame(restartIntro);
         output += `\n(The game has ended and restarted from the beginning.)\n${toModelText(restartIntro)}`;
       }
@@ -89,8 +129,11 @@ async function captureOutput(zork, action) {
   const messages = [];
   const onPrint = (msg) => messages.push(msg);
   zork.events.on('print', onPrint);
-  await action();
-  zork.events.off('print', onPrint);
+  try {
+    await action();
+  } finally {
+    zork.events.off('print', onPrint);
+  }
   return messages;
 }
 

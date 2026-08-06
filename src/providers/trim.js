@@ -17,6 +17,9 @@ export function trimAnthropicHistory(history, limits = DEFAULT_LIMITS) {
   while (start < history.length && history[start].role !== 'user') {
     start += 1;
   }
+  // No safe boundary in the kept window — leave the history alone rather
+  // than discarding it.
+  if (start >= history.length) return history;
 
   const kept = history.slice(start);
   if (kept.length > 0) {
@@ -42,6 +45,9 @@ export function trimOpenAIHistory(history, limits = DEFAULT_LIMITS) {
   while (start < history.length && history[start].role === 'assistant') {
     start += 1;
   }
+  // No safe boundary in the kept window — leave the history alone rather
+  // than discarding it.
+  if (start >= history.length) return history;
 
   const kept = history.slice(start);
   let leadingToolResults = 0;

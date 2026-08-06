@@ -14,6 +14,11 @@ test('parseTextTurn is case-insensitive and trims', () => {
   assert.deepEqual(turn.commands, ['open mailbox']);
 });
 
+test('parseTextTurn takes the last COMMAND line (earlier ones are quotes)', () => {
+  const turn = parseTextTurn('The format is "COMMAND: X".\nCOMMAND: GO NORTH\nCOMMAND: GO SOUTH');
+  assert.deepEqual(turn.commands, ['GO SOUTH']);
+});
+
 test('parseTextTurn returns no commands for plain chatter', () => {
   const turn = parseTextTurn('Hmm, let me think about this.');
   assert.deepEqual(turn.commands, []);

@@ -57,13 +57,14 @@ export function createOpenAIProvider({ systemPrompt }) {
   let history = [];
   let pendingToolCalls = [];
 
-  const complete = async () => {
+  const complete = async (newMessages) => {
     const messages = [
       {
         role: 'system',
         content: systemPrompt + (useTools ? TOOL_PROMPT_APPENDIX : TEXT_PROTOCOL_APPENDIX),
       },
       ...history,
+      ...newMessages,
     ];
     try {
       return await client.chat.completions.create({
@@ -77,7 +78,7 @@ export function createOpenAIProvider({ systemPrompt }) {
       if (!useTools || !isToolsUnsupportedError(err)) throw err;
       useTools = false;
       console.warn('Endpoint rejected tool calling, falling back to the plain-text COMMAND: protocol.');
-      return complete();
+      return complete(newMessages);
     }
   };
 
@@ -88,29 +89,37 @@ export function createOpenAIProvider({ systemPrompt }) {
 
     // gameOutputs pair 1:1 with the commands returned by the previous call.
     async requestCommands(gameOutputs) {
-      if (pendingToolCalls.length > 0) {
-        for (const [i, toolCall] of pendingToolCalls.entries()) {
-          history.push({
+      const newMessages = pendingToolCalls.length > 0
+        ? pendingToolCalls.map((toolCall, i) => ({
             role: 'tool',
             tool_call_id: toolCall.id,
             content: gameOutputs[i] ?? '(no output)',
-          });
-        }
-        pendingToolCalls = [];
-      } else {
-        const text = gameOutputs.join('\n')
-          || 'Please submit your next command.';
-        history.push({ role: 'user', content: text });
-      }
+          }))
+        : [{
+            role: 'user',
+            content: gameOutputs.join('\n') || 'Please submit your next command.',
+          }];
 
       history = trimOpenAIHistory(history);
 
-      const response = await complete();
+      const response = await complete(newMessages);
       const message = response.choices[0]?.message;
       if (!message) throw new Error('Empty completion response');
 
+      // Rebuild the assistant message from known fields — the raw SDK
+      // object carries extras (refusal, annotations, ...) that strict
+      // OpenAI-compatible servers may reject on replay.
+      const assistantMessage = {
+        role: 'assistant',
+        content: message.content ?? '',
+        ...(message.tool_calls?.length ? { tool_calls: message.tool_calls } : {}),
+      };
+
+      // Commit only after a successful exchange, so a retried request
+      // rebuilds the same messages instead of double-appending.
+      history.push(...newMessages, assistantMessage);
+
       if (useTools) {
-        history.push(message);
         pendingToolCalls = message.tool_calls ?? [];
         const commands = pendingToolCalls.map((toolCall) => {
           try {
@@ -122,17 +131,19 @@ export function createOpenAIProvider({ systemPrompt }) {
         return { commands, commentary: (message.content ?? '').trim() };
       }
 
-      const raw = message.content ?? '';
-      history.push({ role: 'assistant', content: raw });
-      return parseTextTurn(raw);
+      pendingToolCalls = [];
+      return parseTextTurn(message.content ?? '');
     },
   };
 }
 
+// Heuristic by necessity: local servers report unsupported tool calling in
+// many shapes. Match 400s naming the tool surface (including the
+// nonstandard `strict` and `parallel_tool_calls` fields some reject).
 function isToolsUnsupportedError(err) {
   return (
     err instanceof OpenAI.APIError &&
     err.status === 400 &&
-    /tool|function/i.test(err.message ?? '')
+    /tool|function|strict/i.test(err.message ?? '')
   );
 }

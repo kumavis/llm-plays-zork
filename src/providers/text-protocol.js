@@ -13,21 +13,26 @@ export const TEXT_PROTOCOL_APPENDIX = `
 // Guard against runaway generations from small local models.
 const MAX_RESPONSE_LENGTH = 10_000;
 
-// Splits a response into spoken commentary and submitted commands. A missing
+// Splits a response into spoken commentary and one submitted command. The
+// protocol asks for the command as the final line, so the last COMMAND line
+// wins — earlier ones are usually the model quoting the format. A missing
 // COMMAND line is not an error — the caller nudges the model to retry.
 export function parseTextTurn(raw) {
   if (typeof raw !== 'string' || raw.length > MAX_RESPONSE_LENGTH) {
     return { commands: [], commentary: '' };
   }
-  const commands = [];
+  const matches = [];
   const commentary = [];
   for (const line of raw.split('\n')) {
     const match = line.match(/^\s*COMMAND:\s*(.+)$/i);
     if (match) {
-      commands.push(match[1].trim());
+      matches.push(match[1].trim());
     } else {
       commentary.push(line);
     }
   }
-  return { commands, commentary: commentary.join('\n').trim() };
+  return {
+    commands: matches.length > 0 ? [matches.at(-1)] : [],
+    commentary: commentary.join('\n').trim(),
+  };
 }

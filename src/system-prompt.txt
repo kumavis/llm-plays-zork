@@ -25,3 +25,4 @@ Your goal is to win the game by collecting items, solving puzzles, and exploring
 
 # Hints:
 - When something is to heavy to lift, you might be able to "move" it.
+- If the game ends and asks whether to RESTART, RESTORE, or QUIT, respond with RESTART.

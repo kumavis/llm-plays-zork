@@ -68,9 +68,12 @@ export async function setup() {
       const messages = [];
       const onPrint = (msg) => messages.push(msg);
       events.on('print', onPrint);
-      zmachine.feed(command);
-      step();
-      events.off('print', onPrint);
+      try {
+        zmachine.feed(command);
+        step();
+      } finally {
+        events.off('print', onPrint);
+      }
       return messages;
     },
 

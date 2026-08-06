@@ -75,21 +75,23 @@ export function createAnthropicProvider({ systemPrompt }) {
 
     // gameOutputs pair 1:1 with the commands returned by the previous call.
     async requestCommands(gameOutputs) {
-      if (pendingToolUses.length > 0) {
-        history.push({
-          role: 'user',
-          content: pendingToolUses.map((toolUse, i) => ({
-            type: 'tool_result',
-            tool_use_id: toolUse.id,
-            content: gameOutputs[i] ?? '(no output)',
-          })),
-        });
-        pendingToolUses = [];
-      } else {
-        const text = gameOutputs.join('\n')
-          || 'Please submit your next command by calling the submit_command tool.';
-        history.push({ role: 'user', content: [{ type: 'text', text }] });
-      }
+      const userMessage = pendingToolUses.length > 0
+        ? {
+            role: 'user',
+            content: pendingToolUses.map((toolUse, i) => ({
+              type: 'tool_result',
+              tool_use_id: toolUse.id,
+              content: gameOutputs[i] ?? '(no output)',
+            })),
+          }
+        : {
+            role: 'user',
+            content: [{
+              type: 'text',
+              text: gameOutputs.join('\n')
+                || 'Please submit your next command by calling the submit_command tool.',
+            }],
+          };
 
       history = trimAnthropicHistory(history);
 
@@ -97,7 +99,7 @@ export function createAnthropicProvider({ systemPrompt }) {
         model,
         max_tokens: 16000,
         system,
-        messages: history,
+        messages: [...history, userMessage],
         // Summarized display makes the model's reasoning visible in the
         // terminal; thinking is billed the same either way.
         thinking: { type: 'adaptive', display: 'summarized' },
@@ -114,9 +116,12 @@ export function createAnthropicProvider({ systemPrompt }) {
         throw new Error('Model declined the request (stop_reason: refusal)');
       }
 
-      // Store the full native content — thinking blocks must be replayed
+      // Commit only after a successful exchange, so a retried request
+      // rebuilds the same user message instead of double-appending. The
+      // full native content is stored — thinking blocks must be replayed
       // unchanged on later turns.
-      history.push({ role: 'assistant', content: response.content });
+      history.push(userMessage, { role: 'assistant', content: response.content });
+      pendingToolUses = [];
 
       const commands = [];
       const commentary = [];
@@ -137,9 +142,11 @@ export function createAnthropicProvider({ systemPrompt }) {
   };
 }
 
+// Heuristic by necessity: the API doesn't return structured "unsupported
+// parameter" codes, so match 400s that name the fallback beta surface.
 function isFallbackUnsupportedError(err) {
   return (
     err instanceof Anthropic.BadRequestError &&
-    /fallback/i.test(err.message ?? '')
+    /fallback|beta/i.test(err.message ?? '')
   );
 }
