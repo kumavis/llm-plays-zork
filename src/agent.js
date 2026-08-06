@@ -1,5 +1,5 @@
-// LLM player: composes the prompt for one game turn and delegates the model
-// call to the configured provider backend.
+// LLM player: sends the static system prompt plus the game transcript and
+// asks the configured provider backend for one turn.
 import { createOpenAIProvider } from './providers/openai.js';
 import { createAnthropicProvider } from './providers/anthropic.js';
 import { createClaudeCliProvider } from './providers/claude-cli.js';
@@ -7,8 +7,15 @@ import { createClaudeCliProvider } from './providers/claude-cli.js';
 // Guard against runaway generations from small local models.
 const MAX_RESPONSE_LENGTH = 10_000;
 
-export function createAgent({ systemPrompt, maxHistoryLength = 200 }) {
+export function createAgent({ systemPrompt }) {
   const provider = createProvider();
+
+  // Prompt caching is a prefix match, so the transcript sent to the model
+  // must only ever grow between requests. Instead of a sliding window
+  // (which shifts the front of the transcript every turn), history is
+  // trimmed in chunks: the window start stays put until the transcript
+  // hits the ceiling, then jumps forward once.
+  let trimStart = 0;
 
   return {
     name: provider.name,
@@ -16,16 +23,26 @@ export function createAgent({ systemPrompt, maxHistoryLength = 200 }) {
 
     // Returns the model's raw text for one turn. Callers parse it with
     // parseTurn so a malformed response can be logged and retried.
-    async requestTurn({ chatHistory, currentMission, notes }) {
-      const systemMessage = systemPrompt
-        .replaceAll('{MISSION}', currentMission)
-        .replaceAll('{NOTES}', notes.length > 0 ? notes.join('\n') : '(No notes)');
+    async requestTurn({ chatHistory }) {
+      trimStart = updateTrimStart(trimStart, chatHistory);
       return provider.requestTurn({
-        systemMessage,
-        chatHistory: chatHistory.slice(-maxHistoryLength),
+        systemMessage: systemPrompt,
+        chatHistory: chatHistory.slice(trimStart),
       });
     },
   };
+}
+
+// Advances the window start only when the transcript exceeds maxMessages,
+// keeping the most recent keepMessages and landing on a user turn (the
+// first message sent to the API must be a user message).
+export function updateTrimStart(trimStart, chatHistory, { maxMessages = 300, keepMessages = 150 } = {}) {
+  if (chatHistory.length - trimStart <= maxMessages) return trimStart;
+  let next = chatHistory.length - keepMessages;
+  while (next < chatHistory.length && chatHistory[next].role !== 'user') {
+    next += 1;
+  }
+  return next;
 }
 
 // Provider selection: LLM_PROVIDER wins; otherwise infer from which API key
@@ -78,7 +95,5 @@ export function parseTurn(raw) {
   return {
     thinking: typeof turn.thinking === 'string' ? turn.thinking : '',
     command: turn.command.trim(),
-    note: typeof turn.note === 'string' && turn.note.trim() !== '' ? turn.note.trim() : null,
-    mission: typeof turn.mission === 'string' && turn.mission.trim() !== '' ? turn.mission.trim() : null,
   };
 }

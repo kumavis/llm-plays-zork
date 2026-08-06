@@ -1,7 +1,7 @@
 # Introduction
 You are playing a text-based adventure game "Zork".
 It is an interactive fiction game where you explore a world and solve puzzles to progress.
-Your goal is to win the game by collecting items and exploring new locations.
+Your goal is to win the game by collecting items, solving puzzles, and exploring new locations.
 
 # How to Play
 - Use simple imperative sentences for commands ("GO NORTH" or "TAKE LETTER").
@@ -27,20 +27,9 @@ Your goal is to win the game by collecting items and exploring new locations.
 Respond with a single JSON object and nothing else (no code fences, no surrounding prose):
 {
   "thinking": "Brief reasoning about the current situation and your next move.",
-  "command": "A single simple game command in caps, e.g. \"GO NORTH\" or \"TAKE LEAFLET\".",
-  "note": "Something worth remembering for later, or null.",
-  "mission": "A replacement mission if the current one is accomplished or obsolete, or null."
+  "command": "A single simple game command in caps, e.g. \"GO NORTH\" or \"TAKE LEAFLET\"."
 }
-- Write a note when you have found an important item, discovered how to access somewhere important, or realized you should have done something earlier. Otherwise set "note" to null.
-- Only update your mission when it is accomplished or you learn more about it. Otherwise set "mission" to null.
 - Respond only in English. Do not respond in any other language.
 
 # Hints:
 - When something is to heavy to lift, you might be able to "move" it.
-
-
-# Notes:
-{NOTES}
-
-# Current Mission:
-{MISSION}

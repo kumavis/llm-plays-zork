@@ -9,7 +9,6 @@ try {
   // No .env file — rely on the ambient environment.
 }
 
-const INITIAL_MISSION = 'Get inside the house and then into the cellar under the rug.';
 const LOG_DIR = new URL('../logs/', import.meta.url);
 
 const systemPrompt = await readFile(new URL('system-prompt.txt', import.meta.url), 'utf8');
@@ -20,9 +19,6 @@ async function main() {
   const chatHistory = [];
   const agent = createAgent({ systemPrompt });
   console.log(styleText('blue', `Player backend: ${agent.name} (${agent.model})`));
-
-  let currentMission = INITIAL_MISSION;
-  const notes = [];
 
   const zork = await makeZork(chatHistory);
   printHistory(chatHistory);
@@ -38,7 +34,7 @@ async function main() {
   while (!aborted) {
     // Ask the model for the next move; on a malformed response, log it and
     // ask again without polluting the chat history.
-    const rawResponse = await agent.requestTurn({ chatHistory, currentMission, notes });
+    const rawResponse = await agent.requestTurn({ chatHistory });
 
     let turn;
     try {
@@ -46,15 +42,6 @@ async function main() {
     } catch (err) {
       await logInvalidResponse(err, rawResponse, chatHistory);
       continue;
-    }
-
-    if (turn.mission && turn.mission !== currentMission) {
-      currentMission = turn.mission;
-      console.log(styleText('blue', `Mission updated: ${currentMission}`));
-    }
-    if (turn.note && !notes.includes(turn.note)) {
-      notes.push(turn.note);
-      console.log(styleText('cyan', `Note: ${turn.note}`));
     }
 
     chatHistory.push({ role: 'assistant', content: rawResponse });
@@ -74,11 +61,9 @@ async function main() {
       console.log(styleText('green', 'Game ended, restarting...'));
       await zork.restart();
       printHistory(chatHistory.slice(-1));
-      currentMission = INITIAL_MISSION;
       continue;
     }
 
-    printRunState({ currentMission, notes });
     printHistory(chatHistory.slice(-2));
   }
 }
@@ -138,15 +123,6 @@ function formatAssistantTurn(content) {
     return turn.thinking ? `${turn.thinking}\n> ${turn.command}` : `> ${turn.command}`;
   } catch {
     return content;
-  }
-}
-
-function printRunState({ currentMission, notes }) {
-  console.log(styleText('yellow', `Mission: ${currentMission}`));
-  if (notes.length > 0) {
-    console.log(styleText('yellow', `Notes:\n${notes.map((note) => `  - ${note}`).join('\n')}`));
-  } else {
-    console.log(styleText('yellow', 'Notes: (No notes)'));
   }
 }
 

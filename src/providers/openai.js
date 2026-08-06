@@ -19,16 +19,8 @@ const TURN_RESPONSE_FORMAT = {
           type: 'string',
           description: 'A single simple game command in caps, e.g. "GO NORTH" or "TAKE LEAFLET".',
         },
-        note: {
-          type: ['string', 'null'],
-          description: 'Something worth remembering for later, or null.',
-        },
-        mission: {
-          type: ['string', 'null'],
-          description: 'A replacement mission if the current one is accomplished or obsolete, or null.',
-        },
       },
-      required: ['thinking', 'command', 'note', 'mission'],
+      required: ['thinking', 'command'],
       additionalProperties: false,
     },
   },

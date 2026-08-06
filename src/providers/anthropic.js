@@ -18,16 +18,8 @@ const TURN_OUTPUT_FORMAT = {
         type: 'string',
         description: 'A single simple game command in caps, e.g. "GO NORTH" or "TAKE LEAFLET".',
       },
-      note: {
-        anyOf: [{ type: 'string' }, { type: 'null' }],
-        description: 'Something worth remembering for later, or null.',
-      },
-      mission: {
-        anyOf: [{ type: 'string' }, { type: 'null' }],
-        description: 'A replacement mission if the current one is accomplished or obsolete, or null.',
-      },
     },
-    required: ['thinking', 'command', 'note', 'mission'],
+    required: ['thinking', 'command'],
     additionalProperties: false,
   },
 };
@@ -56,6 +48,10 @@ export function createAnthropicProvider() {
         system: systemMessage,
         messages: chatHistory,
         output_config: { effort, format: TURN_OUTPUT_FORMAT },
+        // Auto-place a cache breakpoint on the last cacheable block, so each
+        // turn reads the previous turn's prefix (system + transcript) from
+        // cache instead of re-billing it at full price.
+        cache_control: { type: 'ephemeral' },
       };
 
       let response;
