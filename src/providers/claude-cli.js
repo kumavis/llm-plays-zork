@@ -2,26 +2,28 @@
 // as a pure text oracle using whatever auth it is already logged in with.
 //
 // The first call starts a session; later turns `--resume` it and send only
-// the new game output, so the CLI keeps the conversation (and its own
-// prompt cache) instead of re-reading the whole transcript every turn.
+// the new game output, so the CLI keeps the full native conversation
+// (thinking included) and its own prompt cache server-side. A shadow
+// transcript is kept locally for debug logs and session-loss recovery.
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
+import { TEXT_PROTOCOL_APPENDIX, parseTextTurn } from './text-protocol.js';
 
 const execFileAsync = promisify(execFile);
 
-export function createClaudeCliProvider() {
+export function createClaudeCliProvider({ systemPrompt }) {
   const model = process.env.CLAUDE_CLI_MODEL;
+  const system = systemPrompt + TEXT_PROTOCOL_APPENDIX;
 
   let sessionId = null;
-  // How many transcript messages the session has already seen.
-  let sentCount = 0;
+  const history = [];
 
-  const invoke = async (prompt, { systemMessage, resume }) => {
+  const invoke = async (prompt, { resume }) => {
     const args = [
       '-p',
       '--output-format', 'json',
       '--tools', '',
-      ...(resume ? ['--resume', sessionId] : ['--system-prompt', systemMessage]),
+      ...(resume ? ['--resume', sessionId] : ['--system-prompt', system]),
       ...(model ? ['--model', model] : []),
       prompt,
     ];
@@ -40,49 +42,40 @@ export function createClaudeCliProvider() {
   return {
     name: 'claude-cli',
     model: model ?? '(claude CLI default)',
+    history: () => history,
 
-    async requestTurn({ systemMessage, chatHistory }) {
+    // gameOutputs pair 1:1 with the commands returned by the previous call.
+    async requestCommands(gameOutputs) {
+      const prompt = gameOutputs.join('\n')
+        || 'Please submit your next command with a COMMAND: line.';
+      history.push({ role: 'user', content: prompt });
+
+      let raw;
       if (sessionId === null) {
-        const response = await invoke(formatTranscript(chatHistory), { systemMessage, resume: false });
-        sentCount = chatHistory.length;
-        return response;
+        raw = await invoke(prompt, { resume: false });
+      } else {
+        try {
+          raw = await invoke(prompt, { resume: true });
+        } catch (err) {
+          // Session may have expired — start fresh with the full transcript.
+          console.warn(`claude CLI resume failed (${err.message}), starting a new session.`);
+          sessionId = null;
+          raw = await invoke(formatTranscript(history), { resume: false });
+        }
       }
 
-      // The session already holds its own previous replies; forward only
-      // the game output that arrived since the last call. When there is
-      // none, the last response failed to parse — ask for a retry.
-      const newGameOutput = chatHistory
-        .slice(sentCount)
-        .filter(({ role }) => role === 'user')
-        .map(({ content }) => content)
-        .join('\n');
-      const prompt = newGameOutput !== ''
-        ? newGameOutput
-        : 'Your previous response could not be parsed. Respond with a single JSON object and nothing else.';
-
-      try {
-        const response = await invoke(prompt, { resume: true });
-        sentCount = chatHistory.length;
-        return response;
-      } catch (err) {
-        // Session may have expired — start fresh with the full transcript.
-        console.warn(`claude CLI resume failed (${err.message}), starting a new session.`);
-        sessionId = null;
-        const response = await invoke(formatTranscript(chatHistory), { systemMessage, resume: false });
-        sentCount = chatHistory.length;
-        return response;
-      }
+      history.push({ role: 'assistant', content: raw });
+      return parseTextTurn(raw);
     },
   };
 }
 
-// The CLI takes a single prompt string, so the role-based transcript is
-// flattened into labeled sections.
-export function formatTranscript(chatHistory) {
-  const transcript = chatHistory
+// Rebuilds a single prompt from the shadow transcript when a session is lost.
+export function formatTranscript(history) {
+  const transcript = history
     .map(({ role, content }) =>
       role === 'assistant' ? `[Your previous turn]\n${content}` : `[Game]\n${content}`,
     )
     .join('\n\n');
-  return `${transcript}\n\nRespond with your next turn as a single JSON object.`;
+  return `${transcript}\n\nRespond with your next turn.`;
 }

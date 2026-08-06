@@ -10,5 +10,5 @@ test('formatTranscript labels game and player turns', () => {
   ]);
   assert.match(prompt, /\[Game\]\nWest of House/);
   assert.match(prompt, /\[Your previous turn\]\n\{"command": "OPEN MAILBOX"\}/);
-  assert.match(prompt, /Respond with your next turn as a single JSON object\.$/);
+  assert.match(prompt, /Respond with your next turn\.$/);
 });

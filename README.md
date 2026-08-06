@@ -2,21 +2,26 @@
 
 An LLM plays [Zork I](https://en.wikipedia.org/wiki/Zork). A z-machine
 interpreter compiled to WebAssembly (`web.wasm`) runs the original
-`zork1.z3` story file, and an agent loop feeds the game transcript to an
-LLM, which responds with one structured turn at a time: its thinking and
-a game command.
+`zork1.z3` story file, and an agent loop wires the game up to an LLM as a
+tool: each turn the model submits one command via a `submit_command` tool
+call, and the game's printed response comes back as the tool result. Text
+the model writes outside the tool call is its "out loud" commentary.
 
 Three interchangeable player backends are supported:
 
 - **OpenAI** — or any OpenAI-compatible endpoint (LM Studio, Ollama, etc.)
-  via `OPENAI_BASE_URL`.
-- **Anthropic API** — via the official SDK, defaulting to `claude-opus-5`
-  with structured outputs and server-side refusal fallbacks enabled.
+  via `OPENAI_BASE_URL`. Uses the `submit_command` tool; endpoints without
+  tool calling fall back to a plain-text `COMMAND:` protocol.
+- **Anthropic API** — via the official SDK, defaulting to `claude-opus-5`.
+  Uses the `submit_command` tool with server-side refusal fallbacks, and
+  surfaces the model's summarized thinking in the terminal.
 - **Claude Code CLI** — headless `claude -p` with all tools disabled, using
-  whatever login the CLI already has; no API key needed.
+  whatever login the CLI already has; no API key needed. Uses the
+  `COMMAND:` text protocol over a resumed CLI session.
 
-All backends use structured (JSON schema) outputs where the endpoint
-supports them, with a lenient fallback parser for those that don't.
+Each backend owns its conversation history in its API's native format, so
+thinking blocks and tool calls are retained and replayed where the API
+supports them.
 
 ## Setup
 
@@ -54,15 +59,16 @@ mailbox) and unit tests for the response parser.
 
 - `src/zork.js` — bridges the WASM z-machine via `wasm-ffi`: loads the
   story file, feeds commands, and emits the game's printed output.
-- `src/agent.js` — the LLM player: sends the static system prompt plus
-  the game transcript and requests one JSON turn per move from the
-  selected backend.
+- `src/agent.js` — selects the provider backend.
 - `src/providers/` — the backends: `openai.js`, `anthropic.js`, and
-  `claude-cli.js`, each exposing the same one-turn request interface.
-- `src/index.js` — the game loop: runs commands in the game, appends the
-  results to the chat history, and restarts the game when it ends.
+  `claude-cli.js`. Each owns its native conversation history and exposes
+  the same interface: `requestCommands(gameOutputs)` returns the model's
+  submitted commands plus its out-loud commentary.
+- `src/index.js` — the game loop: runs submitted commands in the game,
+  feeds the printed output back as the next tool result, and restarts
+  the game when it ends.
 - `src/system-prompt.txt` — the player's static instructions (tutorial,
-  commands, response format).
+  game commands); each backend appends its own response-format section.
 
 ## Prompt caching
 

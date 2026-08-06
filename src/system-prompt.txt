@@ -23,13 +23,5 @@ Your goal is to win the game by collecting items, solving puzzles, and exploring
 - EXAMINE (X): Get a description of an object
 - SCORE: Display your current score and rank. Type FULL SCORE for details
 
-# Response Format:
-Respond with a single JSON object and nothing else (no code fences, no surrounding prose):
-{
-  "thinking": "Brief reasoning about the current situation and your next move.",
-  "command": "A single simple game command in caps, e.g. \"GO NORTH\" or \"TAKE LEAFLET\"."
-}
-- Respond only in English. Do not respond in any other language.
-
 # Hints:
 - When something is to heavy to lift, you might be able to "move" it.
