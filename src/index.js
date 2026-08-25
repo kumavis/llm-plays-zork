@@ -18,13 +18,18 @@ const MAX_IDLE_TURNS = 5;
 // before giving up.
 const MAX_REQUEST_FAILURES = 5;
 
-const systemPrompt = await readFile(new URL('system-prompt.txt', import.meta.url), 'utf8');
+const systemPrompt = await readFile(
+  new URL('system-prompt.txt', import.meta.url),
+  'utf8',
+);
 
 await main();
 
 async function main() {
   const agent = createAgent({ systemPrompt });
-  console.log(styleText('blue', `Player backend: ${agent.name} (${agent.model})`));
+  console.log(
+    styleText('blue', `Player backend: ${agent.name} (${agent.model})`),
+  );
 
   const zork = await setup();
 
@@ -52,75 +57,89 @@ async function main() {
   let idleTurns = 0;
   let requestFailures = 0;
 
-  while (!aborted) {
-    let turn;
-    try {
-      turn = await agent.requestCommands(pendingOutputs);
-      requestFailures = 0;
-    } catch (err) {
-      requestFailures += 1;
-      console.warn(`>>> Model request failed (${requestFailures}/${MAX_REQUEST_FAILURES}): ${err.message}`);
-      if (requestFailures >= MAX_REQUEST_FAILURES) {
-        await writeDebugLog(agent);
-        throw err;
-      }
-      await sleep(2 ** requestFailures * 1000);
-      continue;
-    }
-
-    const { commands, commentary } = turn;
-    pendingOutputs = [];
-
-    if (commentary) {
-      console.log(styleText('magenta', `Player: ${commentary}`));
-    }
-
-    if (commands.length === 0) {
-      idleTurns += 1;
-      if (idleTurns >= MAX_IDLE_TURNS) {
-        await writeDebugLog(agent);
-        throw new Error(`Model produced no command for ${idleTurns} turns in a row.`);
-      }
-      continue;
-    }
-    idleTurns = 0;
-
-    let restarted = false;
-    for (const command of commands) {
-      if (restarted) {
-        pendingOutputs.push('(command skipped: the game restarted)');
-        continue;
-      }
-      if (command === '') {
-        pendingOutputs.push('(the submit_command call did not include a command)');
-        continue;
-      }
-
-      console.log(styleText('magenta', `> ${command}`));
-
-      let rawMessages;
+  // The finally releases provider child processes (claude-cli), or the
+  // event loop keeps the harness alive after a fatal error.
+  try {
+    while (!aborted) {
+      let turn;
       try {
-        rawMessages = await zork.input(command);
+        turn = await agent.requestCommands(pendingOutputs);
+        requestFailures = 0;
       } catch (err) {
-        console.warn(`>>> Zork error: ${err.message}`);
-        pendingOutputs.push(`(error: the game failed to run that command: ${err.message})`);
+        requestFailures += 1;
+        console.warn(
+          `>>> Model request failed (${requestFailures}/${MAX_REQUEST_FAILURES}): ${err.message}`,
+        );
+        if (requestFailures >= MAX_REQUEST_FAILURES) {
+          await writeDebugLog(agent);
+          throw err;
+        }
+        await sleep(2 ** requestFailures * 1000);
         continue;
       }
 
-      let output = toModelText(rawMessages);
-      printGame(rawMessages);
+      const { commands, commentary } = turn;
+      pendingOutputs = [];
 
-      if (halted) {
-        console.log(styleText('green', 'Game over, restarting...'));
-        const restartIntro = await captureOutput(zork, () => zork.restart());
-        halted = false;
-        restarted = true;
-        printGame(restartIntro);
-        output += `\n(The game has ended and restarted from the beginning.)\n${toModelText(restartIntro)}`;
+      if (commentary) {
+        console.log(styleText('magenta', `Player: ${commentary}`));
       }
 
-      pendingOutputs.push(output);
+      if (commands.length === 0) {
+        idleTurns += 1;
+        if (idleTurns >= MAX_IDLE_TURNS) {
+          await writeDebugLog(agent);
+          throw new Error(
+            `Model produced no command for ${idleTurns} turns in a row.`,
+          );
+        }
+        continue;
+      }
+      idleTurns = 0;
+
+      let restarted = false;
+      for (const command of commands) {
+        if (restarted) {
+          pendingOutputs.push('(command skipped: the game restarted)');
+          continue;
+        }
+        if (command === '') {
+          pendingOutputs.push(
+            '(the submit_command call did not include a command)',
+          );
+          continue;
+        }
+
+        console.log(styleText('magenta', `> ${command}`));
+
+        let rawMessages;
+        try {
+          rawMessages = await zork.input(command);
+        } catch (err) {
+          console.warn(`>>> Zork error: ${err.message}`);
+          pendingOutputs.push(
+            `(error: the game failed to run that command: ${err.message})`,
+          );
+          continue;
+        }
+
+        let output = toModelText(rawMessages);
+        printGame(rawMessages);
+
+        if (halted) {
+          console.log(styleText('green', 'Game over, restarting...'));
+          const restartIntro = await captureOutput(zork, () => zork.restart());
+          halted = false;
+          restarted = true;
+          printGame(restartIntro);
+          output += `\n(The game has ended and restarted from the beginning.)\n${toModelText(restartIntro)}`;
+        }
+
+        pendingOutputs.push(output);
+      }
     }
+  } finally {
+    agent.dispose?.();
   }
 }
 

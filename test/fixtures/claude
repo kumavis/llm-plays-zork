@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+// Fake `claude` CLI for tests: speaks just enough of the stream-json
+// protocol. Each result echoes this process's pid and the received text so
+// tests can assert process reuse and transcript replay. Exits silently
+// (no result) when the text is exactly "DIE" to simulate a crash.
+import { createInterface } from 'node:readline';
+
+const rl = createInterface({ input: process.stdin });
+rl.on('line', (line) => {
+  const { message } = JSON.parse(line);
+  const text = message.content.map((block) => block.text).join('');
+  if (text === 'DIE') {
+    process.exit(0);
+  }
+  process.stdout.write(JSON.stringify({
+    type: 'result',
+    subtype: 'success',
+    is_error: false,
+    result: `pid:${process.pid}\nreceived:${text.split('\n')[0]}\nCOMMAND: LOOK`,
+  }) + '\n');
+});
