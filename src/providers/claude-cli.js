@@ -83,7 +83,8 @@ export function createClaudeCliProvider({ systemPrompt }) {
       };
       child.stdin.write(JSON.stringify({
         type: 'user',
-        message: { role: 'user', content: [{ type: 'text', text }] },
+        // Empty text blocks are rejected upstream with a 400.
+        message: { role: 'user', content: [{ type: 'text', text: text || '(no output)' }] },
       }) + '\n');
     });
   };
