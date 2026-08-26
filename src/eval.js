@@ -7,7 +7,7 @@
 //        [--seeds 2,3]  -- rerun specific trials into an existing batch
 import { spawn } from 'node:child_process';
 import { openSync, closeSync } from 'node:fs';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs, styleText } from 'node:util';
@@ -54,6 +54,12 @@ console.log(
 for (const model of models) {
   for (const trial of trialNumbers) {
     const tag = `${model}-t${trial}`;
+    // Resume: a trial that already spent its budget is left alone, so an
+    // interrupted batch can be relaunched with the same command.
+    if (await isTrialComplete(tag)) {
+      console.log(styleText('blue', `--- ${tag}: already complete, skipping ---`));
+      continue;
+    }
     console.log(styleText('blue', `--- ${tag} (seed ${trial}) ---`));
     const startedAt = Date.now();
     const code = await runOne(model, trial, tag);
@@ -63,6 +69,26 @@ for (const model of models) {
 }
 
 await reportDirectory(batchDir);
+
+// True when this trial already has an event log that spent its move budget.
+async function isTrialComplete(tag) {
+  const logs = (await readdir(batchDir)).filter(
+    (f) => f.startsWith('run-') && f.endsWith(`-${tag}.jsonl`),
+  );
+  for (const log of logs) {
+    const text = await readFile(join(batchDir, log), 'utf8');
+    for (const line of text.trim().split('\n')) {
+      let event;
+      try {
+        event = JSON.parse(line);
+      } catch {
+        continue;
+      }
+      if (event.type === 'run_end' && event.budgetReached) return true;
+    }
+  }
+  return false;
+}
 
 // Runs one harness process to completion, with a wall-clock safety limit.
 function runOne(model, trial, tag) {
