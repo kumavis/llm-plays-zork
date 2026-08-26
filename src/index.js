@@ -48,6 +48,9 @@ const systemPrompt = await readFile(
 );
 
 await main();
+// Backstop: exit even if something still holds the event loop open. Every
+// log write is awaited before main() returns, so nothing is lost.
+process.exit(0);
 
 async function main() {
   const agent = createAgent({ systemPrompt });

@@ -36,6 +36,21 @@ export function createClaudeCliProvider({ systemPrompt }) {
   };
 
   let child = null;
+  // Every spawned process, so a replaced one can't outlive the run. The CLI
+  // does not always exit on SIGTERM, so killing means: close stdin (its input
+  // stream ends, so it can exit on its own), SIGTERM, then SIGKILL.
+  const children = new Set();
+  const killChild = (proc) => {
+    if (!proc) return;
+    try {
+      proc.stdin.end();
+    } catch {
+      // Already closed.
+    }
+    proc.kill();
+    setTimeout(() => proc.kill('SIGKILL'), 5000).unref();
+  };
+
   // The harness is lockstep, so at most one turn is in flight.
   let waiter = null;
 
@@ -73,6 +88,7 @@ export function createClaudeCliProvider({ systemPrompt }) {
       ],
       { stdio: ['pipe', 'pipe', 'pipe'], cwd: tmpdir() },
     );
+    children.add(child);
 
     let stderr = '';
     child.stderr.on('data', (chunk) => {
@@ -122,7 +138,9 @@ export function createClaudeCliProvider({ systemPrompt }) {
       child = null;
       settle('reject', err);
     });
+    const spawned = child;
     child.on('exit', (code) => {
+      children.delete(spawned);
       child = null;
       costFromDeadProcesses = usage.costUsd;
       apiMsFromDeadProcesses = usage.apiMs;
@@ -145,7 +163,7 @@ export function createClaudeCliProvider({ systemPrompt }) {
           const stuck = child;
           child = null;
           settle('reject', new Error('claude CLI turn timed out'));
-          stuck?.kill();
+          killChild(stuck);
         }, TURN_TIMEOUT_MS),
       };
       child.stdin.write(
@@ -182,9 +200,10 @@ export function createClaudeCliProvider({ systemPrompt }) {
           needsReplay ? withTranscript(history, prompt) : prompt,
         );
       } catch (err) {
-        // Process died — restart once, replaying the shadow transcript.
+        // Process died, or returned an error while still alive — kill it and
+        // restart, replaying the shadow transcript.
         console.warn(`claude CLI process failed (${err.message}), restarting.`);
-        child?.kill();
+        killChild(child);
         child = null;
         raw = await sendTurn(withTranscript(history, prompt));
       }
@@ -198,11 +217,11 @@ export function createClaudeCliProvider({ systemPrompt }) {
       return parseTextTurn(raw);
     },
 
-    // Kill the CLI process so the parent can exit cleanly.
+    // Kill every CLI process so the parent can exit cleanly.
     dispose() {
-      const running = child;
       child = null;
-      running?.kill();
+      for (const proc of children) killChild(proc);
+      children.clear();
     },
   };
 }

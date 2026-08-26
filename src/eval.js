@@ -4,6 +4,7 @@
 //
 // Usage: node src/eval.js --models haiku,sonnet --trials 3 --moves 300
 //        [--provider claude-cli] [--max-minutes 30] [--name my-eval]
+//        [--seeds 2,3]  -- rerun specific trials into an existing batch
 import { spawn } from 'node:child_process';
 import { openSync, closeSync } from 'node:fs';
 import { mkdir } from 'node:fs/promises';
@@ -20,6 +21,7 @@ const { values } = parseArgs({
     provider: { type: 'string', default: 'claude-cli' },
     'max-minutes': { type: 'string', default: '30' },
     name: { type: 'string' },
+    seeds: { type: 'string' },
   },
 });
 
@@ -27,7 +29,11 @@ const models = values.models
   .split(',')
   .map((m) => m.trim())
   .filter(Boolean);
-const trials = Number(values.trials);
+// Trial index doubles as the RNG seed, so every model plays the same game in
+// trial k. --seeds reruns just those trials (e.g. after a failed run).
+const trialNumbers = values.seeds
+  ? values.seeds.split(',').map((s) => Number(s.trim())).filter(Number.isFinite)
+  : Array.from({ length: Number(values.trials) }, (_, i) => i + 1);
 const moves = Number(values.moves);
 const maxRunMs = Number(values['max-minutes']) * 60 * 1000;
 const batchName =
@@ -40,13 +46,13 @@ await mkdir(batchDir, { recursive: true });
 console.log(
   styleText(
     'blue',
-    `Eval batch "${batchName}": models [${models.join(', ')}] × ${trials} trials, ` +
+    `Eval batch "${batchName}": models [${models.join(', ')}] × trials [${trialNumbers.join(', ')}], ` +
       `${moves} moves each, provider ${values.provider}\nLogs: ${batchDir}`,
   ),
 );
 
 for (const model of models) {
-  for (let trial = 1; trial <= trials; trial += 1) {
+  for (const trial of trialNumbers) {
     const tag = `${model}-t${trial}`;
     console.log(styleText('blue', `--- ${tag} (seed ${trial}) ---`));
     const startedAt = Date.now();
