@@ -36,7 +36,7 @@ export async function reportDirectory(dir) {
       wallMin: (end.t - events[0].t) / 60000,
       turns: s.modelTurns,
       commands: s.commands,
-      moves: s.moves,
+      moves: s.totalMoves || s.moves,
       maxScore: s.maxScore ?? (scores.length > 0 ? Math.max(...scores) : null),
       parserRejections: s.parserRejections,
       worldRefusals: s.worldRefusals,

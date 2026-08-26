@@ -77,6 +77,10 @@ async function main() {
     score: null,
     maxScore: null,
     moves: null,
+    // Moves spent in earlier lives: the in-game counter resets on restart,
+    // so budgets and reports use movesBeforeRestarts + moves.
+    movesBeforeRestarts: 0,
+    totalMoves: 0,
     // Staleness: the longest stretch of commands with no score change.
     commandsAtLastScoreChange: 0,
     maxCommandsWithoutScore: 0,
@@ -227,6 +231,9 @@ async function main() {
           halted = false;
           restarted = true;
           runStats.gameRestarts += 1;
+          runStats.movesBeforeRestarts += runStats.moves ?? 0;
+          runStats.moves = 0;
+          runStats.score = null;
           logEvent('game_restart', { turn: runStats.modelTurns });
           printGame(restartIntro);
           output += `\n(The game has ended and restarted from the beginning.)\n${toModelText(restartIntro)}`;
@@ -237,7 +244,7 @@ async function main() {
 
       await probeScore(zork, runStats, restarted, logEvent);
 
-      if (MOVE_BUDGET !== null && (runStats.moves ?? 0) >= MOVE_BUDGET) {
+      if (MOVE_BUDGET !== null && runStats.totalMoves >= MOVE_BUDGET) {
         console.log(
           styleText(
             'green',
@@ -281,6 +288,7 @@ async function probeScore(zork, runStats, restarted, logEvent) {
   }
   runStats.score = score;
   runStats.moves = moves;
+  runStats.totalMoves = runStats.movesBeforeRestarts + moves;
 }
 
 function printRunStats(runStats, agent) {
