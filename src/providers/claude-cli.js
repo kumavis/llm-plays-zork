@@ -7,6 +7,7 @@
 // its own prompt cache in-process. A shadow transcript is kept locally for
 // debug logs and process-loss recovery.
 import { spawn } from 'node:child_process';
+import { tmpdir } from 'node:os';
 import { createInterface } from 'node:readline';
 import { TEXT_PROTOCOL_APPENDIX, parseTextTurn } from './text-protocol.js';
 
@@ -46,18 +47,36 @@ export function createClaudeCliProvider({ systemPrompt }) {
   };
 
   const start = () => {
-    child = spawn('claude', [
-      '-p',
-      '--verbose',
-      '--input-format', 'stream-json',
-      '--output-format', 'stream-json',
-      '--tools', '',
-      '--system-prompt', system,
-      ...(model ? ['--model', model] : []),
-    ], { stdio: ['pipe', 'pipe', 'pipe'] });
+    // Sandbox: the model must only interact with the game. --tools '' means
+    // no tools reach the API request (no file access, no web search);
+    // --strict-mcp-config ignores any MCP servers in user settings; a
+    // neutral cwd and no setting sources keep project files and user config
+    // out of the session for a clean eval.
+    child = spawn(
+      'claude',
+      [
+        '-p',
+        '--verbose',
+        '--input-format',
+        'stream-json',
+        '--output-format',
+        'stream-json',
+        '--tools',
+        '',
+        '--strict-mcp-config',
+        '--setting-sources',
+        '',
+        '--system-prompt',
+        system,
+        ...(model ? ['--model', model] : []),
+      ],
+      { stdio: ['pipe', 'pipe', 'pipe'], cwd: tmpdir() },
+    );
 
     let stderr = '';
-    child.stderr.on('data', (chunk) => { stderr += chunk; });
+    child.stderr.on('data', (chunk) => {
+      stderr += chunk;
+    });
     // A write to a just-died process surfaces as EPIPE; the exit handler
     // below reports the failure.
     child.stdin.on('error', () => {});
@@ -65,7 +84,11 @@ export function createClaudeCliProvider({ systemPrompt }) {
     const rl = createInterface({ input: child.stdout });
     rl.on('line', (line) => {
       let event;
-      try { event = JSON.parse(line); } catch { return; }
+      try {
+        event = JSON.parse(line);
+      } catch {
+        return;
+      }
       if (event.type !== 'result') return;
       if (event.usage) {
         usage.turns += 1;
@@ -81,7 +104,12 @@ export function createClaudeCliProvider({ systemPrompt }) {
         usage.apiMs = apiMsFromDeadProcesses + event.duration_api_ms;
       }
       if (event.is_error) {
-        settle('reject', new Error(`claude CLI returned an error: ${event.result ?? event.subtype}`));
+        settle(
+          'reject',
+          new Error(
+            `claude CLI returned an error: ${event.result ?? event.subtype}`,
+          ),
+        );
       } else {
         settle('resolve', event.result ?? '');
       }
@@ -95,7 +123,12 @@ export function createClaudeCliProvider({ systemPrompt }) {
       child = null;
       costFromDeadProcesses = usage.costUsd;
       apiMsFromDeadProcesses = usage.apiMs;
-      settle('reject', new Error(`claude CLI exited (code ${code})${stderr ? `: ${stderr.trim().slice(0, 500)}` : ''}`));
+      settle(
+        'reject',
+        new Error(
+          `claude CLI exited (code ${code})${stderr ? `: ${stderr.trim().slice(0, 500)}` : ''}`,
+        ),
+      );
     });
   };
 
@@ -112,11 +145,16 @@ export function createClaudeCliProvider({ systemPrompt }) {
           stuck?.kill();
         }, TURN_TIMEOUT_MS),
       };
-      child.stdin.write(JSON.stringify({
-        type: 'user',
-        // Empty text blocks are rejected upstream with a 400.
-        message: { role: 'user', content: [{ type: 'text', text: text || '(no output)' }] },
-      }) + '\n');
+      child.stdin.write(
+        JSON.stringify({
+          type: 'user',
+          // Empty text blocks are rejected upstream with a 400.
+          message: {
+            role: 'user',
+            content: [{ type: 'text', text: text || '(no output)' }],
+          },
+        }) + '\n',
+      );
     });
   };
 
@@ -128,15 +166,18 @@ export function createClaudeCliProvider({ systemPrompt }) {
 
     // gameOutputs pair 1:1 with the commands returned by the previous call.
     async requestCommands(gameOutputs) {
-      const prompt = gameOutputs.join('\n')
-        || 'Please submit your next command with a COMMAND: line.';
+      const prompt =
+        gameOutputs.join('\n') ||
+        'Please submit your next command with a COMMAND: line.';
 
       // A fresh process (first turn, or respawn after a timeout kill) has no
       // conversation state — send the whole shadow transcript instead.
       const needsReplay = child === null && history.length > 0;
       let raw;
       try {
-        raw = await sendTurn(needsReplay ? withTranscript(history, prompt) : prompt);
+        raw = await sendTurn(
+          needsReplay ? withTranscript(history, prompt) : prompt,
+        );
       } catch (err) {
         // Process died — restart once, replaying the shadow transcript.
         console.warn(`claude CLI process failed (${err.message}), restarting.`);
@@ -147,7 +188,10 @@ export function createClaudeCliProvider({ systemPrompt }) {
 
       // Commit only after a successful exchange, so a retried request
       // rebuilds the same transcript instead of double-appending.
-      history.push({ role: 'user', content: prompt }, { role: 'assistant', content: raw });
+      history.push(
+        { role: 'user', content: prompt },
+        { role: 'assistant', content: raw },
+      );
       return parseTextTurn(raw);
     },
 
@@ -168,7 +212,9 @@ function withTranscript(history, prompt) {
 export function formatTranscript(history) {
   const transcript = history
     .map(({ role, content }) =>
-      role === 'assistant' ? `[Your previous turn]\n${content}` : `[Game]\n${content}`,
+      role === 'assistant'
+        ? `[Your previous turn]\n${content}`
+        : `[Game]\n${content}`,
     )
     .join('\n\n');
   return `${transcript}\n\nRespond with your next turn.`;

@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { appendFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { styleText } from 'node:util';
 import { createAgent } from './agent.js';
@@ -22,6 +22,11 @@ const MAX_REQUEST_FAILURES = 5;
 // commands the world merely refuses ("You can't go that way").
 const PARSER_REJECTION =
   /I don't know the word|in a way that I don't understand|That sentence isn't one I recognize|There was no verb in that|noun missing in that sentence|I beg your pardon/;
+// Legal commands the world refuses — exploration cost, not model error.
+const WORLD_REFUSAL =
+  /You can't go that way|There is a wall|You can't see any|You can't do that|Which .* do you mean/;
+const DARKNESS = /pitch black/;
+const DEATH = /You have died|You are dead/;
 
 const systemPrompt = await readFile(
   new URL('system-prompt.txt', import.meta.url),
@@ -51,9 +56,31 @@ async function main() {
     modelTurns: 0,
     commands: 0,
     parserRejections: 0,
+    worldRefusals: 0,
+    darknessWarnings: 0,
+    deaths: 0,
+    gameRestarts: 0,
     score: null,
     moves: null,
+    // Staleness: the longest stretch of commands with no score change.
+    commandsAtLastScoreChange: 0,
+    maxCommandsWithoutScore: 0,
+    turnLatenciesMs: [],
   };
+
+  // Machine-readable event log for offline analysis (metrics, state-graph
+  // reconstruction) — one JSON object per line. The terminal log stays for
+  // humans. Writes are chained so lines never interleave.
+  await mkdir(LOG_DIR, { recursive: true });
+  const timestamp = new Date().toISOString().replaceAll(':', '-');
+  const eventLogUrl = new URL(`run-${timestamp}.jsonl`, LOG_DIR);
+  let eventLogChain = Promise.resolve();
+  const logEvent = (type, data) => {
+    const line = `${JSON.stringify({ t: Date.now(), type, ...data })}\n`;
+    eventLogChain = eventLogChain.then(() => appendFile(eventLogUrl, line));
+  };
+  logEvent('run_start', { provider: agent.name, model: agent.model });
+  console.log(styleText('blue', `Event log: ${eventLogUrl.pathname}`));
 
   let aborted = false;
   // SIGTERM matters too: `timeout`-bounded benchmark runs end with it.
@@ -62,6 +89,8 @@ async function main() {
       console.log(`Caught ${signal}, exiting...`);
       aborted = true;
       printRunStats(runStats, agent);
+      logEvent('run_end', { runStats, usage: agent.stats?.() ?? null });
+      await eventLogChain;
       await writeDebugLog(agent, runStats);
       process.exit(0);
     });
@@ -80,6 +109,7 @@ async function main() {
   try {
     while (!aborted) {
       let turn;
+      const requestStartedAt = Date.now();
       try {
         turn = await agent.requestCommands(pendingOutputs);
         requestFailures = 0;
@@ -99,6 +129,13 @@ async function main() {
       const { commands, commentary } = turn;
       pendingOutputs = [];
       runStats.modelTurns += 1;
+      runStats.turnLatenciesMs.push(Date.now() - requestStartedAt);
+      logEvent('model_turn', {
+        turn: runStats.modelTurns,
+        latencyMs: Date.now() - requestStartedAt,
+        commands,
+        commentary,
+      });
 
       if (commentary) {
         console.log(styleText('magenta', `Player: ${commentary}`));
@@ -145,15 +182,27 @@ async function main() {
         let output = toModelText(rawMessages);
         printGame(rawMessages);
         runStats.commands += 1;
-        if (PARSER_REJECTION.test(output)) {
-          runStats.parserRejections += 1;
-        }
+        const rejected = PARSER_REJECTION.test(output);
+        const refused = WORLD_REFUSAL.test(output);
+        if (rejected) runStats.parserRejections += 1;
+        if (refused) runStats.worldRefusals += 1;
+        if (DARKNESS.test(output)) runStats.darknessWarnings += 1;
+        if (DEATH.test(output)) runStats.deaths += 1;
+        logEvent('command', {
+          turn: runStats.modelTurns,
+          command,
+          response: output,
+          parserRejection: rejected,
+          worldRefusal: refused,
+        });
 
         if (halted) {
           console.log(styleText('green', 'Game over, restarting...'));
           const restartIntro = await captureOutput(zork, () => zork.restart());
           halted = false;
           restarted = true;
+          runStats.gameRestarts += 1;
+          logEvent('game_restart', { turn: runStats.modelTurns });
           printGame(restartIntro);
           output += `\n(The game has ended and restarted from the beginning.)\n${toModelText(restartIntro)}`;
         }
@@ -161,17 +210,19 @@ async function main() {
         pendingOutputs.push(output);
       }
 
-      await probeScore(zork, runStats, restarted);
+      await probeScore(zork, runStats, restarted, logEvent);
     }
   } finally {
     agent.dispose?.();
     printRunStats(runStats, agent);
+    logEvent('run_end', { runStats, usage: agent.stats?.() ?? null });
+    await eventLogChain;
   }
 }
 
 // Silently asks the game for the current score after each model turn. The
 // model never sees this exchange — it's harness instrumentation only.
-async function probeScore(zork, runStats, restarted) {
+async function probeScore(zork, runStats, restarted, logEvent) {
   if (restarted) return;
   let response;
   try {
@@ -185,6 +236,12 @@ async function probeScore(zork, runStats, restarted) {
   const moves = Number(match[2]);
   if (score !== runStats.score) {
     console.log(styleText('cyan', `[score: ${score}, moves: ${moves}]`));
+    logEvent('score', { score, moves, commands: runStats.commands });
+    runStats.maxCommandsWithoutScore = Math.max(
+      runStats.maxCommandsWithoutScore,
+      runStats.commands - runStats.commandsAtLastScoreChange,
+    );
+    runStats.commandsAtLastScoreChange = runStats.commands;
   }
   runStats.score = score;
   runStats.moves = moves;
@@ -192,15 +249,26 @@ async function probeScore(zork, runStats, restarted) {
 
 function printRunStats(runStats, agent) {
   const wallSeconds = Math.round((Date.now() - runStats.startedAt) / 1000);
+  const latencies = [...runStats.turnLatenciesMs].sort((a, b) => a - b);
+  const pctile = (p) =>
+    latencies.length > 0
+      ? `${(latencies[Math.floor((latencies.length - 1) * p)] / 1000).toFixed(1)}s`
+      : '?';
+  const staleness = Math.max(
+    runStats.maxCommandsWithoutScore,
+    runStats.commands - runStats.commandsAtLastScoreChange,
+  );
   const lines = [
-    `wall: ${wallSeconds}s | model turns: ${runStats.modelTurns} | commands: ${runStats.commands} (parser rejections: ${runStats.parserRejections})`,
-    `score: ${runStats.score ?? '(unknown)'} in ${runStats.moves ?? '?'} moves`,
+    `wall: ${wallSeconds}s | model turns: ${runStats.modelTurns} (latency p50 ${pctile(0.5)}, p95 ${pctile(0.95)}) | commands: ${runStats.commands}`,
+    `parser rejections: ${runStats.parserRejections} | world refusals: ${runStats.worldRefusals} | darkness warnings: ${runStats.darknessWarnings} | deaths: ${runStats.deaths} | restarts: ${runStats.gameRestarts}`,
+    `score: ${runStats.score ?? '(unknown)'} in ${runStats.moves ?? '?'} moves | longest scoreless stretch: ${staleness} commands`,
   ];
   const usage = agent.stats?.();
   if (usage) {
     const pct = (n) => `${Math.round(n * 100)}%`;
     const cachedShare =
-      usage.cacheReadTokens / (usage.inputTokens + usage.cacheReadTokens + usage.cacheWriteTokens || 1);
+      usage.cacheReadTokens /
+      (usage.inputTokens + usage.cacheReadTokens + usage.cacheWriteTokens || 1);
     lines.push(
       `tokens in: ${usage.inputTokens} uncached + ${usage.cacheReadTokens} cache reads + ${usage.cacheWriteTokens} cache writes (${pct(cachedShare)} cached) | tokens out: ${usage.outputTokens}`,
     );
@@ -254,7 +322,11 @@ async function writeDebugLog(agent, runStats = null) {
   const timestamp = new Date().toISOString().replaceAll(':', '-');
   const debugLogUrl = new URL(`debug-${timestamp}.json`, LOG_DIR);
   await mkdir(LOG_DIR, { recursive: true });
-  const payload = { run: runStats, usage: agent.stats?.() ?? null, history: agent.history() };
+  const payload = {
+    run: runStats,
+    usage: agent.stats?.() ?? null,
+    history: agent.history(),
+  };
   await writeFile(debugLogUrl, JSON.stringify(payload, null, 2));
   console.warn(`>>> Debug log written to: ${debugLogUrl.pathname}`);
 }
