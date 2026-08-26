@@ -30,6 +30,7 @@ export function createClaudeCliProvider({ systemPrompt }) {
     outputTokens: 0,
     cacheReadTokens: 0,
     cacheWriteTokens: 0,
+    thinkingTokens: 0,
     costUsd: 0,
     apiMs: 0,
   };
@@ -96,6 +97,8 @@ export function createClaudeCliProvider({ systemPrompt }) {
         usage.outputTokens += event.usage.output_tokens ?? 0;
         usage.cacheReadTokens += event.usage.cache_read_input_tokens ?? 0;
         usage.cacheWriteTokens += event.usage.cache_creation_input_tokens ?? 0;
+        usage.thinkingTokens +=
+          event.usage.output_tokens_details?.thinking_tokens ?? 0;
       }
       if (event.total_cost_usd !== undefined) {
         usage.costUsd = costFromDeadProcesses + event.total_cost_usd;

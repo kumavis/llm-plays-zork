@@ -9,11 +9,27 @@ const projectRoot = new URL('..', import.meta.url);
 const WASM_URL = new URL('web.wasm', projectRoot);
 const STORY_URL = new URL('zork1.z3', projectRoot);
 
+// Deterministic PRNG (mulberry32) so eval runs can pin the game's RNG —
+// combat rolls, thief movement — to a seed.
+function createRng(seed) {
+  let state = seed >>> 0;
+  return () => {
+    state = (state + 0x6d2b79f5) >>> 0;
+    let t = state;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
 // Creates a fresh interpreter instance with the Zork I story file loaded.
 // Game output is delivered via `events`: the interpreter emits 'print' with
 // HTML-ish text, plus 'header', 'map', 'tree', 'savestate', and 'quit'.
-export async function setup() {
+// With `seed` set, the z-machine's RNG is deterministic: the same seed and
+// command sequence replays the same game (a restart rewinds the RNG too).
+export async function setup({ seed } = {}) {
   const events = new EventEmitter();
+  let rng = seed === undefined ? Math.random : createRng(seed);
 
   const zmachine = new Wrapper({
     hook: [],
@@ -32,7 +48,7 @@ export async function setup() {
         setTimeout(() => zmachine.flush_log(), 200);
         console.error(`z-machine trace: ${msg}`);
       }),
-      rand: () => Math.floor(Math.random() * 0xffff),
+      rand: () => Math.floor(rng() * 0xffff),
     },
   }));
 
@@ -79,6 +95,7 @@ export async function setup() {
 
     // Reset the machine to the beginning of the story.
     async restart() {
+      if (seed !== undefined) rng = createRng(seed);
       loadStory();
       step();
     },

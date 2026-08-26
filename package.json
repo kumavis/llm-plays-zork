@@ -10,6 +10,8 @@
   },
   "scripts": {
     "start": "node src/index.js",
+    "eval": "node src/eval.js",
+    "eval:report": "node src/eval-report.js",
     "test": "node --test"
   },
   "dependencies": {

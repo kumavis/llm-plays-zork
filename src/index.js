@@ -1,5 +1,7 @@
+import { execSync } from 'node:child_process';
 import { appendFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { setTimeout as sleep } from 'node:timers/promises';
+import { pathToFileURL } from 'node:url';
 import { styleText } from 'node:util';
 import { createAgent } from './agent.js';
 import { setup } from './zork.js';
@@ -10,7 +12,19 @@ try {
   // No .env file — rely on the ambient environment.
 }
 
-const LOG_DIR = new URL('../logs/', import.meta.url);
+// LOG_DIR env lets the eval runner group a batch's logs in one directory.
+const LOG_DIR = process.env.LOG_DIR
+  ? pathToFileURL(process.env.LOG_DIR.replace(/\/?$/, '/'))
+  : new URL('../logs/', import.meta.url);
+
+// Eval knobs: stop cleanly after this many game moves (MAX_MOVES), pin the
+// game's RNG (ZORK_SEED), and tag the run's logs (RUN_TAG).
+const MOVE_BUDGET = Number(process.env.MAX_MOVES) || null;
+const SEED =
+  process.env.ZORK_SEED !== undefined
+    ? Number(process.env.ZORK_SEED)
+    : undefined;
+const RUN_TAG = process.env.RUN_TAG || null;
 
 // Consecutive turns without a submitted command before giving up.
 const MAX_IDLE_TURNS = 5;
@@ -41,7 +55,7 @@ async function main() {
     styleText('blue', `Player backend: ${agent.name} (${agent.model})`),
   );
 
-  const zork = await setup();
+  const zork = await setup({ seed: SEED });
 
   // The interpreter halts when the game truly ends (e.g. the model confirms
   // QUIT, or dies past the end-of-game prompt). In-game text like SCORE
@@ -61,6 +75,7 @@ async function main() {
     deaths: 0,
     gameRestarts: 0,
     score: null,
+    maxScore: null,
     moves: null,
     // Staleness: the longest stretch of commands with no score change.
     commandsAtLastScoreChange: 0,
@@ -73,13 +88,23 @@ async function main() {
   // humans. Writes are chained so lines never interleave.
   await mkdir(LOG_DIR, { recursive: true });
   const timestamp = new Date().toISOString().replaceAll(':', '-');
-  const eventLogUrl = new URL(`run-${timestamp}.jsonl`, LOG_DIR);
+  const eventLogUrl = new URL(
+    `run-${timestamp}${RUN_TAG ? `-${RUN_TAG}` : ''}.jsonl`,
+    LOG_DIR,
+  );
   let eventLogChain = Promise.resolve();
   const logEvent = (type, data) => {
     const line = `${JSON.stringify({ t: Date.now(), type, ...data })}\n`;
     eventLogChain = eventLogChain.then(() => appendFile(eventLogUrl, line));
   };
-  logEvent('run_start', { provider: agent.name, model: agent.model });
+  logEvent('run_start', {
+    provider: agent.name,
+    model: agent.model,
+    tag: RUN_TAG,
+    seed: SEED ?? null,
+    moveBudget: MOVE_BUDGET,
+    harnessCommit: gitCommit(),
+  });
   console.log(styleText('blue', `Event log: ${eventLogUrl.pathname}`));
 
   let aborted = false;
@@ -211,6 +236,16 @@ async function main() {
       }
 
       await probeScore(zork, runStats, restarted, logEvent);
+
+      if (MOVE_BUDGET !== null && (runStats.moves ?? 0) >= MOVE_BUDGET) {
+        console.log(
+          styleText(
+            'green',
+            `Move budget of ${MOVE_BUDGET} reached, ending run.`,
+          ),
+        );
+        break;
+      }
     }
   } finally {
     agent.dispose?.();
@@ -237,6 +272,7 @@ async function probeScore(zork, runStats, restarted, logEvent) {
   if (score !== runStats.score) {
     console.log(styleText('cyan', `[score: ${score}, moves: ${moves}]`));
     logEvent('score', { score, moves, commands: runStats.commands });
+    runStats.maxScore = Math.max(runStats.maxScore ?? score, score);
     runStats.maxCommandsWithoutScore = Math.max(
       runStats.maxCommandsWithoutScore,
       runStats.commands - runStats.commandsAtLastScoreChange,
@@ -261,7 +297,7 @@ function printRunStats(runStats, agent) {
   const lines = [
     `wall: ${wallSeconds}s | model turns: ${runStats.modelTurns} (latency p50 ${pctile(0.5)}, p95 ${pctile(0.95)}) | commands: ${runStats.commands}`,
     `parser rejections: ${runStats.parserRejections} | world refusals: ${runStats.worldRefusals} | darkness warnings: ${runStats.darknessWarnings} | deaths: ${runStats.deaths} | restarts: ${runStats.gameRestarts}`,
-    `score: ${runStats.score ?? '(unknown)'} in ${runStats.moves ?? '?'} moves | longest scoreless stretch: ${staleness} commands`,
+    `score: ${runStats.score ?? '(unknown)'} (max ${runStats.maxScore ?? '?'}) in ${runStats.moves ?? '?'} moves | longest scoreless stretch: ${staleness} commands`,
   ];
   const usage = agent.stats?.();
   if (usage) {
@@ -270,7 +306,7 @@ function printRunStats(runStats, agent) {
       usage.cacheReadTokens /
       (usage.inputTokens + usage.cacheReadTokens + usage.cacheWriteTokens || 1);
     lines.push(
-      `tokens in: ${usage.inputTokens} uncached + ${usage.cacheReadTokens} cache reads + ${usage.cacheWriteTokens} cache writes (${pct(cachedShare)} cached) | tokens out: ${usage.outputTokens}`,
+      `tokens in: ${usage.inputTokens} uncached + ${usage.cacheReadTokens} cache reads + ${usage.cacheWriteTokens} cache writes (${pct(cachedShare)} cached) | tokens out: ${usage.outputTokens}${usage.thinkingTokens ? ` (${usage.thinkingTokens} thinking)` : ''}`,
     );
     if (usage.costUsd) {
       lines.push(
@@ -316,6 +352,18 @@ function printGame(rawMessages) {
     .replaceAll('</span>', '\x1b[0m')
     .trim();
   console.log(styleText('white', `Game: ${formatted}`));
+}
+
+function gitCommit() {
+  try {
+    return execSync('git rev-parse --short HEAD', {
+      cwd: new URL('.', import.meta.url).pathname,
+    })
+      .toString()
+      .trim();
+  } catch {
+    return null;
+  }
 }
 
 async function writeDebugLog(agent, runStats = null) {
