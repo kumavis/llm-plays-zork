@@ -121,7 +121,12 @@ async function main() {
       console.log(`Caught ${signal}, exiting...`);
       aborted = true;
       printRunStats(runStats, agent);
-      logEvent('run_end', { runStats, usage: agent.stats?.() ?? null });
+      logEvent('run_end', {
+        endReason: signal,
+        budgetReached: false,
+        runStats,
+        usage: agent.stats?.() ?? null,
+      });
       await eventLogChain;
       await writeDebugLog(agent, runStats);
       process.exit(0);
@@ -135,6 +140,9 @@ async function main() {
   let pendingOutputs = [toModelText(intro)];
   let idleTurns = 0;
   let requestFailures = 0;
+  // Whether the run ended by spending its move budget, as opposed to a
+  // signal or error. Only budget-complete runs are comparable in a report.
+  let budgetReached = false;
 
   // The finally releases provider child processes (claude-cli), or the
   // event loop keeps the harness alive after a fatal error.
@@ -254,13 +262,19 @@ async function main() {
             `Move budget of ${MOVE_BUDGET} reached, ending run.`,
           ),
         );
+        budgetReached = true;
         break;
       }
     }
   } finally {
     agent.dispose?.();
     printRunStats(runStats, agent);
-    logEvent('run_end', { runStats, usage: agent.stats?.() ?? null });
+    logEvent('run_end', {
+      endReason: budgetReached ? 'budget' : 'stopped',
+      budgetReached,
+      runStats,
+      usage: agent.stats?.() ?? null,
+    });
     await eventLogChain;
   }
 }

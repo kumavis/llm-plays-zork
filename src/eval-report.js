@@ -17,12 +17,23 @@ export async function reportDirectory(dir) {
       .split('\n')
       .map((line) => JSON.parse(line));
     const start = events.find((e) => e.type === 'run_start') ?? {};
-    const end = events.findLast((e) => e.type === 'run_end');
-    if (!end) {
+    // The first run_end is the genuine one: a later one comes from a signal
+    // handler during cleanup and would count shutdown time as play time.
+    const end = events.find((e) => e.type === 'run_end');
+    // A run only counts if it spent its whole move budget: a run stopped by
+    // a signal still writes run_end, and mixing it in would understate the
+    // model. Older logs predate endReason, so fall back to the move count.
+    const budgetReached =
+      end?.budgetReached ??
+      (end && start.moveBudget
+        ? (end.runStats.totalMoves || end.runStats.moves || 0) >= start.moveBudget
+        : false);
+    if (!end || !budgetReached) {
       rows.push({
         model: start.model ?? '?',
         tag: start.tag ?? file,
         incomplete: true,
+        endReason: end ? (end.endReason ?? 'stopped early') : 'no run_end',
       });
       continue;
     }
@@ -52,7 +63,7 @@ export async function reportDirectory(dir) {
 
   const columns = [
     ['run', (r) => r.tag],
-    ['score', (r) => (r.incomplete ? 'INCOMPLETE' : r.maxScore)],
+    ['score', (r) => (r.incomplete ? `INCOMPLETE(${r.endReason})` : r.maxScore)],
     ['moves', (r) => r.moves],
     ['cmds', (r) => r.commands],
     ['rej', (r) => r.parserRejections],
