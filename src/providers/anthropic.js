@@ -51,6 +51,15 @@ export function createAnthropicProvider({ systemPrompt }) {
 
   let history = [];
   let pendingToolUses = [];
+  // Cumulative usage across all turns. No cost field: the SDK doesn't price
+  // responses, and prices vary by model.
+  const usage = {
+    turns: 0,
+    inputTokens: 0,
+    outputTokens: 0,
+    cacheReadTokens: 0,
+    cacheWriteTokens: 0,
+  };
 
   const createMessage = async (request) => {
     try {
@@ -72,6 +81,7 @@ export function createAnthropicProvider({ systemPrompt }) {
     name: 'anthropic',
     model,
     history: () => history,
+    stats: () => ({ ...usage }),
 
     // gameOutputs pair 1:1 with the commands returned by the previous call.
     async requestCommands(gameOutputs) {
@@ -111,6 +121,14 @@ export function createAnthropicProvider({ systemPrompt }) {
         // cache instead of re-billing it at full price.
         cache_control: { type: 'ephemeral' },
       });
+
+      if (response.usage) {
+        usage.turns += 1;
+        usage.inputTokens += response.usage.input_tokens ?? 0;
+        usage.outputTokens += response.usage.output_tokens ?? 0;
+        usage.cacheReadTokens += response.usage.cache_read_input_tokens ?? 0;
+        usage.cacheWriteTokens += response.usage.cache_creation_input_tokens ?? 0;
+      }
 
       if (response.stop_reason === 'refusal') {
         throw new Error('Model declined the request (stop_reason: refusal)');

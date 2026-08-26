@@ -18,6 +18,11 @@ const MAX_IDLE_TURNS = 5;
 // before giving up.
 const MAX_REQUEST_FAILURES = 5;
 
+// Zork's parser rejections (bad grammar/vocabulary), as opposed to legal
+// commands the world merely refuses ("You can't go that way").
+const PARSER_REJECTION =
+  /I don't know the word|in a way that I don't understand|That sentence isn't one I recognize|There was no verb in that|noun missing in that sentence|I beg your pardon/;
+
 const systemPrompt = await readFile(
   new URL('system-prompt.txt', import.meta.url),
   'utf8',
@@ -41,13 +46,26 @@ async function main() {
     halted = true;
   });
 
+  const runStats = {
+    startedAt: Date.now(),
+    modelTurns: 0,
+    commands: 0,
+    parserRejections: 0,
+    score: null,
+    moves: null,
+  };
+
   let aborted = false;
-  process.on('SIGINT', async () => {
-    console.log('Caught interrupt signal, exiting...');
-    aborted = true;
-    await writeDebugLog(agent);
-    process.exit(0);
-  });
+  // SIGTERM matters too: `timeout`-bounded benchmark runs end with it.
+  for (const signal of ['SIGINT', 'SIGTERM']) {
+    process.on(signal, async () => {
+      console.log(`Caught ${signal}, exiting...`);
+      aborted = true;
+      printRunStats(runStats, agent);
+      await writeDebugLog(agent, runStats);
+      process.exit(0);
+    });
+  }
 
   // Boot the game; the intro is the first thing the model sees. After that,
   // every game output is the result of a command the model submitted.
@@ -80,6 +98,7 @@ async function main() {
 
       const { commands, commentary } = turn;
       pendingOutputs = [];
+      runStats.modelTurns += 1;
 
       if (commentary) {
         console.log(styleText('magenta', `Player: ${commentary}`));
@@ -125,6 +144,10 @@ async function main() {
 
         let output = toModelText(rawMessages);
         printGame(rawMessages);
+        runStats.commands += 1;
+        if (PARSER_REJECTION.test(output)) {
+          runStats.parserRejections += 1;
+        }
 
         if (halted) {
           console.log(styleText('green', 'Game over, restarting...'));
@@ -137,10 +160,57 @@ async function main() {
 
         pendingOutputs.push(output);
       }
+
+      await probeScore(zork, runStats, restarted);
     }
   } finally {
     agent.dispose?.();
+    printRunStats(runStats, agent);
   }
+}
+
+// Silently asks the game for the current score after each model turn. The
+// model never sees this exchange — it's harness instrumentation only.
+async function probeScore(zork, runStats, restarted) {
+  if (restarted) return;
+  let response;
+  try {
+    response = toModelText(await zork.input('SCORE'));
+  } catch {
+    return;
+  }
+  const match = response.match(/Your score is (-?\d+).*?in (\d+) moves/s);
+  if (!match) return;
+  const score = Number(match[1]);
+  const moves = Number(match[2]);
+  if (score !== runStats.score) {
+    console.log(styleText('cyan', `[score: ${score}, moves: ${moves}]`));
+  }
+  runStats.score = score;
+  runStats.moves = moves;
+}
+
+function printRunStats(runStats, agent) {
+  const wallSeconds = Math.round((Date.now() - runStats.startedAt) / 1000);
+  const lines = [
+    `wall: ${wallSeconds}s | model turns: ${runStats.modelTurns} | commands: ${runStats.commands} (parser rejections: ${runStats.parserRejections})`,
+    `score: ${runStats.score ?? '(unknown)'} in ${runStats.moves ?? '?'} moves`,
+  ];
+  const usage = agent.stats?.();
+  if (usage) {
+    const pct = (n) => `${Math.round(n * 100)}%`;
+    const cachedShare =
+      usage.cacheReadTokens / (usage.inputTokens + usage.cacheReadTokens + usage.cacheWriteTokens || 1);
+    lines.push(
+      `tokens in: ${usage.inputTokens} uncached + ${usage.cacheReadTokens} cache reads + ${usage.cacheWriteTokens} cache writes (${pct(cachedShare)} cached) | tokens out: ${usage.outputTokens}`,
+    );
+    if (usage.costUsd) {
+      lines.push(
+        `est. cost at API list prices: $${usage.costUsd.toFixed(2)}${usage.apiMs ? ` | api time: ${Math.round(usage.apiMs / 1000)}s` : ''}`,
+      );
+    }
+  }
+  console.log(styleText('cyan', `=== Run stats ===\n${lines.join('\n')}`));
 }
 
 // Collects everything the game prints while running an action.
@@ -180,10 +250,11 @@ function printGame(rawMessages) {
   console.log(styleText('white', `Game: ${formatted}`));
 }
 
-async function writeDebugLog(agent) {
+async function writeDebugLog(agent, runStats = null) {
   const timestamp = new Date().toISOString().replaceAll(':', '-');
   const debugLogUrl = new URL(`debug-${timestamp}.json`, LOG_DIR);
   await mkdir(LOG_DIR, { recursive: true });
-  await writeFile(debugLogUrl, JSON.stringify(agent.history(), null, 2));
+  const payload = { run: runStats, usage: agent.stats?.() ?? null, history: agent.history() };
+  await writeFile(debugLogUrl, JSON.stringify(payload, null, 2));
   console.warn(`>>> Debug log written to: ${debugLogUrl.pathname}`);
 }

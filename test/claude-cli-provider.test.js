@@ -33,4 +33,12 @@ test('reuses one CLI process across turns and replays the transcript after a cra
 
   // History committed exactly once per turn despite the internal retry.
   assert.equal(provider.history().filter((m) => m.role === 'user').length, 3);
+
+  // Usage accumulated across the three successful exchanges.
+  const stats = provider.stats();
+  assert.equal(stats.turns, 3);
+  assert.equal(stats.inputTokens, 300);
+  assert.equal(stats.outputTokens, 30);
+  assert.equal(stats.cacheReadTokens, 150);
+  assert.ok(Math.abs(stats.costUsd - 0.03) < 1e-9);
 });

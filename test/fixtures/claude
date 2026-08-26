@@ -6,6 +6,8 @@
 import { createInterface } from 'node:readline';
 
 const rl = createInterface({ input: process.stdin });
+// Like the real CLI, cost and api time are cumulative within one process.
+let turns = 0;
 rl.on('line', (line) => {
   const { message } = JSON.parse(line);
   const text = message.content.map((block) => block.text).join('');
@@ -16,6 +18,9 @@ rl.on('line', (line) => {
     type: 'result',
     subtype: 'success',
     is_error: false,
+    total_cost_usd: 0.01 * (turns += 1),
+    duration_api_ms: 5 * turns,
+    usage: { input_tokens: 100, output_tokens: 10, cache_read_input_tokens: 50, cache_creation_input_tokens: 5 },
     result: `pid:${process.pid}\nreceived:${text.split('\n')[0]}\nCOMMAND: LOOK`,
   }) + '\n');
 });

@@ -16,6 +16,22 @@ export function createClaudeCliProvider({ systemPrompt }) {
   const model = process.env.CLAUDE_CLI_MODEL;
   const system = systemPrompt + TEXT_PROTOCOL_APPENDIX;
   const history = [];
+  // Cumulative usage across all turns, from the CLI's result events. costUsd
+  // is the CLI's own estimate at API list prices. Token counts are per-turn
+  // in result events and are summed; cost and api time are cumulative per
+  // CLI process, so the latest value is kept and folded into a base when a
+  // process dies.
+  let costFromDeadProcesses = 0;
+  let apiMsFromDeadProcesses = 0;
+  const usage = {
+    turns: 0,
+    inputTokens: 0,
+    outputTokens: 0,
+    cacheReadTokens: 0,
+    cacheWriteTokens: 0,
+    costUsd: 0,
+    apiMs: 0,
+  };
 
   let child = null;
   // The harness is lockstep, so at most one turn is in flight.
@@ -51,6 +67,19 @@ export function createClaudeCliProvider({ systemPrompt }) {
       let event;
       try { event = JSON.parse(line); } catch { return; }
       if (event.type !== 'result') return;
+      if (event.usage) {
+        usage.turns += 1;
+        usage.inputTokens += event.usage.input_tokens ?? 0;
+        usage.outputTokens += event.usage.output_tokens ?? 0;
+        usage.cacheReadTokens += event.usage.cache_read_input_tokens ?? 0;
+        usage.cacheWriteTokens += event.usage.cache_creation_input_tokens ?? 0;
+      }
+      if (event.total_cost_usd !== undefined) {
+        usage.costUsd = costFromDeadProcesses + event.total_cost_usd;
+      }
+      if (event.duration_api_ms !== undefined) {
+        usage.apiMs = apiMsFromDeadProcesses + event.duration_api_ms;
+      }
       if (event.is_error) {
         settle('reject', new Error(`claude CLI returned an error: ${event.result ?? event.subtype}`));
       } else {
@@ -64,6 +93,8 @@ export function createClaudeCliProvider({ systemPrompt }) {
     });
     child.on('exit', (code) => {
       child = null;
+      costFromDeadProcesses = usage.costUsd;
+      apiMsFromDeadProcesses = usage.apiMs;
       settle('reject', new Error(`claude CLI exited (code ${code})${stderr ? `: ${stderr.trim().slice(0, 500)}` : ''}`));
     });
   };
@@ -93,6 +124,7 @@ export function createClaudeCliProvider({ systemPrompt }) {
     name: 'claude-cli',
     model: model ?? '(claude CLI default)',
     history: () => history,
+    stats: () => ({ ...usage }),
 
     // gameOutputs pair 1:1 with the commands returned by the previous call.
     async requestCommands(gameOutputs) {
