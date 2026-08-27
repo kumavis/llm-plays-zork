@@ -90,3 +90,44 @@
 {"t":1787807157136,"type":"command","turn":42,"command":"TAKE WRENCH","response":"Taken.","parserRejection":false,"worldRefusal":false}
 {"t":1787807160000,"type":"model_turn","turn":43,"latencyMs":2864,"commands":["TAKE SCREWDRIVER"],"commentary":"Let's grab the screwdriver too."}
 {"t":1787807160001,"type":"command","turn":43,"command":"TAKE SCREWDRIVER","response":"Taken.","parserRejection":false,"worldRefusal":false}
+{"t":1787807174664,"type":"model_turn","turn":44,"latencyMs":14662,"commands":["PUSH YELLOW BUTTON"],"commentary":"Let's push the yellow button to activate the dam controls."}
+{"t":1787807174665,"type":"command","turn":44,"command":"PUSH YELLOW BUTTON","response":"Click.","parserRejection":false,"worldRefusal":false}
+{"t":1787807177054,"type":"model_turn","turn":45,"latencyMs":2388,"commands":["GO SOUTH"],"commentary":"Now let's head back to the dam to try the bolt."}
+{"t":1787807177055,"type":"command","turn":45,"command":"GO SOUTH","response":"Dam Lobby\nSome guidebooks entitled \"Flood Control Dam #3\" are on the reception desk.","parserRejection":false,"worldRefusal":false}
+{"t":1787807179449,"type":"model_turn","turn":46,"latencyMs":2394,"commands":["GO SOUTH"],"commentary":""}
+{"t":1787807179451,"type":"command","turn":46,"command":"GO SOUTH","response":"Dam\nYou are standing on the top of the Flood Control Dam #3, which was quite a tourist attraction in times far distant. There are paths to the north, south, and west, and a scramble down.\nThe sluice gates on the dam are closed. Behind the dam, there can be seen a wide reservoir. Water is pouring over the top of the now abandoned dam.\nThere is a control panel here, on which a large metal bolt is mounted. Directly above the bolt is a small green plastic bubble which is glowing serenely.","parserRejection":false,"worldRefusal":false}
+{"t":1787807181678,"type":"model_turn","turn":47,"latencyMs":2226,"commands":["TURN BOLT WITH WRENCH"],"commentary":"The bubble is glowing, indicating power is active. Let's turn the bolt with the wrench."}
+{"t":1787807181680,"type":"command","turn":47,"command":"TURN BOLT WITH WRENCH","response":"The sluice gates open and water pours through the dam.","parserRejection":false,"worldRefusal":false}
+{"t":1787807185851,"type":"model_turn","turn":48,"latencyMs":4171,"commands":["DROP WRENCH"],"commentary":"Let's drop the wrench since it's no longer needed and continue exploring."}
+{"t":1787807185852,"type":"command","turn":48,"command":"DROP WRENCH","response":"Dropped.","parserRejection":false,"worldRefusal":false}
+{"t":1787807188239,"type":"model_turn","turn":49,"latencyMs":2387,"commands":["GO DOWN"],"commentary":""}
+{"t":1787807188240,"type":"command","turn":49,"command":"GO DOWN","response":"Dam Base\nYou are at the base of Flood Control Dam #3, which looms above you and to the north. The river Frigid is flowing by here. Along the river are the White Cliffs which seem to form giant walls stretching from north to south along the shores of the river as it winds its way downstream.\nThere is a folded pile of plastic here which has a small valve attached.","parserRejection":false,"worldRefusal":false}
+{"t":1787807191458,"type":"model_turn","turn":50,"latencyMs":3217,"commands":["GO UP"],"commentary":"Let's continue exploring. I'll head back up to the Dam."}
+{"t":1787807191458,"type":"command","turn":50,"command":"GO UP","response":"Dam\nThere is a wrench here.","parserRejection":false,"worldRefusal":false}
+{"t":1787807193610,"type":"model_turn","turn":51,"latencyMs":2151,"commands":["GO WEST"],"commentary":""}
+{"t":1787807193612,"type":"command","turn":51,"command":"GO WEST","response":"Reservoir South\nYou are in a long room. To the north is a large lake, too deep to cross. You notice, however, that the water level appears to be dropping at a rapid rate. Before long, it might be possible to cross to the other side from here.\nThere is a path along the stream to the east or west, a steep pathway climbing southwest along the edge of a chasm, and a path leading into a canyon to the southeast.","parserRejection":false,"worldRefusal":false}
+{"t":1787807198474,"type":"model_turn","turn":52,"latencyMs":4862,"commands":["GO SOUTHWEST"],"commentary":"Let's continue exploring southwest."}
+{"t":1787807198476,"type":"command","turn":52,"command":"GO SOUTHWEST","response":"Chasm\nA chasm runs southwest to northeast and the path follows it. You are on the south side of the chasm, where a crack opens into a passage.","parserRejection":false,"worldRefusal":false}
+{"t":1787807201288,"type":"model_turn","turn":53,"latencyMs":2811,"commands":["GO SOUTHWEST"],"commentary":""}
+{"t":1787807201289,"type":"command","turn":53,"command":"GO SOUTHWEST","response":"East-West Passage","parserRejection":false,"worldRefusal":false}
+{"t":1787807203846,"type":"model_turn","turn":54,"latencyMs":2556,"commands":["GO DOWN"],"commentary":"We've looped back. Let's go down the stairway here."}
+{"t":1787807203847,"type":"command","turn":54,"command":"GO DOWN","response":"Chasm","parserRejection":false,"worldRefusal":false}
+{"t":1787807208417,"type":"model_turn","turn":55,"latencyMs":4569,"commands":[],"commentary":"LOOK"}
+{"t":1787807215895,"type":"model_turn","turn":56,"latencyMs":4710,"commands":["LOOK"],"commentary":"I need to see the full description of this location to find all exits."}
+{"t":1787807215897,"type":"command","turn":56,"command":"LOOK","response":"Chasm\nA chasm runs southwest to northeast and the path follows it. You are on the south side of the chasm, where a crack opens into a passage.","parserRejection":false,"worldRefusal":false}
+{"t":1787807217144,"type":"model_turn","turn":57,"latencyMs":1247,"commands":["LOOK"],"commentary":""}
+{"t":1787807217145,"type":"command","turn":57,"command":"LOOK","response":"Chasm\nA chasm runs southwest to northeast and the path follows it. You are on the south side of the chasm, where a crack opens into a passage.","parserRejection":false,"worldRefusal":false}
+{"t":1787807220156,"type":"model_turn","turn":58,"latencyMs":3010,"commands":["GO NORTHEAST"],"commentary":""}
+{"t":1787807220157,"type":"command","turn":58,"command":"GO NORTHEAST","response":"Reservoir South","parserRejection":false,"worldRefusal":false}
+{"t":1787807222752,"type":"model_turn","turn":59,"latencyMs":2594,"commands":["GO SOUTH"],"commentary":""}
+{"t":1787807222753,"type":"command","turn":59,"command":"GO SOUTH","response":"You can't go that way.","parserRejection":false,"worldRefusal":true}
+{"t":1787807225383,"type":"model_turn","turn":60,"latencyMs":2629,"commands":["GO SOUTHEAST"],"commentary":""}
+{"t":1787807225384,"type":"command","turn":60,"command":"GO SOUTHEAST","response":"Deep Canyon\nYou are on the south edge of a deep canyon. Passages lead off to the east, northwest and southwest. A stairway leads down. You can hear the sound of flowing water from below.","parserRejection":false,"worldRefusal":false}
+{"t":1787807230502,"type":"model_turn","turn":61,"latencyMs":5118,"commands":["LOOK"],"commentary":""}
+{"t":1787807230503,"type":"command","turn":61,"command":"LOOK","response":"Deep Canyon\nYou are on the south edge of a deep canyon. Passages lead off to the east, northwest and southwest. A stairway leads down. You can hear the sound of flowing water from below.","parserRejection":false,"worldRefusal":false}
+{"t":1787807234361,"type":"model_turn","turn":62,"latencyMs":3857,"commands":["GO NORTHWEST"],"commentary":""}
+{"t":1787807234362,"type":"command","turn":62,"command":"GO NORTHWEST","response":"Reservoir South","parserRejection":false,"worldRefusal":false}
+{"t":1787807237058,"type":"model_turn","turn":63,"latencyMs":2696,"commands":["GO DOWN"],"commentary":""}
+{"t":1787807237059,"type":"command","turn":63,"command":"GO DOWN","response":"You can't go that way.","parserRejection":false,"worldRefusal":true}
+{"t":1787807241848,"type":"model_turn","turn":64,"latencyMs":4788,"commands":["LOOK"],"commentary":""}
+{"t":1787807241849,"type":"command","turn":64,"command":"LOOK","response":"Reservoir South\nYou are in a long room, to the north of which was formerly a lake. However, with the water level lowered, there is merely a wide stream running through the center of the room.\nThere is a path along the stream to the east or west, a steep pathway climbing southwest along the edge of a chasm, and a path leading into a canyon to the southeast.","parserRejection":false,"worldRefusal":false}

@@ -4,3 +4,5 @@ node_modules
 logs/*
 !logs/eval-*/
 logs/eval-*/debug-*.json
+# A run still in flight; renamed to .jsonl once it spends its budget.
+logs/eval-*/*.partial

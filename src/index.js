@@ -1,5 +1,11 @@
 import { execSync } from 'node:child_process';
-import { appendFile, mkdir, readFile, writeFile } from 'node:fs/promises';
+import {
+  appendFile,
+  mkdir,
+  readFile,
+  rename,
+  writeFile,
+} from 'node:fs/promises';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { pathToFileURL } from 'node:url';
 import { styleText } from 'node:util';
@@ -93,16 +99,20 @@ async function main() {
   // Machine-readable event log for offline analysis (metrics, state-graph
   // reconstruction) — one JSON object per line. The terminal log stays for
   // humans. Writes are chained so lines never interleave.
+  // A run in flight writes a .partial file and only takes its final name
+  // once it has spent its move budget, so an interrupted run is never
+  // mistaken for a result — on disk or in git.
   await mkdir(LOG_DIR, { recursive: true });
   const timestamp = new Date().toISOString().replaceAll(':', '-');
   const eventLogUrl = new URL(
     `run-${timestamp}${RUN_TAG ? `-${RUN_TAG}` : ''}.jsonl`,
     LOG_DIR,
   );
+  const partialLogUrl = new URL(`${eventLogUrl.href}.partial`);
   let eventLogChain = Promise.resolve();
   const logEvent = (type, data) => {
     const line = `${JSON.stringify({ t: Date.now(), type, ...data })}\n`;
-    eventLogChain = eventLogChain.then(() => appendFile(eventLogUrl, line));
+    eventLogChain = eventLogChain.then(() => appendFile(partialLogUrl, line));
   };
   logEvent('run_start', {
     provider: agent.name,
@@ -112,7 +122,7 @@ async function main() {
     moveBudget: MOVE_BUDGET,
     harnessCommit: gitCommit(),
   });
-  console.log(styleText('blue', `Event log: ${eventLogUrl.pathname}`));
+  console.log(styleText('blue', `Event log: ${partialLogUrl.pathname}`));
 
   let aborted = false;
   // SIGTERM matters too: `timeout`-bounded benchmark runs end with it.
@@ -276,6 +286,7 @@ async function main() {
       usage: agent.stats?.() ?? null,
     });
     await eventLogChain;
+    if (budgetReached) await rename(partialLogUrl, eventLogUrl);
   }
 }
 

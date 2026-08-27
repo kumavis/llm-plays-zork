@@ -185,3 +185,70 @@ Game: Taken.[0m
 Player: Let's grab the screwdriver too.
 > TAKE SCREWDRIVER
 Game: Taken.[0m
+Player: Let's push the yellow button to activate the dam controls.
+> PUSH YELLOW BUTTON
+Game: Click.[0m
+Player: Now let's head back to the dam to try the bolt.
+> GO SOUTH
+Game: [1mDam Lobby[0m
+Some guidebooks entitled "Flood Control Dam #3" are on the reception desk.[0m
+> GO SOUTH
+Game: [1mDam[0m
+You are standing on the top of the Flood Control Dam #3, which was quite a tourist attraction in times far distant. There are paths to the north, south, and west, and a scramble down.[0m
+The sluice gates on the dam are closed. Behind the dam, there can be seen a wide reservoir. Water is pouring over the top of the now abandoned dam.[0m
+There is a control panel here, on which a large metal bolt is mounted. Directly above the bolt is a small green plastic bubble which is glowing serenely.[0m
+Player: The bubble is glowing, indicating power is active. Let's turn the bolt with the wrench.
+> TURN BOLT WITH WRENCH
+Game: The sluice gates open and water pours through the dam.[0m
+Player: Let's drop the wrench since it's no longer needed and continue exploring.
+> DROP WRENCH
+Game: Dropped.[0m
+> GO DOWN
+Game: [1mDam Base[0m
+You are at the base of Flood Control Dam #3, which looms above you and to the north. The river Frigid is flowing by here. Along the river are the White Cliffs which seem to form giant walls stretching from north to south along the shores of the river as it winds its way downstream.[0m
+There is a folded pile of plastic here which has a small valve attached.[0m
+Player: Let's continue exploring. I'll head back up to the Dam.
+> GO UP
+Game: [1mDam[0m
+There is a [0m[4mwrench[0m here.[0m
+> GO WEST
+Game: [1mReservoir South[0m
+You are in a long room. To the north is a large lake, too deep to cross. You notice, however, that the water level appears to be dropping at a rapid rate. Before long, it might be possible to cross to the other side from here.[0m
+There is a path along the stream to the east or west, a steep pathway climbing southwest along the edge of a chasm, and a path leading into a canyon to the southeast.[0m
+Player: Let's continue exploring southwest.
+> GO SOUTHWEST
+Game: [1mChasm[0m
+A chasm runs southwest to northeast and the path follows it. You are on the south side of the chasm, where a crack opens into a passage.[0m
+> GO SOUTHWEST
+Game: [1mEast-West Passage[0m
+Player: We've looped back. Let's go down the stairway here.
+> GO DOWN
+Game: [1mChasm[0m
+Player: LOOK
+claude CLI process failed (claude CLI returned an error: API Error: 400 messages: text content blocks must be non-empty), restarting.
+>>> Model request failed (1/5): claude CLI exited (code 143)
+Player: I need to see the full description of this location to find all exits.
+> LOOK
+Game: [1mChasm[0m
+A chasm runs southwest to northeast and the path follows it. You are on the south side of the chasm, where a crack opens into a passage.[0m
+> LOOK
+Game: [1mChasm[0m
+A chasm runs southwest to northeast and the path follows it. You are on the south side of the chasm, where a crack opens into a passage.[0m
+> GO NORTHEAST
+Game: [1mReservoir South[0m
+> GO SOUTH
+Game: You can't go that way.[0m
+> GO SOUTHEAST
+Game: [1mDeep Canyon[0m
+You are on the south edge of a deep canyon. Passages lead off to the east, northwest and southwest. A stairway leads down. You can hear the sound of flowing water from below.[0m
+> LOOK
+Game: [1mDeep Canyon[0m
+You are on the south edge of a deep canyon. Passages lead off to the east, northwest and southwest. A stairway leads down. You can hear the sound of flowing water from below.[0m
+> GO NORTHWEST
+Game: [1mReservoir South[0m
+> GO DOWN
+Game: You can't go that way.[0m
+> LOOK
+Game: [1mReservoir South[0m
+You are in a long room, to the north of which was formerly a lake. However, with the water level lowered, there is merely a wide stream running through the center of the room.[0m
+There is a path along the stream to the east or west, a steep pathway climbing southwest along the edge of a chasm, and a path leading into a canyon to the southeast.[0m
