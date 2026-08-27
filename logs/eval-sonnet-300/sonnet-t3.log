@@ -116,3 +116,49 @@ Player: Now let's try taking the bar again.
 > TAKE BAR
 Game: Taken.[0m
 [score: 50, moves: 24]
+Player: Excellent! Got the platinum bar. Let's continue exploring east.
+> GO EAST
+Game: [1mDamp Cave[0m
+This cave has exits to the west and east, and narrows to a crack toward the south. The earth is particularly damp here.[0m
+> GO EAST
+Game: [1mWhite Cliffs Beach[0m
+You are on a narrow strip of beach which runs along the base of the White Cliffs. There is a narrow path heading south along the Cliffs and a tight passage leading west into the cliffs themselves.[0m
+> GO SOUTH
+Game: [1mWhite Cliffs Beach[0m
+You are on a rocky, narrow strip of beach beside the Cliffs. A narrow path leads north along the shore.[0m
+Player: This seems like a dead end. Let's head back and explore other paths.
+> GO NORTH
+Game: [1mWhite Cliffs Beach[0m
+> GO WEST
+Game: [1mDamp Cave[0m
+Player: Let's try the crack to the south.
+> GO SOUTH
+Game: It is too narrow for most insects.[0m
+Player: That's a dead end too. Let's head back to explore the Round Room's other exits.
+> GO WEST
+Game: [1mLoud Room[0m
+Player: Let's try going up from here.
+> GO UP
+Game: [1mDeep Canyon[0m
+You are on the south edge of a deep canyon. Passages lead off to the east, northwest and southwest. A stairway leads down. You can hear the sound of flowing water from below.[0m
+> GO EAST
+Game: [1mDam[0m
+You are standing on the top of the Flood Control Dam #3, which was quite a tourist attraction in times far distant. There are paths to the north, south, and west, and a scramble down.[0m
+The sluice gates on the dam are closed. Behind the dam, there can be seen a wide reservoir. Water is pouring over the top of the now abandoned dam.[0m
+There is a control panel here, on which a large metal bolt is mounted. Directly above the bolt is a small green plastic bubble.[0m
+Player: Let's explore north to the Maintenance Room.
+> GO NORTH
+Game: [1mDam Lobby[0m
+This room appears to have been the waiting room for groups touring the dam. There are open doorways here to the north and east marked "Private", and there is a path leading south over the top of the dam.[0m
+Some guidebooks entitled "Flood Control Dam #3" are on the reception desk.[0m
+There is a matchbook whose cover says "Visit Beautiful FCD#3" here.[0m
+Player: Let's grab the matchbook, useful for lighting things later.
+> TAKE MATCHBOOK
+Game: Taken.[0m
+> GO NORTH
+Game: [1mMaintenance Room[0m
+This is what appears to have been the maintenance room for Flood Control Dam #3. Apparently, this room has been ransacked recently, for most of the valuable equipment is gone. On the wall in front of you is a group of buttons colored blue, yellow, brown, and red. There are doorways to the west and south.[0m
+There is a [0m[4mgroup of tool chests[0m here.[0m
+There is a [0m[4mwrench[0m here.[0m
+There is an object which looks like a tube of toothpaste here.[0m
+There is a [0m[4mscrewdriver[0m here.[0m
