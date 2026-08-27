@@ -162,3 +162,26 @@ There is a [0m[4mgroup of tool chests[0m here.[0m
 There is a [0m[4mwrench[0m here.[0m
 There is an object which looks like a tube of toothpaste here.[0m
 There is a [0m[4mscrewdriver[0m here.[0m
+Player: Let's grab the wrench and screwdriver - both useful tools.
+> TAKE WRENCH
+Game: Your load is too heavy.[0m
+Player: Let me check my inventory to see what I'm carrying.
+> INVENTORY
+Game: You are carrying:[0m
+  A [0m[4mmatchbook[0m
+  A [0m[4mplatinum bar[0m
+  A [0m[4msword[0m
+  A [0m[4mbrass lantern[0m (providing light)[0m
+  A [0m[4mglass bottle[0m
+  The [0m[4mglass bottle[0m contains:[0m
+    A [0m[4mquantity of water[0m
+  A [0m[4mbrown sack[0m
+Player: Let me drop the bottle of water to lighten my load.
+> DROP BOTTLE
+Game: Dropped.[0m
+Player: Now let's try taking the wrench again.
+> TAKE WRENCH
+Game: Taken.[0m
+Player: Let's grab the screwdriver too.
+> TAKE SCREWDRIVER
+Game: Taken.[0m

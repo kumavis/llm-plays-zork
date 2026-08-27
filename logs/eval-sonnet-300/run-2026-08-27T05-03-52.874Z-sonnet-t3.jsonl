@@ -80,3 +80,13 @@
 {"t":1787807141335,"type":"command","turn":37,"command":"TAKE MATCHBOOK","response":"Taken.","parserRejection":false,"worldRefusal":false}
 {"t":1787807143803,"type":"model_turn","turn":38,"latencyMs":2468,"commands":["GO NORTH"],"commentary":""}
 {"t":1787807143805,"type":"command","turn":38,"command":"GO NORTH","response":"Maintenance Room\nThis is what appears to have been the maintenance room for Flood Control Dam #3. Apparently, this room has been ransacked recently, for most of the valuable equipment is gone. On the wall in front of you is a group of buttons colored blue, yellow, brown, and red. There are doorways to the west and south.\nThere is a group of tool chests here.\nThere is a wrench here.\nThere is an object which looks like a tube of toothpaste here.\nThere is a screwdriver here.","parserRejection":false,"worldRefusal":false}
+{"t":1787807146821,"type":"model_turn","turn":39,"latencyMs":3015,"commands":["TAKE WRENCH"],"commentary":"Let's grab the wrench and screwdriver - both useful tools."}
+{"t":1787807146822,"type":"command","turn":39,"command":"TAKE WRENCH","response":"Your load is too heavy.","parserRejection":false,"worldRefusal":false}
+{"t":1787807149297,"type":"model_turn","turn":40,"latencyMs":2475,"commands":["INVENTORY"],"commentary":"Let me check my inventory to see what I'm carrying."}
+{"t":1787807149298,"type":"command","turn":40,"command":"INVENTORY","response":"You are carrying:\n  A matchbook\n  A platinum bar\n  A sword\n  A brass lantern (providing light)\n  A glass bottle\n  The glass bottle contains:\n    A quantity of water\n  A brown sack","parserRejection":false,"worldRefusal":false}
+{"t":1787807154512,"type":"model_turn","turn":41,"latencyMs":5214,"commands":["DROP BOTTLE"],"commentary":"Let me drop the bottle of water to lighten my load."}
+{"t":1787807154513,"type":"command","turn":41,"command":"DROP BOTTLE","response":"Dropped.","parserRejection":false,"worldRefusal":false}
+{"t":1787807157135,"type":"model_turn","turn":42,"latencyMs":2621,"commands":["TAKE WRENCH"],"commentary":"Now let's try taking the wrench again."}
+{"t":1787807157136,"type":"command","turn":42,"command":"TAKE WRENCH","response":"Taken.","parserRejection":false,"worldRefusal":false}
+{"t":1787807160000,"type":"model_turn","turn":43,"latencyMs":2864,"commands":["TAKE SCREWDRIVER"],"commentary":"Let's grab the screwdriver too."}
+{"t":1787807160001,"type":"command","turn":43,"command":"TAKE SCREWDRIVER","response":"Taken.","parserRejection":false,"worldRefusal":false}
