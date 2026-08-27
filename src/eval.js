@@ -77,14 +77,24 @@ async function isTrialComplete(tag) {
   );
   for (const log of logs) {
     const text = await readFile(join(batchDir, log), 'utf8');
-    for (const line of text.trim().split('\n')) {
-      let event;
-      try {
-        event = JSON.parse(line);
-      } catch {
-        continue;
-      }
-      if (event.type === 'run_end' && event.budgetReached) return true;
+    const events = text
+      .trim()
+      .split('\n')
+      .flatMap((line) => {
+        try {
+          return [JSON.parse(line)];
+        } catch {
+          return [];
+        }
+      });
+    const end = events.find((e) => e.type === 'run_end');
+    if (!end) continue;
+    // Logs written before run_end carried budgetReached fall back to the
+    // move count, matching how the report decides a run is complete.
+    if (end.budgetReached) return true;
+    if (end.budgetReached === undefined) {
+      const played = end.runStats?.totalMoves || end.runStats?.moves || 0;
+      if (played >= moves) return true;
     }
   }
   return false;
