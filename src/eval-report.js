@@ -41,10 +41,11 @@ export async function reportDirectory(dir) {
     const u = end.usage ?? {};
     const scores = events.filter((e) => e.type === 'score').map((e) => e.score);
     rows.push({
-      // Group by the exact model the API served, falling back to the alias
-      // the run requested when a log predates that being recorded.
-      model: u.resolvedModel ?? start.model ?? '?',
-      alias: start.model ?? '?',
+      // Runs group by the alias they requested, so a batch stays one row
+      // even though older logs predate exact ids; the row is then labeled
+      // with the exact model the API served, when any run recorded it.
+      model: start.model ?? '?',
+      resolvedModel: u.resolvedModel ?? null,
       tag: start.tag ?? file,
       seed: start.seed ?? null,
       wallMin: (end.t - events[0].t) / 60000,
@@ -84,7 +85,8 @@ export async function reportDirectory(dir) {
     (r) => r.model,
   );
   const aggregates = [...byModel.entries()].map(([model, runs]) => ({
-    model,
+    model: runs.find((r) => r.resolvedModel)?.resolvedModel ?? model,
+    alias: model,
     trials: runs.length,
     medianScore: median(runs.map((r) => r.maxScore ?? 0)),
     meanScore: mean(runs.map((r) => r.maxScore ?? 0)),

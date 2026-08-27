@@ -2,6 +2,7 @@
   "rows": [
     {
       "model": "haiku",
+      "resolvedModel": null,
       "tag": "haiku-t1",
       "seed": 1,
       "wallMin": 13.484766666666667,
@@ -18,6 +19,7 @@
     },
     {
       "model": "haiku",
+      "resolvedModel": null,
       "tag": "haiku-t2",
       "seed": 2,
       "wallMin": 13.501816666666667,
@@ -31,18 +33,36 @@
       "staleness": 94,
       "tokensOut": 27186,
       "costUsd": 1.0103130000000002
+    },
+    {
+      "model": "haiku",
+      "resolvedModel": "claude-haiku-4-5-20251001",
+      "tag": "haiku-t3",
+      "seed": 3,
+      "wallMin": 13.9714,
+      "turns": 333,
+      "commands": 333,
+      "moves": 300,
+      "maxScore": 40,
+      "parserRejections": 13,
+      "worldRefusals": 34,
+      "deaths": 2,
+      "staleness": 120,
+      "tokensOut": 27723,
+      "costUsd": 1.1407495000000003
     }
   ],
   "aggregates": [
     {
-      "model": "haiku",
-      "trials": 2,
-      "medianScore": 32,
-      "meanScore": 32,
-      "meanCommands": 314.5,
-      "meanWallMin": 13.493291666666668,
-      "meanCostUsd": 0.9840735500000001,
-      "scorePerDollar": 32.51789462281554
+      "model": "claude-haiku-4-5-20251001",
+      "alias": "haiku",
+      "trials": 3,
+      "medianScore": 40,
+      "meanScore": 34.666666666666664,
+      "meanCommands": 320.6666666666667,
+      "meanWallMin": 13.65266111111111,
+      "meanCostUsd": 1.0362988666666668,
+      "scorePerDollar": 33.45238307378894
     }
   ]
 }
