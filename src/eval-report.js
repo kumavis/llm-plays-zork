@@ -17,9 +17,12 @@ export async function reportDirectory(dir) {
       .split('\n')
       .map((line) => JSON.parse(line));
     const start = events.find((e) => e.type === 'run_start') ?? {};
-    // The first run_end is the genuine one: a later one comes from a signal
-    // handler during cleanup and would count shutdown time as play time.
-    const end = events.find((e) => e.type === 'run_end');
+    // A resumed run logs a run_end per interrupted attempt before the real
+    // one, so the completion wins; otherwise take the first, since a later
+    // one comes from signal cleanup and would count shutdown as play time.
+    const end =
+      events.findLast((e) => e.type === 'run_end' && e.budgetReached) ??
+      events.find((e) => e.type === 'run_end');
     // A run only counts if it spent its whole move budget: a run stopped by
     // a signal still writes run_end, and mixing it in would understate the
     // model. Older logs predate endReason, so fall back to the move count.
@@ -48,7 +51,9 @@ export async function reportDirectory(dir) {
       resolvedModel: u.resolvedModel ?? null,
       tag: start.tag ?? file,
       seed: start.seed ?? null,
-      wallMin: (end.t - events[0].t) / 60000,
+      // Time actually spent playing: a resumed run is idle between attempts,
+      // so sum each attempt rather than spanning first event to last.
+      wallMin: activeMs(events) / 60000,
       turns: s.modelTurns,
       commands: s.commands,
       moves: s.totalMoves || s.moves,
@@ -116,6 +121,24 @@ export async function reportDirectory(dir) {
   await writeFile(summaryPath, JSON.stringify({ rows, aggregates }, null, 2));
   console.log(`\nSummary written to ${summaryPath}`);
   return { rows, aggregates };
+}
+
+// Sums each play period: run_start/run_resume until that attempt's run_end,
+// so the gaps while a run was dead are not counted as play time.
+function activeMs(events) {
+  let total = 0;
+  let startedAt = null;
+  for (const event of events) {
+    if (event.type === 'run_start' || event.type === 'run_resume') {
+      startedAt = event.t;
+    } else if (event.type === 'run_end' && startedAt !== null) {
+      total += event.t - startedAt;
+      startedAt = null;
+    }
+  }
+  // An attempt that never wrote run_end (hard kill) ends at its last event.
+  if (startedAt !== null) total += events.at(-1).t - startedAt;
+  return total;
 }
 
 function printTable(columns, rows) {

@@ -1,0 +1,34 @@
+{
+  "rows": [
+    {
+      "model": "opus",
+      "resolvedModel": "claude-opus-5",
+      "tag": "opus-t1",
+      "seed": 1,
+      "wallMin": 36.532833333333336,
+      "turns": 311,
+      "commands": 310,
+      "moves": 300,
+      "maxScore": 144,
+      "parserRejections": 0,
+      "worldRefusals": 45,
+      "deaths": 1,
+      "staleness": 223,
+      "tokensOut": 49862,
+      "costUsd": 4.249954
+    }
+  ],
+  "aggregates": [
+    {
+      "model": "claude-opus-5",
+      "alias": "opus",
+      "trials": 1,
+      "medianScore": 144,
+      "meanScore": 144,
+      "meanCommands": 310,
+      "meanWallMin": 36.532833333333336,
+      "meanCostUsd": 4.249954,
+      "scorePerDollar": 33.88271967178939
+    }
+  ]
+}
