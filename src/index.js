@@ -336,6 +336,9 @@ function printRunStats(runStats, agent) {
     `score: ${runStats.score ?? '(unknown)'} (max ${runStats.maxScore ?? '?'}) in ${runStats.moves ?? '?'} moves | longest scoreless stretch: ${staleness} commands`,
   ];
   const usage = agent.stats?.();
+  if (usage?.resolvedModel) {
+    lines.push(`model served: ${usage.resolvedModel}`);
+  }
   if (usage) {
     const pct = (n) => `${Math.round(n * 100)}%`;
     const cachedShare =

@@ -31,6 +31,11 @@ export function createClaudeCliProvider({ systemPrompt }) {
     cacheReadTokens: 0,
     cacheWriteTokens: 0,
     thinkingTokens: 0,
+    // Output tokens per exact model id (e.g. claude-haiku-4-5-2025…), since
+    // CLAUDE_CLI_MODEL is usually an alias that moves over time. The CLI also
+    // bills small auxiliary calls to other models, so the model that played
+    // the game is the one with the most output tokens, not merely the first.
+    modelOutputTokens: {},
     costUsd: 0,
     apiMs: 0,
   };
@@ -116,6 +121,10 @@ export function createClaudeCliProvider({ systemPrompt }) {
         usage.thinkingTokens +=
           event.usage.output_tokens_details?.thinking_tokens ?? 0;
       }
+      for (const [id, stats] of Object.entries(event.modelUsage ?? {})) {
+        usage.modelOutputTokens[id] =
+          (usage.modelOutputTokens[id] ?? 0) + (stats.outputTokens ?? 0);
+      }
       if (event.total_cost_usd !== undefined) {
         usage.costUsd = costFromDeadProcesses + event.total_cost_usd;
       }
@@ -183,7 +192,11 @@ export function createClaudeCliProvider({ systemPrompt }) {
     name: 'claude-cli',
     model: model ?? '(claude CLI default)',
     history: () => history,
-    stats: () => ({ ...usage }),
+    stats: () => ({
+      ...usage,
+      modelOutputTokens: { ...usage.modelOutputTokens },
+      resolvedModel: primaryModel(usage.modelOutputTokens),
+    }),
 
     // gameOutputs pair 1:1 with the commands returned by the previous call.
     async requestCommands(gameOutputs) {
@@ -224,6 +237,13 @@ export function createClaudeCliProvider({ systemPrompt }) {
       children.clear();
     },
   };
+}
+
+// The model that played the game: the one the CLI billed the most output
+// tokens to, ignoring the small auxiliary calls it makes to other models.
+function primaryModel(modelOutputTokens) {
+  const ranked = Object.entries(modelOutputTokens).sort((a, b) => b[1] - a[1]);
+  return ranked[0]?.[0] ?? null;
 }
 
 function withTranscript(history, prompt) {

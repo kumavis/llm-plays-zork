@@ -41,7 +41,10 @@ export async function reportDirectory(dir) {
     const u = end.usage ?? {};
     const scores = events.filter((e) => e.type === 'score').map((e) => e.score);
     rows.push({
-      model: start.model ?? '?',
+      // Group by the exact model the API served, falling back to the alias
+      // the run requested when a log predates that being recorded.
+      model: u.resolvedModel ?? start.model ?? '?',
+      alias: start.model ?? '?',
       tag: start.tag ?? file,
       seed: start.seed ?? null,
       wallMin: (end.t - events[0].t) / 60000,
