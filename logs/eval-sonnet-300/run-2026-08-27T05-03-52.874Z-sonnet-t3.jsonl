@@ -131,3 +131,26 @@
 {"t":1787807237059,"type":"command","turn":63,"command":"GO DOWN","response":"You can't go that way.","parserRejection":false,"worldRefusal":true}
 {"t":1787807241848,"type":"model_turn","turn":64,"latencyMs":4788,"commands":["LOOK"],"commentary":""}
 {"t":1787807241849,"type":"command","turn":64,"command":"LOOK","response":"Reservoir South\nYou are in a long room, to the north of which was formerly a lake. However, with the water level lowered, there is merely a wide stream running through the center of the room.\nThere is a path along the stream to the east or west, a steep pathway climbing southwest along the edge of a chasm, and a path leading into a canyon to the southeast.","parserRejection":false,"worldRefusal":false}
+{"t":1787807244791,"type":"model_turn","turn":65,"latencyMs":2941,"commands":["LOOK"],"commentary":""}
+{"t":1787807244792,"type":"command","turn":65,"command":"LOOK","response":"Reservoir South\nYou are in a long room, to the north of which was formerly a lake. However, with the water level lowered, there is merely a wide stream running through the center of the room.\nThere is a path along the stream to the east or west, a steep pathway climbing southwest along the edge of a chasm, and a path leading into a canyon to the southeast.","parserRejection":false,"worldRefusal":false}
+{"t":1787807247268,"type":"model_turn","turn":66,"latencyMs":2475,"commands":["GO NORTH"],"commentary":"The lake has drained. Let's cross north now."}
+{"t":1787807247269,"type":"command","turn":66,"command":"GO NORTH","response":"Reservoir\nYou are on what used to be a large lake, but which is now a large mud pile. There are \"shores\" to the north and south.\nLying half buried in the mud is an old trunk, bulging with jewels.","parserRejection":false,"worldRefusal":false}
+{"t":1787807249750,"type":"model_turn","turn":67,"latencyMs":2481,"commands":["CROSS STREAM"],"commentary":""}
+{"t":1787807249751,"type":"command","turn":67,"command":"CROSS STREAM","response":"The other side is a sheer rock cliff.","parserRejection":false,"worldRefusal":false}
+{"t":1787807252403,"type":"model_turn","turn":68,"latencyMs":2651,"commands":["TAKE TRUNK"],"commentary":"Found the trunk of jewels. Let's grab it."}
+{"t":1787807252404,"type":"command","turn":68,"command":"TAKE TRUNK","response":"Your load is too heavy.","parserRejection":false,"worldRefusal":false}
+{"t":1787807254903,"type":"model_turn","turn":69,"latencyMs":2499,"commands":["TAKE TRUNK"],"commentary":""}
+{"t":1787807254904,"type":"command","turn":69,"command":"TAKE TRUNK","response":"Your load is too heavy.","parserRejection":false,"worldRefusal":false}
+{"t":1787807257557,"type":"model_turn","turn":70,"latencyMs":2653,"commands":["INVENTORY"],"commentary":""}
+{"t":1787807257558,"type":"command","turn":70,"command":"INVENTORY","response":"You are carrying:\n  A screwdriver\n  A matchbook\n  A platinum bar\n  A sword\n  A brass lantern (providing light)\n  A brown sack","parserRejection":false,"worldRefusal":false}
+{"t":1787807260933,"type":"model_turn","turn":71,"latencyMs":3375,"commands":["DROP SACK"],"commentary":""}
+{"t":1787807260934,"type":"command","turn":71,"command":"DROP SACK","response":"Dropped.","parserRejection":false,"worldRefusal":false}
+{"t":1787807262983,"type":"model_turn","turn":72,"latencyMs":2049,"commands":["DROP SACK"],"commentary":""}
+{"t":1787807262984,"type":"command","turn":72,"command":"DROP SACK","response":"You don't have the brown sack.","parserRejection":false,"worldRefusal":false}
+{"t":1787807265012,"type":"model_turn","turn":73,"latencyMs":2028,"commands":["DROP PLATINUM BAR"],"commentary":""}
+{"t":1787807265013,"type":"command","turn":73,"command":"DROP PLATINUM BAR","response":"Dropped.","parserRejection":false,"worldRefusal":false}
+{"t":1787807267362,"type":"model_turn","turn":74,"latencyMs":2349,"commands":["TAKE TRUNK"],"commentary":""}
+{"t":1787807267363,"type":"command","turn":74,"command":"TAKE TRUNK","response":"Taken.","parserRejection":false,"worldRefusal":false}
+{"t":1787807267364,"type":"score","score":65,"moves":70,"commands":73}
+{"t":1787807270364,"type":"model_turn","turn":75,"latencyMs":3000,"commands":["TAKE TRUNK"],"commentary":""}
+{"t":1787807270365,"type":"command","turn":75,"command":"TAKE TRUNK","response":"You already have that!","parserRejection":false,"worldRefusal":false}

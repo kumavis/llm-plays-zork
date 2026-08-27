@@ -252,3 +252,38 @@ Game: You can't go that way.[0m
 Game: [1mReservoir South[0m
 You are in a long room, to the north of which was formerly a lake. However, with the water level lowered, there is merely a wide stream running through the center of the room.[0m
 There is a path along the stream to the east or west, a steep pathway climbing southwest along the edge of a chasm, and a path leading into a canyon to the southeast.[0m
+> LOOK
+Game: [1mReservoir South[0m
+You are in a long room, to the north of which was formerly a lake. However, with the water level lowered, there is merely a wide stream running through the center of the room.[0m
+There is a path along the stream to the east or west, a steep pathway climbing southwest along the edge of a chasm, and a path leading into a canyon to the southeast.[0m
+Player: The lake has drained. Let's cross north now.
+> GO NORTH
+Game: [1mReservoir[0m
+You are on what used to be a large lake, but which is now a large mud pile. There are "shores" to the north and south.[0m
+Lying half buried in the mud is an old trunk, bulging with jewels.[0m
+> CROSS STREAM
+Game: The other side is a sheer rock cliff.[0m
+Player: Found the trunk of jewels. Let's grab it.
+> TAKE TRUNK
+Game: Your load is too heavy.[0m
+> TAKE TRUNK
+Game: Your load is too heavy.[0m
+> INVENTORY
+Game: You are carrying:[0m
+  A [0m[4mscrewdriver[0m
+  A [0m[4mmatchbook[0m
+  A [0m[4mplatinum bar[0m
+  A [0m[4msword[0m
+  A [0m[4mbrass lantern[0m (providing light)[0m
+  A [0m[4mbrown sack[0m
+> DROP SACK
+Game: Dropped.[0m
+> DROP SACK
+Game: You don't have the [0m[4mbrown sack[0m.[0m
+> DROP PLATINUM BAR
+Game: Dropped.[0m
+> TAKE TRUNK
+Game: Taken.[0m
+[score: 65, moves: 70]
+> TAKE TRUNK
+Game: You already have that![0m
