@@ -2,6 +2,7 @@ import { execSync } from 'node:child_process';
 import {
   appendFile,
   mkdir,
+  readdir,
   readFile,
   rename,
   writeFile,
@@ -103,18 +104,21 @@ async function main() {
   // once it has spent its move budget, so an interrupted run is never
   // mistaken for a result — on disk or in git.
   await mkdir(LOG_DIR, { recursive: true });
+  // An interrupted run leaves a .partial log. Because the game is seeded and
+  // deterministic, replaying its commands rebuilds the exact game state, so
+  // the run continues in that same log instead of starting over.
+  const resumeFrom = RUN_TAG ? await findPartialLog(LOG_DIR, RUN_TAG) : null;
   const timestamp = new Date().toISOString().replaceAll(':', '-');
-  const eventLogUrl = new URL(
-    `run-${timestamp}${RUN_TAG ? `-${RUN_TAG}` : ''}.jsonl`,
-    LOG_DIR,
-  );
+  const eventLogUrl =
+    resumeFrom ??
+    new URL(`run-${timestamp}${RUN_TAG ? `-${RUN_TAG}` : ''}.jsonl`, LOG_DIR);
   const partialLogUrl = new URL(`${eventLogUrl.href}.partial`);
   let eventLogChain = Promise.resolve();
   const logEvent = (type, data) => {
     const line = `${JSON.stringify({ t: Date.now(), type, ...data })}\n`;
     eventLogChain = eventLogChain.then(() => appendFile(partialLogUrl, line));
   };
-  logEvent('run_start', {
+  logEvent(resumeFrom ? 'run_resume' : 'run_start', {
     provider: agent.name,
     model: agent.model,
     tag: RUN_TAG,
@@ -148,6 +152,16 @@ async function main() {
   const intro = await captureOutput(zork, () => zork.start());
   printGame(intro);
   let pendingOutputs = [toModelText(intro)];
+
+  if (resumeFrom) {
+    pendingOutputs = await replayInto(
+      zork,
+      agent,
+      runStats,
+      partialLogUrl,
+      toModelText(intro),
+    );
+  }
   let idleTurns = 0;
   let requestFailures = 0;
   // Whether the run ended by spending its move budget, as opposed to a
@@ -391,6 +405,72 @@ function printGame(rawMessages) {
     .replaceAll('</span>', '\x1b[0m')
     .trim();
   console.log(styleText('white', `Game: ${formatted}`));
+}
+
+// The newest interrupted log for this tag, if any.
+async function findPartialLog(logDir, tag) {
+  let names;
+  try {
+    names = await readdir(logDir);
+  } catch {
+    return null;
+  }
+  const partials = names
+    .filter((f) => f.startsWith('run-') && f.endsWith(`-${tag}.jsonl.partial`))
+    .sort();
+  const newest = partials.at(-1);
+  return newest ? new URL(newest.replace(/\.partial$/, ''), logDir) : null;
+}
+
+// Rebuilds an interrupted run: feeds its commands back into the fresh game
+// (identical results, since the RNG is seeded), restores the counters, and
+// hands the model its own transcript so it continues where it left off.
+// Nothing is re-logged — the events are already in the file being appended to.
+async function replayInto(zork, agent, runStats, partialLogUrl, intro) {
+  const text = await readFile(partialLogUrl, 'utf8');
+  const events = text
+    .split('\n')
+    .flatMap((line) => {
+      try {
+        return [JSON.parse(line)];
+      } catch {
+        return [];
+      }
+    })
+    .filter((e) => e.type === 'command' || e.type === 'model_turn');
+
+  const history = [];
+  let pending = [intro];
+  for (const event of events) {
+    if (event.type === 'model_turn') {
+      history.push({ role: 'user', content: pending.join('\n') });
+      history.push({
+        role: 'assistant',
+        content: [event.commentary, ...event.commands.map((c) => `COMMAND: ${c}`)]
+          .filter(Boolean)
+          .join('\n'),
+      });
+      pending = [];
+      runStats.modelTurns += 1;
+      continue;
+    }
+    // Replay the command; the game's response must match what was logged.
+    const replayed = toModelText(await zork.input(event.command));
+    pending.push(replayed);
+    runStats.commands += 1;
+    if (event.parserRejection) runStats.parserRejections += 1;
+    if (event.worldRefusal) runStats.worldRefusals += 1;
+  }
+
+  agent.restoreHistory?.(history);
+  await probeScore(zork, runStats, false, () => {});
+  console.log(
+    styleText(
+      'green',
+      `Resumed: replayed ${runStats.commands} commands, score ${runStats.score} at move ${runStats.moves}.`,
+    ),
+  );
+  return pending.length > 0 ? pending : [`(resumed)\n${intro}`];
 }
 
 function gitCommit() {

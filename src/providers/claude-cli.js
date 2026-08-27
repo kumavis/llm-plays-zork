@@ -192,6 +192,12 @@ export function createClaudeCliProvider({ systemPrompt }) {
     name: 'claude-cli',
     model: model ?? '(claude CLI default)',
     history: () => history,
+    // Seeds the transcript when the harness resumes an interrupted run. The
+    // next turn has no live process, so the whole transcript is replayed.
+    restoreHistory(entries) {
+      history.push(...entries);
+    },
+
     stats: () => ({
       ...usage,
       modelOutputTokens: { ...usage.modelOutputTokens },
