@@ -7,7 +7,7 @@
 //        [--seeds 2,3]  -- rerun specific trials into an existing batch
 import { spawn } from 'node:child_process';
 import { openSync, closeSync } from 'node:fs';
-import { mkdir, readdir, readFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, rename } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs, styleText } from 'node:util';
@@ -65,6 +65,14 @@ for (const model of models) {
     const code = await runOne(model, trial, tag);
     const minutes = ((Date.now() - startedAt) / 60000).toFixed(1);
     console.log(`${tag}: exit ${code} after ${minutes} min`);
+    // The terminal log takes its final name only if the run finished, the
+    // same rule the harness applies to the event log.
+    if (await isTrialComplete(tag)) {
+      await rename(
+        join(batchDir, `${tag}.log.partial`),
+        join(batchDir, `${tag}.log`),
+      );
+    }
   }
 }
 
@@ -103,7 +111,7 @@ async function isTrialComplete(tag) {
 // Runs one harness process to completion, with a wall-clock safety limit.
 function runOne(model, trial, tag) {
   return new Promise((resolve) => {
-    const logFd = openSync(join(batchDir, `${tag}.log`), 'w');
+    const logFd = openSync(join(batchDir, `${tag}.log.partial`), 'w');
     const child = spawn(
       process.execPath,
       [fileURLToPath(new URL('index.js', import.meta.url))],
