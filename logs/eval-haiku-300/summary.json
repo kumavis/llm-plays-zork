@@ -1,0 +1,48 @@
+{
+  "rows": [
+    {
+      "model": "haiku",
+      "tag": "haiku-t1",
+      "seed": 1,
+      "wallMin": 13.484766666666667,
+      "turns": 314,
+      "commands": 314,
+      "moves": 300,
+      "maxScore": 15,
+      "parserRejections": 7,
+      "worldRefusals": 16,
+      "deaths": 0,
+      "staleness": 289,
+      "tokensOut": 27122,
+      "costUsd": 0.9578340999999999
+    },
+    {
+      "model": "haiku",
+      "tag": "haiku-t2",
+      "seed": 2,
+      "wallMin": 13.501816666666667,
+      "turns": 316,
+      "commands": 315,
+      "moves": 300,
+      "maxScore": 49,
+      "parserRejections": 3,
+      "worldRefusals": 11,
+      "deaths": 0,
+      "staleness": 94,
+      "tokensOut": 27186,
+      "costUsd": 1.0103130000000002
+    }
+  ],
+  "aggregates": [
+    {
+      "model": "haiku",
+      "trials": 2,
+      "medianScore": 32,
+      "meanScore": 32,
+      "meanCommands": 314.5,
+      "meanWallMin": 13.493291666666668,
+      "meanCostUsd": 0.9840735500000001,
+      "scorePerDollar": 32.51789462281554
+    }
+  ]
+}

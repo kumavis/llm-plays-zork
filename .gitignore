@@ -1,3 +1,6 @@
 .env
 node_modules
-logs/
+# Ad-hoc run logs stay local; committed eval batches are the exception.
+logs/*
+!logs/eval-*/
+logs/eval-*/debug-*.json

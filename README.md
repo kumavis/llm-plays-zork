@@ -17,7 +17,8 @@ Three interchangeable player backends are supported:
   surfaces the model's summarized thinking in the terminal.
 - **Claude Code CLI** — headless `claude -p` with all tools disabled, using
   whatever login the CLI already has; no API key needed. Uses the
-  `COMMAND:` text protocol over a resumed CLI session.
+  `COMMAND:` text protocol over one persistent CLI process per game, so
+  the CLI's multi-second startup is paid once rather than every turn.
 
 Each backend owns its conversation history in its API's native format, so
 thinking blocks and tool calls are retained and replayed where the API
@@ -56,6 +57,55 @@ Runs a smoke test of the z-machine bridge (boots the game and opens the
 mailbox), unit tests for the text protocol and history trimming, and
 stub-server tests of both API providers (tool-result pairing, thinking
 replay, failure recovery, and the tools fallback).
+
+## Eval
+
+`yarn eval` runs a models × trials matrix and reports how they compare:
+
+```sh
+yarn eval --models haiku,sonnet --trials 3 --moves 300 --name my-eval
+yarn eval:report logs/eval-my-eval        # re-aggregate a batch
+```
+
+Each run is bounded by **game moves**, not wall-clock, so a slower model
+is not penalized for thinking longer. The trial number doubles as the
+game's RNG seed, so every model plays the same game in trial *k* —
+combat rolls and thief movement included — which makes the comparison
+paired rather than noisy. A trial that already spent its budget is
+skipped, so an interrupted batch resumes with the same command.
+
+Runs write `logs/eval-<name>/run-*.jsonl`: one event per model turn,
+command (with the game's response and whether it was a parser rejection
+or a world refusal), score change, and a `run_end` summary with token
+usage and cost. Only runs that spent their full move budget are counted;
+one stopped early is labeled and excluded. Metrics are queries over
+those logs, so new questions can be asked of old runs.
+
+Model comparisons hold the backend constant. The `claude-cli` backend
+spawns with no tools, no MCP servers, no setting sources, and a neutral
+working directory, so a run cannot search the web, read files, or keep
+notes between turns: its only effector is the game.
+
+### Results
+
+Claude Code CLI backend, 300 game moves per run, seeds 1–3, score out of
+350. Full logs are in `logs/eval-haiku-300/` and `logs/eval-sonnet-300/`.
+
+| seed | haiku | sonnet |
+| ---- | ----- | ------ |
+| 1    | 15    | 95     |
+| 2    | 49    | 75     |
+| 3    | *pending* | *pending* |
+
+| model  | median score | mean cost/run | score per $ | mean wall/run |
+| ------ | ------------ | ------------- | ----------- | ------------- |
+| haiku  | 32           | $0.99         | 32.3        | 13.5 min      |
+| sonnet | 85           | $1.69         | 50.4        | 18.9 min      |
+
+Sonnet scores far higher per run *and* per dollar: it is roughly 1.7×
+the cost but 2.7× the score. Variance between seeds is large for both
+models (haiku scored 15 and 49 on the same budget), so single runs are
+anecdotes — the seeded, repeated matrix exists for that reason.
 
 ## How it works
 
