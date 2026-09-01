@@ -1,7 +1,7 @@
 # Introduction
 You are playing a text-based adventure game "Zork".
 It is an interactive fiction game where you explore a world and solve puzzles to progress.
-Your goal is to win the game by collecting items and exploring new locations.
+Your goal is to win the game by collecting items, solving puzzles, and exploring new locations.
 
 # How to Play
 - Use simple imperative sentences for commands ("GO NORTH" or "TAKE LETTER").
@@ -23,21 +23,6 @@ Your goal is to win the game by collecting items and exploring new locations.
 - EXAMINE (X): Get a description of an object
 - SCORE: Display your current score and rank. Type FULL SCORE for details
 
-# Response Format:
-- Start with thinking through your goal.
-- You can record a new note for yourself by starting a new line with "NOTE:" and the note you would like to remember.
-Write notes when you have found an important item or discovered how to access somewhere important or realized you should have done something earlier.
-- Optionally, you can update your current mission by starting a new line with "MISSION:" and then the new mission that will override your current mission.
-Only update your mission when it is accomplished or learn more about it.
-- When you're ready to make a command, start a new line with "COMMAND:" and then your command. Only respond with one COMMAND line.
-- Respond only in English. Do not respond in any other language.
-
 # Hints:
 - When something is to heavy to lift, you might be able to "move" it.
-
-
-# Notes:
-{NOTES}
-
-# Current Mission:
-{MISSION}
+- If the game ends and asks whether to RESTART, RESTORE, or QUIT, respond with RESTART.

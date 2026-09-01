@@ -1,191 +1,103 @@
-// this must run first
-import './file-fetch-fix.js'
+// Bridge to the z-machine interpreter compiled to WebAssembly (web.wasm).
+import { EventEmitter } from 'node:events';
+import { readFile } from 'node:fs/promises';
+import wasmFFI from 'wasm-ffi';
 
-import pkg from 'wasm-ffi';
-import { EventEmitter } from 'events';
-const { Wrapper, rust } = pkg;
+const { Wrapper } = wasmFFI;
 
-const wasmURL = 'file://./web.wasm'
+const projectRoot = new URL('..', import.meta.url);
+const WASM_URL = new URL('web.wasm', projectRoot);
+const STORY_URL = new URL('zork1.z3', projectRoot);
 
-// hold onto active file in case of restarts
-let file = null;
-
-const events = new EventEmitter();
-
-
-function sendWorkerMessage(type, msg) {
-  events.emit(type, msg);
-  const knownEvents = ['header', 'map', 'print', 'tree', 'savestate']
-  if (!knownEvents.includes(type)) {
-    console.log({ type, msg });
-  }
-  // postMessage({ type, msg });
+// Deterministic PRNG (mulberry32) so eval runs can pin the game's RNG —
+// combat rolls, thief movement — to a seed.
+function createRng(seed) {
+  let state = seed >>> 0;
+  return () => {
+    state = (state + 0x6d2b79f5) >>> 0;
+    let t = state;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
 }
 
-const zmachine = new Wrapper({
-  hook: [],
-  create: [null, ['number', 'number']],
-  feed: [null, ['string']],
-  step: ['bool'],
-  undo: ['bool'],
-  redo: ['bool'],
-  get_updates: [],
-  restore: [null, ['string']],
-  load_savestate: [null, ['string']],
-  enable_instruction_logs: [null, ['bool']],
-  get_object_details: [rust.string, ['number']],
-  flush_log: [],
-});
+// Creates a fresh interpreter instance with the Zork I story file loaded.
+// Game output is delivered via `events`: the interpreter emits 'print' with
+// HTML-ish text, plus 'header', 'map', 'tree', 'savestate', and 'quit'.
+// With `seed` set, the z-machine's RNG is deterministic: the same seed and
+// command sequence replays the same game (a restart rewinds the RNG too).
+export async function setup({ seed } = {}) {
+  const events = new EventEmitter();
+  let rng = seed === undefined ? Math.random : createRng(seed);
 
+  const zmachine = new Wrapper({
+    hook: [],
+    create: [null, ['number', 'number']],
+    feed: [null, ['string']],
+    step: ['bool'],
+    flush_log: [],
+  });
 
-zmachine.imports(wrap => ({
-  env: {
-    js_message: wrap('string', 'string', sendWorkerMessage),
+  const imports = zmachine.imports((wrap) => ({
+    env: {
+      js_message: wrap('string', 'string', (type, msg) => {
+        events.emit(type, msg);
+      }),
+      trace: wrap('string', (msg) => {
+        setTimeout(() => zmachine.flush_log(), 200);
+        console.error(`z-machine trace: ${msg}`);
+      }),
+      rand: () => Math.floor(rng() * 0xffff),
+    },
+  }));
 
-    trace: wrap('string', (msg) => {
-      const err = new Error(msg);
+  const wasmBytes = await readFile(WASM_URL);
+  const { instance } = await WebAssembly.instantiate(wasmBytes, imports);
+  zmachine.use(instance);
+  zmachine.hook();
 
-      setTimeout(() => {
-        zmachine.flush_log();
-      }, 200);
+  const storyFile = new Uint8Array(await readFile(STORY_URL));
 
-      console.log({
-      // postMessage({
-        type: 'error',
-        msg: { msg, stack: err.stack }
-      });
-    }),
+  const loadStory = () => {
+    const ptr = zmachine.utils.writeArray(storyFile);
+    zmachine.create(ptr, storyFile.length);
+  };
 
-    rand: function() {
-      return Math.floor(Math.random() * 0xFFFF);
-    }
-  },
-}));
+  // Run the interpreter until it blocks waiting for input.
+  const step = () => {
+    const done = zmachine.step();
+    if (done) events.emit('quit');
+  };
 
+  loadStory();
 
-function step() {
-  const done = zmachine.step();
-  if (done) sendWorkerMessage('quit');
+  return {
+    events,
+
+    async start() {
+      step();
+    },
+
+    // Feed one command and return the lines the game printed in response.
+    async input(command) {
+      const messages = [];
+      const onPrint = (msg) => messages.push(msg);
+      events.on('print', onPrint);
+      try {
+        zmachine.feed(command);
+        step();
+      } finally {
+        events.off('print', onPrint);
+      }
+      return messages;
+    },
+
+    // Reset the machine to the beginning of the story.
+    async restart() {
+      if (seed !== undefined) rng = createRng(seed);
+      loadStory();
+      step();
+    },
+  };
 }
-
-
-function instantiate() {
-  if (zmachine.exports) return Promise.resolve();
-  return zmachine.fetch(wasmURL).then(() => zmachine.hook());
-}
-
-const api = {
-  events,
-  instantiate: async () => {
-    instantiate().catch(err => setTimeout(() => {
-      console.log('Error starting wasm: ', err, err.stack);
-    }));
-  },
-  load: async ({ file }) => {
-    return instantiate()
-    .then(() => {
-      file = new Uint8Array(file);
-      const file_ptr = zmachine.utils.writeArray(file);
-
-      zmachine.create(file_ptr, file.length);
-      return 'loaded';
-    })
-    .catch(err => setTimeout(() => {
-      console.log('Error starting wasm: ', err, err.stack);
-    }));
-  },
-  restore: async (msg) => {
-    zmachine.restore(msg);
-    step();
-  },
-  load_savestate: async (msg) => {
-    zmachine.load_savestate(msg);
-    step();
-    zmachine.feed('look'); // get description text and then undo
-    step();
-    zmachine.undo();
-  },
-  start: async () => {
-    step();
-  },
-  restart: async () => {
-
-    const file_ptr = zmachine.utils.writeArray(file);
-
-    zmachine.create(file_ptr, file.length);
-    return 'loaded';
-  },
-  input: async (msg) => {
-    const messages = [];
-    const onGameMessage = (msg) => messages.push(msg);
-    events.on('print', onGameMessage);
-    zmachine.feed(msg);
-    step();
-    events.off('print', onGameMessage);
-    return messages;
-  },
-  undo: async () => {
-    const ok = zmachine.undo();
-    // originally tick after return
-    zmachine.get_updates();
-    return ok;
-  },
-  redo: async () => {
-    const ok = zmachine.redo();
-    // originally tick after return
-    zmachine.get_updates();
-    return ok
-  },
-  'enable:instructions': async (msg) => {
-    zmachine.enable_instruction_logs(!!msg);
-  },
-  getDetails: async (msg) => {
-    const str = zmachine.get_object_details(ev.data.msg);
-    const value = str.value;
-    // originally tick after return
-    str.free();
-    return value;
-  },
-}
-
-
-// dispatch handlers based on incoming messages
-const onmessage = async (ev) => {
-  const { type, msg } = ev.data;
-  const response = await api[type](msg);
-  if (response !== undefined) sendWorkerMessage(type, response);
-};
-
-// onmessage({
-//   data: {
-//     type: 'load',
-//     msg: {
-//       filename: 'zork1',
-//       file: new ArrayBuffer(),
-//     }
-//   }
-// });
-
-async function setup () {
-  // api.events.on('header', (msg) => {
-  //   console.log(`Location: ${msg}`);
-  // });
-  // api.events.on('print', (msg) => {
-  //   console.log(msg);
-  // });
-
-  const fileBuffer = await (await fetch('file://./zork1.z3')).arrayBuffer();
-  await api.load({
-    filename: "zork1",
-    file: fileBuffer,
-  })
-  // await api['enable:instructions'](true);
-  // await api.load_savestate(
-  //   'Rk9STQAAAS5JRlpTSUZoZAAAAA0AWDg0MDcyNqEpAFkMAFN0a3MAAABOAAAAAAAAAAYkkSSFJH8AtAABAAEAT54aAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAFVNG48AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAKQ01lbQAAALUA'
-  // )
-  // await api.start()
-
-  return api;
-}
-
-export { setup };

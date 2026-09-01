@@ -1,0 +1,67 @@
+{
+  "rows": [
+    {
+      "model": "sonnet",
+      "alias": "sonnet",
+      "tag": "sonnet-t1",
+      "seed": 1,
+      "wallMin": 18.995866666666668,
+      "turns": 308,
+      "commands": 307,
+      "moves": 300,
+      "maxScore": 95,
+      "parserRejections": 0,
+      "worldRefusals": 46,
+      "deaths": 0,
+      "staleness": 68,
+      "tokensOut": 29686,
+      "costUsd": 1.7146967999999996
+    },
+    {
+      "model": "sonnet",
+      "alias": "sonnet",
+      "tag": "sonnet-t2",
+      "seed": 2,
+      "wallMin": 18.6628,
+      "turns": 306,
+      "commands": 306,
+      "moves": 300,
+      "maxScore": 75,
+      "parserRejections": 0,
+      "worldRefusals": 32,
+      "deaths": 1,
+      "staleness": 119,
+      "tokensOut": 27568,
+      "costUsd": 1.6600024000000004
+    },
+    {
+      "model": "sonnet",
+      "alias": "sonnet",
+      "tag": "sonnet-t3",
+      "seed": 3,
+      "wallMin": 21.23435,
+      "turns": 307,
+      "commands": 306,
+      "moves": 300,
+      "maxScore": 69,
+      "parserRejections": 0,
+      "worldRefusals": 25,
+      "deaths": 1,
+      "staleness": 120,
+      "tokensOut": 29958,
+      "costUsd": 1.9029509999999998
+    }
+  ],
+  "aggregates": [
+    {
+      "model": "sonnet",
+      "trials": 3,
+      "medianScore": 75,
+      "meanScore": 79.66666666666667,
+      "meanCommands": 306.3333333333333,
+      "meanWallMin": 19.631005555555557,
+      "meanCostUsd": 1.7592167333333333,
+      "scorePerDollar": 45.285305191314116
+    }
+  ]
+}
