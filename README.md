@@ -7,6 +7,8 @@ tool: each turn the model submits one command via a `submit_command` tool
 call, and the game's printed response comes back as the tool result. Text
 the model writes outside the tool call is its "out loud" commentary.
 
+![Score progression across all completed runs](logs/run-scores.svg)
+
 Four interchangeable player backends are supported:
 
 - **OpenAI** — or any OpenAI-compatible endpoint (LM Studio, Ollama, etc.)
@@ -73,6 +75,7 @@ replay, failure recovery, and the tools fallback).
 yarn eval --models haiku,sonnet --trials 3 --moves 300 --name my-eval
 yarn eval:report logs/eval-my-eval        # re-aggregate a batch
 yarn eval:report logs/eval-a logs/eval-b  # one table across batches
+yarn eval:score-svg                       # chart all completed runs together
 ```
 
 A `--models` entry may carry its own backend and reasoning effort, so a

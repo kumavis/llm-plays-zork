@@ -12,6 +12,7 @@
     "start": "node src/index.js",
     "eval": "node src/eval.js",
     "eval:report": "node src/eval-report.js",
+    "eval:score-svg": "node src/eval-score-svg.js",
     "test": "node --test"
   },
   "dependencies": {
