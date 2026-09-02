@@ -130,24 +130,33 @@ price, so its cost and score-per-dollar columns read `n/a` rather than
 
 ### Results
 
-Claude Code CLI backend, 300 game moves per run, seeds 1–3, score out of
-350. Full logs are in `logs/eval-haiku-300/` and `logs/eval-sonnet-300/`.
+All runs use a 300-game-move budget and deterministic seeds, with a maximum
+Zork score of 350. Opus currently has two completed trials; every other model
+has three. Full transcripts, event logs, and summaries are under the matching
+`logs/eval-<model>-300/` directory.
 
-| seed | haiku | sonnet |
-| ---- | ----- | ------ |
-| 1    | 15    | 95     |
-| 2    | 49    | 75     |
-| 3    | *pending* | *pending* |
+| provider  | model         | seed 1 | seed 2 | seed 3 |
+| --------- | ------------- | -----: | -----: | -----: |
+| Anthropic | Opus          |    144 |     94 |      — |
+| Anthropic | Sonnet        |     95 |     75 |     69 |
+| Anthropic | Haiku         |     15 |     49 |     40 |
+| OpenAI    | GPT-5.6 Sol   |    104 |    129 |    115 |
+| OpenAI    | GPT-5.6 Terra |     55 |     50 |     59 |
+| OpenAI    | GPT-5.6 Luna  |     40 |     35 |     49 |
 
-| model  | median score | mean cost/run | score per $ | mean wall/run |
-| ------ | ------------ | ------------- | ----------- | ------------- |
-| haiku  | 32           | $0.99         | 32.3        | 13.5 min      |
-| sonnet | 85           | $1.69         | 50.4        | 18.9 min      |
+| provider  | model         | trials | median | mean  | mean cost/run | score per $ | mean wall/run |
+| --------- | ------------- | -----: | -----: | ----: | -------------: | ----------: | -------------: |
+| Anthropic | Opus          |      2 |    119 | 119.0 |          $7.36 |        16.2 |       30.6 min |
+| Anthropic | Sonnet        |      3 |     75 |  79.7 |          $1.76 |        45.3 |       19.6 min |
+| Anthropic | Haiku         |      3 |     40 |  34.7 |          $1.04 |        33.5 |       13.7 min |
+| OpenAI    | GPT-5.6 Sol   |      3 |    115 | 116.0 |            n/a |         n/a |       59.4 min |
+| OpenAI    | GPT-5.6 Terra |      3 |     55 |  54.7 |            n/a |         n/a |       37.5 min |
+| OpenAI    | GPT-5.6 Luna  |      3 |     40 |  41.3 |            n/a |         n/a |       36.2 min |
 
-Sonnet scores far higher per run *and* per dollar: it is roughly 1.7×
-the cost but 2.7× the score. Variance between seeds is large for both
-models (haiku scored 15 and 49 on the same budget), so single runs are
-anecdotes — the seeded, repeated matrix exists for that reason.
+Opus and GPT-5.6 Sol reached the highest median scores, though the Opus
+estimate has only two trials. Within the priced Anthropic runs, Sonnet has
+the best score per dollar. Seed-to-seed variance remains substantial, so
+single runs are anecdotes rather than reliable rankings.
 
 ## How it works
 
