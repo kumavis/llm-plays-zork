@@ -11,6 +11,11 @@ import { setTimeout as sleep } from 'node:timers/promises';
 import { pathToFileURL } from 'node:url';
 import { styleText } from 'node:util';
 import { createAgent } from './agent.js';
+import {
+  selectReplayEvents,
+  stripUnsuccessfulModelTails,
+  validateZorkCommand,
+} from './run-safety.js';
 import { setup } from './zork.js';
 
 try {
@@ -27,6 +32,13 @@ const LOG_DIR = process.env.LOG_DIR
 // Eval knobs: stop cleanly after this many game moves (MAX_MOVES), pin the
 // game's RNG (ZORK_SEED), and tag the run's logs (RUN_TAG).
 const MOVE_BUDGET = Number(process.env.MAX_MOVES) || null;
+const configuredModelTurnBudget = Number(process.env.MAX_MODEL_TURNS);
+const MODEL_TURN_BUDGET =
+  Number.isFinite(configuredModelTurnBudget) && configuredModelTurnBudget > 0
+    ? configuredModelTurnBudget
+    : MOVE_BUDGET === null
+      ? null
+      : MOVE_BUDGET * 2;
 const SEED =
   process.env.ZORK_SEED !== undefined
     ? Number(process.env.ZORK_SEED)
@@ -35,6 +47,8 @@ const RUN_TAG = process.env.RUN_TAG || null;
 
 // Consecutive turns without a submitted command before giving up.
 const MAX_IDLE_TURNS = 5;
+// Consecutive model turns whose submitted command is unsafe for the Z-machine.
+const MAX_INVALID_COMMAND_TURNS = 5;
 // Consecutive failed model requests (each already retried by the SDK)
 // before giving up.
 const MAX_REQUEST_FAILURES = 5;
@@ -124,6 +138,7 @@ async function main() {
     tag: RUN_TAG,
     seed: SEED ?? null,
     moveBudget: MOVE_BUDGET,
+    modelTurnBudget: MODEL_TURN_BUDGET,
     harnessCommit: gitCommit(),
   });
   console.log(styleText('blue', `Event log: ${partialLogUrl.pathname}`));
@@ -163,15 +178,31 @@ async function main() {
     );
   }
   let idleTurns = 0;
+  let invalidCommandTurns = 0;
   let requestFailures = 0;
   // Whether the run ended by spending its move budget, as opposed to a
   // signal or error. Only budget-complete runs are comparable in a report.
   let budgetReached = false;
+  let endReason = 'stopped';
 
   // The finally releases provider child processes (claude-cli), or the
   // event loop keeps the harness alive after a fatal error.
   try {
     while (!aborted) {
+      if (
+        MODEL_TURN_BUDGET !== null &&
+        runStats.modelTurns >= MODEL_TURN_BUDGET
+      ) {
+        console.log(
+          styleText(
+            'yellow',
+            `Model-turn budget of ${MODEL_TURN_BUDGET} reached, ending run.`,
+          ),
+        );
+        endReason = 'model_turn_budget';
+        break;
+      }
+
       let turn;
       const requestStartedAt = Date.now();
       try {
@@ -230,6 +261,26 @@ async function main() {
           continue;
         }
 
+        const validationError = validateZorkCommand(command);
+        if (validationError !== null) {
+          invalidCommandTurns += 1;
+          console.warn(`>>> Invalid Zork command: ${validationError}`);
+          logEvent('command_rejected', {
+            turn: runStats.modelTurns,
+            command,
+            reason: validationError,
+          });
+          pendingOutputs.push(
+            `(command rejected: ${validationError}; submit one short ASCII command)`,
+          );
+          if (invalidCommandTurns >= MAX_INVALID_COMMAND_TURNS) {
+            throw new Error(
+              `Model produced an invalid command for ${invalidCommandTurns} turns in a row.`,
+            );
+          }
+          continue;
+        }
+
         console.log(styleText('magenta', `> ${command}`));
 
         let rawMessages;
@@ -237,11 +288,17 @@ async function main() {
           rawMessages = await zork.input(command);
         } catch (err) {
           console.warn(`>>> Zork error: ${err.message}`);
-          pendingOutputs.push(
-            `(error: the game failed to run that command: ${err.message})`,
+          logEvent('command_error', {
+            turn: runStats.modelTurns,
+            command,
+            error: err.message,
+          });
+          throw new Error(
+            `Zork failed while running ${JSON.stringify(command)}: ${err.message}`,
+            { cause: err },
           );
-          continue;
         }
+        invalidCommandTurns = 0;
 
         let output = toModelText(rawMessages);
         printGame(rawMessages);
@@ -287,20 +344,28 @@ async function main() {
           ),
         );
         budgetReached = true;
+        endReason = 'budget';
         break;
       }
     }
+  } catch (err) {
+    endReason = 'error';
+    logEvent('run_error', { error: err.message });
+    throw err;
   } finally {
     agent.dispose?.();
     printRunStats(runStats, agent);
     logEvent('run_end', {
-      endReason: budgetReached ? 'budget' : 'stopped',
+      endReason,
       budgetReached,
       runStats,
       usage: agent.stats?.() ?? null,
     });
     await eventLogChain;
-    if (budgetReached) await rename(partialLogUrl, eventLogUrl);
+    if (budgetReached) {
+      await compactCompletedLog(partialLogUrl);
+      await rename(partialLogUrl, eventLogUrl);
+    }
   }
 }
 
@@ -308,12 +373,7 @@ async function main() {
 // model never sees this exchange — it's harness instrumentation only.
 async function probeScore(zork, runStats, restarted, logEvent) {
   if (restarted) return;
-  let response;
-  try {
-    response = toModelText(await zork.input('SCORE'));
-  } catch {
-    return;
-  }
+  const response = toModelText(await zork.input('SCORE'));
   const match = response.match(/Your score is (-?\d+).*?in (\d+) moves/s);
   if (!match) return;
   const score = Number(match[1]);
@@ -428,7 +488,7 @@ async function findPartialLog(logDir, tag) {
 // Nothing is re-logged — the events are already in the file being appended to.
 async function replayInto(zork, agent, runStats, partialLogUrl, intro) {
   const text = await readFile(partialLogUrl, 'utf8');
-  const events = text
+  const allEvents = text
     .split('\n')
     .flatMap((line) => {
       try {
@@ -436,8 +496,8 @@ async function replayInto(zork, agent, runStats, partialLogUrl, intro) {
       } catch {
         return [];
       }
-    })
-    .filter((e) => e.type === 'command' || e.type === 'model_turn');
+    });
+  const { events, droppedModelTurns } = selectReplayEvents(allEvents);
 
   const history = [];
   let pending = [intro];
@@ -456,6 +516,11 @@ async function replayInto(zork, agent, runStats, partialLogUrl, intro) {
     }
     // Replay the command; the game's response must match what was logged.
     const replayed = toModelText(await zork.input(event.command));
+    if (event.response !== undefined && replayed !== event.response) {
+      throw new Error(
+        `Resume diverged while replaying ${JSON.stringify(event.command)} at turn ${event.turn}.`,
+      );
+    }
     pending.push(replayed);
     runStats.commands += 1;
     if (event.parserRejection) runStats.parserRejections += 1;
@@ -464,6 +529,11 @@ async function replayInto(zork, agent, runStats, partialLogUrl, intro) {
 
   agent.restoreHistory?.(history);
   await probeScore(zork, runStats, false, () => {});
+  if (droppedModelTurns > 0) {
+    console.warn(
+      `Resume discarded ${droppedModelTurns} model turns after their attempt's last successful command.`,
+    );
+  }
   console.log(
     styleText(
       'green',
@@ -471,6 +541,34 @@ async function replayInto(zork, agent, runStats, partialLogUrl, intro) {
     ),
   );
   return pending.length > 0 ? pending : [`(resumed)\n${intro}`];
+}
+
+// Once a resumed run completes, remove model turns from interrupted attempts
+// that occurred after their last successfully applied command. Keeping those
+// poisoned tails would make event-level reports disagree with the recovered
+// run stats even though they were correctly excluded from replay.
+async function compactCompletedLog(eventLogUrl) {
+  const text = await readFile(eventLogUrl, 'utf8');
+  const events = text
+    .split('\n')
+    .flatMap((line) => {
+      try {
+        return [JSON.parse(line)];
+      } catch {
+        return [];
+      }
+    });
+  const compacted = stripUnsuccessfulModelTails(events);
+  if (compacted.droppedModelTurns === 0) return;
+  compacted.events.push({
+    t: Date.now(),
+    type: 'log_compaction',
+    droppedModelTurns: compacted.droppedModelTurns,
+  });
+  await writeFile(
+    eventLogUrl,
+    `${compacted.events.map((event) => JSON.stringify(event)).join('\n')}\n`,
+  );
 }
 
 function gitCommit() {

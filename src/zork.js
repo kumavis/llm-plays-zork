@@ -2,6 +2,7 @@
 import { EventEmitter } from 'node:events';
 import { readFile } from 'node:fs/promises';
 import wasmFFI from 'wasm-ffi';
+import { assertValidZorkCommand } from './run-safety.js';
 
 const { Wrapper } = wasmFFI;
 
@@ -81,6 +82,10 @@ export async function setup({ seed } = {}) {
 
     // Feed one command and return the lines the game printed in response.
     async input(command) {
+      // Validate before crossing the WASM string boundary. In particular,
+      // never let a long Unicode command reach the interpreter's byte-sized
+      // input buffer, where truncation can panic on a non-character boundary.
+      assertValidZorkCommand(command);
       const messages = [];
       const onPrint = (msg) => messages.push(msg);
       events.on('print', onPrint);
