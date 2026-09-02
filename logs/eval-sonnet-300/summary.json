@@ -2,7 +2,8 @@
   "rows": [
     {
       "model": "sonnet",
-      "alias": "sonnet",
+      "resolvedModel": null,
+      "provider": "claude-cli",
       "tag": "sonnet-t1",
       "seed": 1,
       "wallMin": 18.995866666666668,
@@ -19,7 +20,8 @@
     },
     {
       "model": "sonnet",
-      "alias": "sonnet",
+      "resolvedModel": null,
+      "provider": "claude-cli",
       "tag": "sonnet-t2",
       "seed": 2,
       "wallMin": 18.6628,
@@ -36,7 +38,8 @@
     },
     {
       "model": "sonnet",
-      "alias": "sonnet",
+      "resolvedModel": null,
+      "provider": "claude-cli",
       "tag": "sonnet-t3",
       "seed": 3,
       "wallMin": 21.23435,
@@ -55,6 +58,8 @@
   "aggregates": [
     {
       "model": "sonnet",
+      "alias": "sonnet",
+      "provider": "claude-cli",
       "trials": 3,
       "medianScore": 75,
       "meanScore": 79.66666666666667,
