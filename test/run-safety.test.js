@@ -29,6 +29,13 @@ test('rejects overlong ASCII commands but accepts ordinary parser input', () => 
   assert.equal(validateZorkCommand('PUT LEAFLET IN SACK'), null);
 });
 
+test('rejects interpreter lifecycle commands handled by the harness', () => {
+  for (const command of ['RESTART', 'RESTORE', 'QUIT']) {
+    assert.match(validateZorkCommand(command), /controlled by the harness/);
+  }
+  assert.equal(validateZorkCommand('PRAY'), null);
+});
+
 test('resume drops the unsuccessful tail from each stopped attempt', () => {
   const events = [
     { type: 'run_start' },

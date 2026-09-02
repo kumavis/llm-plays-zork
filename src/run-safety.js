@@ -16,6 +16,9 @@ export function validateZorkCommand(command) {
   if (Buffer.byteLength(command, 'utf8') > MAX_ZORK_COMMAND_BYTES) {
     return `commands must be at most ${MAX_ZORK_COMMAND_BYTES} bytes`;
   }
+  if (/^(?:RESTART|RESTORE|QUIT)(?:\s|$)/i.test(command)) {
+    return 'RESTART, RESTORE, and QUIT are controlled by the harness';
+  }
   return null;
 }
 

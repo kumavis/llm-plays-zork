@@ -3,7 +3,8 @@
 // models, so trial k is the same game for every model.
 //
 // Usage: node src/eval.js --models haiku,sonnet --trials 3 --moves 300
-//        [--provider claude-cli] [--max-minutes 60] [--name my-eval]
+//        [--provider claude-cli] [--max-minutes 60] [--max-model-turns 1200]
+//        [--name my-eval]
 //        [--seeds 2,3]  -- rerun specific trials into an existing batch
 //
 // A --models entry may name its own backend and reasoning effort, so one
@@ -25,6 +26,7 @@ const { values } = parseArgs({
     moves: { type: 'string', default: '300' },
     provider: { type: 'string', default: 'claude-cli' },
     'max-minutes': { type: 'string', default: '60' },
+    'max-model-turns': { type: 'string' },
     name: { type: 'string' },
     seeds: { type: 'string' },
   },
@@ -152,6 +154,9 @@ function runOne(model, trial, tag) {
             ? { CODEX_CLI_EFFORT: model.effort, ANTHROPIC_EFFORT: model.effort }
             : {}),
           MAX_MOVES: String(moves),
+          ...(values['max-model-turns']
+            ? { MAX_MODEL_TURNS: values['max-model-turns'] }
+            : {}),
           ZORK_SEED: String(trial),
           RUN_TAG: tag,
           LOG_DIR: batchDir,
