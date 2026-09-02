@@ -9,6 +9,10 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import {
+  aggregateScoringUsage,
+  estimateOpenAiApiCost,
+} from './cost-estimator.js';
 
 // Reports one batch directory, writing its summary.json back into it.
 export async function reportDirectory(dir) {
@@ -54,7 +58,15 @@ async function collectRows(dir) {
       continue;
     }
     const s = end.runStats;
-    const u = end.usage ?? {};
+    // Usage resets when an interrupted run resumes. Price the model turns
+    // retained in the repaired scoring transcript; when only attempt-level
+    // usage exists, removed turns are subtracted by proportional allocation.
+    const u = aggregateScoringUsage(events);
+    const estimatedCost =
+      u.costUsd == null
+        ? estimateOpenAiApiCost(u.resolvedModel ?? start.model ?? '', u)
+        : null;
+    const costUsd = u.costUsd ?? estimatedCost?.totalUsd ?? null;
     const scores = events.filter((e) => e.type === 'score').map((e) => e.score);
     rows.push({
       // Runs group by the alias they requested, so a batch stays one row
@@ -80,9 +92,14 @@ async function collectRows(dir) {
         (s.commands ?? 0) - (s.commandsAtLastScoreChange ?? 0),
       ),
       tokensOut: u.outputTokens ?? null,
-      // Subscription backends report tokens but no price; null means "no
-      // cost data", which is not the same as a run that cost nothing.
-      costUsd: u.costUsd ?? null,
+      costUsd,
+      costBasis:
+        u.costUsd != null
+          ? 'reported'
+          : estimatedCost
+            ? 'api-equivalent-estimate'
+            : null,
+      costEstimate: estimatedCost,
     });
   }
   return rows;
@@ -103,7 +120,7 @@ export async function reportDirectories(dirs, outDir = null) {
     ['stale', (r) => r.staleness],
     ['wall(m)', (r) => r.wallMin?.toFixed(1)],
     ['out-tok', (r) => r.tokensOut],
-    ['cost($)', (r) => r.costUsd?.toFixed(2) ?? 'n/a'],
+    ['cost($)', (r) => formatCost(r.costUsd, r.costBasis)],
   ];
   printTable(columns, rows);
 
@@ -112,10 +129,11 @@ export async function reportDirectories(dirs, outDir = null) {
     (r) => r.model,
   );
   const aggregates = [...byModel.entries()].map(([model, runs]) => {
-    // Only runs that reported a price contribute to the money columns; a
-    // subscription backend reports none, so its cost columns stay null
-    // rather than averaging in zeros and inflating score-per-dollar.
+    // Only runs with a reported or estimable price contribute to the money
+    // columns. API-equivalent estimates remain labeled separately from
+    // provider-reported charges.
     const costed = runs.filter((r) => r.costUsd != null);
+    const costBases = new Set(costed.map((r) => r.costBasis));
     return {
       model: runs.find((r) => r.resolvedModel)?.resolvedModel ?? model,
       alias: model,
@@ -126,6 +144,12 @@ export async function reportDirectories(dirs, outDir = null) {
       meanCommands: mean(runs.map((r) => r.commands)),
       meanWallMin: mean(runs.map((r) => r.wallMin)),
       meanCostUsd: costed.length > 0 ? mean(costed.map((r) => r.costUsd)) : null,
+      costBasis:
+        costBases.size === 1
+          ? [...costBases][0]
+          : costBases.size > 1
+            ? 'mixed'
+            : null,
       scorePerDollar:
         costed.length > 0
           ? sum(costed.map((r) => r.maxScore ?? 0)) /
@@ -143,7 +167,7 @@ export async function reportDirectories(dirs, outDir = null) {
       ['mean score', (a) => a.meanScore.toFixed(1)],
       ['mean cmds', (a) => a.meanCommands.toFixed(0)],
       ['mean wall(m)', (a) => a.meanWallMin.toFixed(1)],
-      ['mean cost($)', (a) => a.meanCostUsd?.toFixed(2) ?? 'n/a'],
+      ['mean cost($)', (a) => formatCost(a.meanCostUsd, a.costBasis)],
       ['score/$', (a) => a.scorePerDollar?.toFixed(1) ?? 'n/a'],
     ],
     aggregates,
@@ -190,6 +214,10 @@ function printTable(columns, rows) {
 
 const sum = (xs) => xs.reduce((a, b) => a + b, 0);
 const mean = (xs) => (xs.length > 0 ? sum(xs) / xs.length : 0);
+const formatCost = (cost, basis) =>
+  cost == null
+    ? 'n/a'
+    : `${basis === 'api-equivalent-estimate' ? '~' : ''}${cost.toFixed(2)}`;
 function median(xs) {
   const sorted = [...xs].sort((a, b) => a - b);
   if (sorted.length === 0) return 0;

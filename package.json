@@ -11,6 +11,7 @@
   "scripts": {
     "start": "node src/index.js",
     "eval": "node src/eval.js",
+    "eval:cost": "node src/cost-estimator.js",
     "eval:report": "node src/eval-report.js",
     "eval:score-svg": "node src/eval-score-svg.js",
     "test": "node --test"

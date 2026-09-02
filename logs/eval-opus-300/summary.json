@@ -15,8 +15,10 @@
       "worldRefusals": 45,
       "deaths": 1,
       "staleness": 223,
-      "tokensOut": 49862,
-      "costUsd": 4.249954
+      "tokensOut": 110584,
+      "costUsd": 9.978156499999994,
+      "costBasis": "reported",
+      "costEstimate": null
     },
     {
       "model": "opus",
@@ -34,7 +36,9 @@
       "deaths": 3,
       "staleness": 145,
       "tokensOut": 84426,
-      "costUsd": 10.477134500000004
+      "costUsd": 10.477134500000004,
+      "costBasis": "reported",
+      "costEstimate": null
     }
   ],
   "aggregates": [
@@ -47,8 +51,9 @@
       "meanScore": 119,
       "meanCommands": 310,
       "meanWallMin": 30.567825,
-      "meanCostUsd": 7.363544250000002,
-      "scorePerDollar": 16.160695985496382
+      "meanCostUsd": 10.227645499999998,
+      "costBasis": "reported",
+      "scorePerDollar": 11.635131467941475
     }
   ]
 }

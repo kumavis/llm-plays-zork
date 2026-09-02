@@ -3,6 +3,7 @@
     {
       "model": "haiku",
       "resolvedModel": null,
+      "provider": "claude-cli",
       "tag": "haiku-t1",
       "seed": 1,
       "wallMin": 13.484766666666667,
@@ -15,11 +16,14 @@
       "deaths": 0,
       "staleness": 289,
       "tokensOut": 27122,
-      "costUsd": 0.9578340999999999
+      "costUsd": 0.9578340999999999,
+      "costBasis": "reported",
+      "costEstimate": null
     },
     {
       "model": "haiku",
       "resolvedModel": null,
+      "provider": "claude-cli",
       "tag": "haiku-t2",
       "seed": 2,
       "wallMin": 13.501816666666667,
@@ -32,11 +36,14 @@
       "deaths": 0,
       "staleness": 94,
       "tokensOut": 27186,
-      "costUsd": 1.0103130000000002
+      "costUsd": 1.0103130000000002,
+      "costBasis": "reported",
+      "costEstimate": null
     },
     {
       "model": "haiku",
       "resolvedModel": "claude-haiku-4-5-20251001",
+      "provider": "claude-cli",
       "tag": "haiku-t3",
       "seed": 3,
       "wallMin": 13.9714,
@@ -49,19 +56,23 @@
       "deaths": 2,
       "staleness": 120,
       "tokensOut": 27723,
-      "costUsd": 1.1407495000000003
+      "costUsd": 1.1407495000000003,
+      "costBasis": "reported",
+      "costEstimate": null
     }
   ],
   "aggregates": [
     {
       "model": "claude-haiku-4-5-20251001",
       "alias": "haiku",
+      "provider": "claude-cli",
       "trials": 3,
       "medianScore": 40,
       "meanScore": 34.666666666666664,
       "meanCommands": 320.6666666666667,
       "meanWallMin": 13.65266111111111,
       "meanCostUsd": 1.0362988666666668,
+      "costBasis": "reported",
       "scorePerDollar": 33.45238307378894
     }
   ]

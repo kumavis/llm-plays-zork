@@ -16,7 +16,9 @@
       "deaths": 0,
       "staleness": 68,
       "tokensOut": 29686,
-      "costUsd": 1.7146967999999996
+      "costUsd": 1.7146967999999996,
+      "costBasis": "reported",
+      "costEstimate": null
     },
     {
       "model": "sonnet",
@@ -34,7 +36,9 @@
       "deaths": 1,
       "staleness": 119,
       "tokensOut": 27568,
-      "costUsd": 1.6600024000000004
+      "costUsd": 1.6600024000000004,
+      "costBasis": "reported",
+      "costEstimate": null
     },
     {
       "model": "sonnet",
@@ -52,7 +56,9 @@
       "deaths": 1,
       "staleness": 120,
       "tokensOut": 29958,
-      "costUsd": 1.9029509999999998
+      "costUsd": 1.9029509999999998,
+      "costBasis": "reported",
+      "costEstimate": null
     }
   ],
   "aggregates": [
@@ -66,6 +72,7 @@
       "meanCommands": 306.3333333333333,
       "meanWallMin": 19.631005555555557,
       "meanCostUsd": 1.7592167333333333,
+      "costBasis": "reported",
       "scorePerDollar": 45.285305191314116
     }
   ]

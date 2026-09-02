@@ -73,6 +73,7 @@ replay, failure recovery, and the tools fallback).
 
 ```sh
 yarn eval --models haiku,sonnet --trials 3 --moves 300 --name my-eval
+yarn eval:cost logs/eval-gpt-5.6-sol-300/*.jsonl
 yarn eval:report logs/eval-my-eval        # re-aggregate a batch
 yarn eval:report logs/eval-a logs/eval-b  # one table across batches
 yarn eval:score-svg                       # chart all completed runs together
@@ -123,10 +124,33 @@ The report groups runs by the model name they requested, so pin one
 reasoning effort per model within a batch (`gpt-5.6-sol@medium`) — the two
 Codex efforts of one model would otherwise share a row.
 
-Cost is reported only where the backend reports it. The Claude CLI
-estimates each run at API list prices; the Codex CLI reports tokens but no
-price, so its cost and score-per-dollar columns read `n/a` rather than
-`$0.00` — a subscription run is not a free one.
+The Claude CLI reports its own API-equivalent cost. The Codex CLI reports
+tokens but no dollar amount because these runs use a ChatGPT subscription,
+so `src/cost-estimator.js` estimates what the same recorded usage would cost
+at standard OpenAI API list prices. Estimated amounts carry a `~` prefix and
+are not the subscription charge.
+
+The estimator subtracts cached reads and cache writes from total input to
+obtain uncached input, then calculates:
+
+```text
+(uncached input × input price
+ + cached input × cached-input price
+ + cache writes × 1.25 × input price
+ + output × output price) / 1,000,000
+```
+
+Reasoning tokens are already included in output tokens and are not charged
+twice. Costs cover only model turns retained in the repaired scoring
+transcript. When repair removed turns from an interrupted attempt, historical
+logs provide only an attempt-level token total, so the estimator prorates each
+token category by retained turns / recorded turns and rounds to the nearest
+token. Duplicate cleanup records are ignored. Historical logs contain
+aggregate, not per-request, usage, so estimates cannot detect or include the
+OpenAI long-context surcharge for requests over 272K input tokens. Prices are
+the [official GPT-5.6 rates](https://developers.openai.com/api/docs/models/compare)
+as of 2026-09-02; each generated `summary.json` records the rate table,
+formula, token breakdown, and assumptions for every estimated run.
 
 ### Results
 
@@ -146,16 +170,17 @@ has three. Full transcripts, event logs, and summaries are under the matching
 
 | provider  | model         | trials | median | mean  | mean cost/run | score per $ | mean wall/run |
 | --------- | ------------- | -----: | -----: | ----: | -------------: | ----------: | -------------: |
-| Anthropic | Opus          |      2 |    119 | 119.0 |          $7.36 |        16.2 |       30.6 min |
+| Anthropic | Opus          |      2 |    119 | 119.0 |         $10.23 |        11.6 |       30.6 min |
 | Anthropic | Sonnet        |      3 |     75 |  79.7 |          $1.76 |        45.3 |       19.6 min |
 | Anthropic | Haiku         |      3 |     40 |  34.7 |          $1.04 |        33.5 |       13.7 min |
-| OpenAI    | GPT-5.6 Sol   |      3 |    115 | 116.0 |            n/a |         n/a |       59.4 min |
-| OpenAI    | GPT-5.6 Terra |      3 |     55 |  54.7 |            n/a |         n/a |       37.5 min |
-| OpenAI    | GPT-5.6 Luna  |      3 |     40 |  41.3 |            n/a |         n/a |       36.2 min |
+| OpenAI    | GPT-5.6 Sol   |      3 |    115 | 116.0 |         ~$4.93 |        23.5 |       59.4 min |
+| OpenAI    | GPT-5.6 Terra |      3 |     55 |  54.7 |         ~$2.41 |        22.7 |       37.5 min |
+| OpenAI    | GPT-5.6 Luna  |      3 |     40 |  41.3 |         ~$0.21 |       193.2 |       36.2 min |
 
 Opus and GPT-5.6 Sol reached the highest median scores, though the Opus
-estimate has only two trials. Within the priced Anthropic runs, Sonnet has
-the best score per dollar. Seed-to-seed variance remains substantial, so
+estimate has only two trials. Sonnet has the best score per reported dollar
+among the Anthropic runs, while Luna has the best score per estimated API
+dollar among the OpenAI runs. Seed-to-seed variance remains substantial, so
 single runs are anecdotes rather than reliable rankings.
 
 ## How it works
