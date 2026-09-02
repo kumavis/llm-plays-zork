@@ -1,0 +1,72 @@
+{
+  "rows": [
+    {
+      "model": "gpt-5.6-luna",
+      "resolvedModel": null,
+      "provider": "codex-cli",
+      "tag": "gpt-5.6-luna-t1",
+      "seed": 1,
+      "wallMin": 36.46188333333333,
+      "turns": 317,
+      "commands": 317,
+      "moves": 300,
+      "maxScore": 40,
+      "parserRejections": 5,
+      "worldRefusals": 48,
+      "deaths": 1,
+      "staleness": 141,
+      "tokensOut": 14367,
+      "costUsd": null
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "resolvedModel": null,
+      "provider": "codex-cli",
+      "tag": "gpt-5.6-luna-t2",
+      "seed": 2,
+      "wallMin": 36.225966666666665,
+      "turns": 319,
+      "commands": 319,
+      "moves": 300,
+      "maxScore": 35,
+      "parserRejections": 0,
+      "worldRefusals": 41,
+      "deaths": 1,
+      "staleness": 215,
+      "tokensOut": 13477,
+      "costUsd": null
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "resolvedModel": null,
+      "provider": "codex-cli",
+      "tag": "gpt-5.6-luna-t3",
+      "seed": 3,
+      "wallMin": 35.94148333333333,
+      "turns": 318,
+      "commands": 318,
+      "moves": 300,
+      "maxScore": 49,
+      "parserRejections": 9,
+      "worldRefusals": 51,
+      "deaths": 1,
+      "staleness": 108,
+      "tokensOut": 13356,
+      "costUsd": null
+    }
+  ],
+  "aggregates": [
+    {
+      "model": "gpt-5.6-luna",
+      "alias": "gpt-5.6-luna",
+      "provider": "codex-cli",
+      "trials": 3,
+      "medianScore": 40,
+      "meanScore": 41.333333333333336,
+      "meanCommands": 318,
+      "meanWallMin": 36.20977777777778,
+      "meanCostUsd": null,
+      "scorePerDollar": null
+    }
+  ]
+}

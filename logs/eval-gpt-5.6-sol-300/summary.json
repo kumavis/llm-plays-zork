@@ -1,0 +1,72 @@
+{
+  "rows": [
+    {
+      "model": "gpt-5.6-sol",
+      "resolvedModel": null,
+      "provider": "codex-cli",
+      "tag": "gpt-5.6-sol-t1",
+      "seed": 1,
+      "wallMin": 63.56433333333333,
+      "turns": 306,
+      "commands": 304,
+      "moves": 300,
+      "maxScore": 104,
+      "parserRejections": 2,
+      "worldRefusals": 6,
+      "deaths": 0,
+      "staleness": 262,
+      "tokensOut": 2037,
+      "costUsd": null
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "resolvedModel": null,
+      "provider": "codex-cli",
+      "tag": "gpt-5.6-sol-t2",
+      "seed": 2,
+      "wallMin": 53.36323333333333,
+      "turns": 306,
+      "commands": 305,
+      "moves": 300,
+      "maxScore": 129,
+      "parserRejections": 3,
+      "worldRefusals": 1,
+      "deaths": 2,
+      "staleness": 55,
+      "tokensOut": 19162,
+      "costUsd": null
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "resolvedModel": null,
+      "provider": "codex-cli",
+      "tag": "gpt-5.6-sol-t3",
+      "seed": 3,
+      "wallMin": 61.23665,
+      "turns": 301,
+      "commands": 298,
+      "moves": 300,
+      "maxScore": 115,
+      "parserRejections": 0,
+      "worldRefusals": 4,
+      "deaths": 2,
+      "staleness": 81,
+      "tokensOut": 29125,
+      "costUsd": null
+    }
+  ],
+  "aggregates": [
+    {
+      "model": "gpt-5.6-sol",
+      "alias": "gpt-5.6-sol",
+      "provider": "codex-cli",
+      "trials": 3,
+      "medianScore": 115,
+      "meanScore": 116,
+      "meanCommands": 302.3333333333333,
+      "meanWallMin": 59.38807222222223,
+      "meanCostUsd": null,
+      "scorePerDollar": null
+    }
+  ]
+}

@@ -1,0 +1,2025 @@
+Player backend: codex-cli (gpt-5.6-luna)
+Event log: /Users/xyz/Development/llm-plays-zork/logs/eval-codex-300/run-2026-09-02T02-00-20.283Z-gpt-5.6-luna-t2.jsonl.partial
+Game: ZORK I: The Great Underground Empire[0m
+Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved.[0m
+ZORK is a registered trademark of Infocom, Inc.[0m
+Revision 88 / Serial number 840726[0m
+
+[1mWest of House[0m
+You are standing in an open field west of a white house, with a boarded front door.[0m
+There is a [0m[4msmall mailbox[0m here.[0m
+> OPEN MAILBOX
+Game: Opening the [0m[4msmall mailbox[0m reveals a [0m[4mleaflet[0m.[0m
+> TAKE LEAFLET
+Game: Taken.[0m
+[score: 0, moves: 2]
+> GO NORTH
+Game: [1mNorth of House[0m
+You are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.[0m
+> GO NORTH
+Game: [1mForest Path[0m
+This is a path winding through a dimly lit forest. The path heads north-south here. One particularly large tree with some low branches stands at the edge of the path.[0m
+> CLIMB TREE
+Game: [1mUp a Tree[0m
+You are about 10 feet above the ground nestled among some large branches. The nearest branch above you is above your reach.[0m
+Beside you on the branch is a small bird's nest.[0m
+In the bird's nest is a large egg encrusted with precious jewels, apparently scavenged by a childless songbird. The egg is covered with fine gold inlay, and ornamented in lapis lazuli and mother-of-pearl. Unlike most eggs, this one is hinged and closed with a delicate looking clasp. The egg appears extremely fragile.[0m
+> TAKE EGG
+Game: Taken.[0m
+You hear in the distance the chirping of a song bird.[0m
+[score: 5, moves: 6]
+> GO DOWN
+Game: [1mForest Path[0m
+> GO SOUTH
+Game: [1mNorth of House[0m
+> GO SOUTH
+Game: The windows are all boarded.[0m
+> LOOK
+Game: [1mNorth of House[0m
+You are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.[0m
+> GO WEST
+Game: [1mWest of House[0m
+There is a [0m[4msmall mailbox[0m here.[0m
+> GO SOUTH
+Game: [1mSouth of House[0m
+You are facing the south side of a white house. There is no door here, and all the windows are boarded.[0m
+> GO EAST
+Game: [1mBehind House[0m
+You are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is slightly ajar.[0m
+> OPEN WINDOW
+Game: With great effort, you open the window far enough to allow entry.[0m
+> ENTER WINDOW
+Game: [1mKitchen[0m
+You are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open.[0m
+On the table is an elongated brown sack, smelling of hot peppers.[0m
+A bottle is sitting on the table.[0m
+The [0m[4mglass bottle[0m contains:[0m
+  A [0m[4mquantity of water[0m
+[score: 15, moves: 15]
+> TAKE SACK
+Game: Taken.[0m
+> TAKE BOTTLE
+Game: Taken.[0m
+> GO WEST
+Game: [1mLiving Room[0m
+You are in the living room. There is a doorway to the east, a wooden door with strange gothic lettering to the west, which appears to be nailed shut, a trophy case, and a large oriental rug in the center of the room.[0m
+Above the trophy case hangs an elvish sword of great antiquity.[0m
+A battery-powered brass lantern is on the trophy case.[0m
+> TAKE LANTERN
+Game: Taken.[0m
+> TAKE SWORD
+Game: Taken.[0m
+> MOVE RUG
+Game: With a great effort, the rug is moved to one side of the room, revealing the dusty cover of a closed trap door.[0m
+> OPEN TRAPDOOR
+Game: The door reluctantly opens to reveal a rickety staircase descending into darkness.[0m
+> TURN ON LANTERN
+Game: The [0m[4mbrass lantern[0m is now on.[0m
+> GO DOWN
+Game: The trap door crashes shut, and you hear someone barring it.[0m
+
+[1mCellar[0m
+You are in a dark and damp cellar with a narrow passageway leading north, and a crawlway to the south. On the west is the bottom of a steep metal ramp which is unclimbable.[0m
+Your sword is glowing with a faint blue glow.[0m
+[score: 40, moves: 24]
+> GO SOUTH
+Game: [1mEast of Chasm[0m
+You are on the east edge of a chasm, the bottom of which cannot be seen. A narrow passage goes north, and the path you are on continues to the east.[0m
+Your sword is no longer glowing.[0m
+> GO EAST
+Game: [1mGallery[0m
+This is an art gallery. Most of the paintings have been stolen by vandals with exceptional taste. The vandals left through either the north or west exits.[0m
+Fortunately, there is still one chance for you to be a vandal, for on the far wall is a painting of unparalleled beauty.[0m
+> TAKE PAINTING
+Game: Taken.[0m
+[score: 44, moves: 27]
+> GO NORTH
+Game: [1mStudio[0m
+This appears to have been an artist's studio. The walls and floors are splattered with paints of 69 different colors. Strangely enough, nothing of value is hanging here. At the south end of the room is an open door (also covered with paint). A dark and narrow chimney leads up from a fireplace; although you might be able to get up it, it seems unlikely you could get back down.[0m
+Loosely attached to a wall is a small piece of paper.[0m
+> TAKE PAPER
+Game: Your load is too heavy.[0m
+> DROP SACK
+Game: Dropped.[0m
+> TAKE PAPER
+Game: Taken.[0m
+> GO UP
+Game: You can't get up there with what you're carrying.[0m
+> EXAMINE PAPER
+Game: Congratulations![0m
+
+You are the privileged owner of ZORK I: The Great Underground Empire, a self-contained and self-maintaining universe. If used and maintained in accordance with normal operating practices for small universes, ZORK will provide many months of trouble-free operation.[0m
+> DROP PAPER
+Game: Dropped.[0m
+> GO UP
+Game: You can't get up there with what you're carrying.[0m
+> DROP PAINTING
+Game: Dropped.[0m
+> GO UP
+Game: You can't get up there with what you're carrying.[0m
+> DROP BOTTLE
+Game: Dropped.[0m
+A seedy-looking individual with a large bag just wandered through the room. On the way through, he quietly abstracted some valuables from the room and from your possession, mumbling something about "Doing unto others before..."[0m
+> GO UP
+Game: You can't get up there with what you're carrying.[0m
+> DROP SWORD
+Game: Dropped.[0m
+> GO UP
+Game: You can't get up there with what you're carrying.[0m
+> DROP LANTERN
+Game: Dropped.[0m
+> GO UP
+Game: You can't get up there with what you're carrying.[0m
+> DROP LEAFLET
+Game: Dropped.[0m
+> GO UP
+Game: You can't get up there with what you're carrying.[0m
+> DROP EGG
+Game: Dropped.[0m
+> GO UP
+Game: Going up empty-handed is a bad idea.[0m
+> TAKE LANTERN
+Game: Taken.[0m
+> GO UP
+Game: [1mKitchen[0m
+> GO UP
+Game: [1mAttic[0m
+This is the attic. The only exit is a stairway leading down.[0m
+A large coil of rope is lying in the corner.[0m
+On a table is a nasty-looking knife.[0m
+> TAKE ROPE
+Game: Taken.[0m
+> TAKE KNIFE
+Game: Taken.[0m
+> GO DOWN
+Game: [1mKitchen[0m
+> GO DOWN
+Game: Only Santa Claus climbs down chimneys.[0m
+> GO WEST
+Game: [1mLiving Room[0m
+> GO DOWN
+Game: The trap door is closed.[0m
+> OPEN TRAPDOOR
+Game: The door reluctantly opens to reveal a rickety staircase descending into darkness.[0m
+> GO DOWN
+Game: The trap door crashes shut, and you hear someone barring it.[0m
+
+[1mCellar[0m
+> GO NORTH
+Game: [1mThe Troll Room[0m
+This is a small room with passages to the east and south and a forbidding hole leading west. Bloodstains and deep scratches (perhaps made by an axe) mar the walls.[0m
+A nasty-looking troll, brandishing a bloody axe, blocks all passages out of the room.[0m
+The flat of the troll's axe hits you delicately on the head, knocking you out.[0m
+Conquering his fears, the troll puts you to death.[0m
+It appears that that last blow was too much for you. I'm afraid you are dead.[0m
+ [0m
+   ****  You have died  **** [0m
+
+Now, let's take a look here... Well, you probably deserve another chance. I can't quite fix you up completely, but you can't have everything.[0m
+
+[1mForest[0m
+This is a forest, with trees in all directions. To the east, there appears to be sunlight.[0m
+[score: 34, moves: 59]
+> LOOK
+Game: [1mForest[0m
+This is a forest, with trees in all directions. To the east, there appears to be sunlight.[0m
+> GO EAST
+Game: [1mForest Path[0m
+> GO SOUTH
+Game: [1mNorth of House[0m
+> GO WEST
+Game: [1mWest of House[0m
+There is a [0m[4mrope[0m here.[0m
+There is a [0m[4msmall mailbox[0m here.[0m
+> GO SOUTH
+Game: [1mSouth of House[0m
+> GO EAST
+Game: [1mBehind House[0m
+> ENTER WINDOW
+Game: [1mKitchen[0m
+> GO WEST
+Game: [1mLiving Room[0m
+There is a brass lantern (battery-powered) here.[0m
+> TAKE LANTERN
+Game: Taken.[0m
+> MOVE RUG
+Game: Having moved the carpet previously, you find it impossible to move it again.[0m
+> OPEN TRAPDOOR
+Game: The door reluctantly opens to reveal a rickety staircase descending into darkness.[0m
+> GO DOWN
+Game: The trap door crashes shut, and you hear someone barring it.[0m
+
+[1mCellar[0m
+> GO SOUTH
+Game: [1mEast of Chasm[0m
+> GO EAST
+Game: [1mGallery[0m
+> GO NORTH
+Game: [1mStudio[0m
+There is a [0m[4mjewel-encrusted egg[0m here.[0m
+A small leaflet is on the ground.[0m
+There is a [0m[4msword[0m here.[0m
+There is a [0m[4mglass bottle[0m here.[0m
+The [0m[4mglass bottle[0m contains:[0m
+  A [0m[4mquantity of water[0m
+There is a [0m[4mZORK owner's manual[0m here.[0m
+There is a [0m[4mbrown sack[0m here.[0m
+> TAKE SWORD
+Game: Taken.[0m
+> GO SOUTH
+Game: [1mGallery[0m
+> GO WEST
+Game: [1mEast of Chasm[0m
+> GO WEST
+Game: You can't go that way.[0m
+> GO SOUTH
+Game: You can't go that way.[0m
+> GO NORTH
+Game: [1mCellar[0m
+Your sword is glowing with a faint blue glow.[0m
+> GO NORTH
+Game: [1mThe Troll Room[0m
+A nasty-looking troll, brandishing a bloody axe, blocks all passages out of the room.[0m
+Your sword has begun to glow very brightly.[0m
+> KILL TROLL WITH SWORD
+Game: The [0m[4mtroll[0m is knocked out![0m
+> KILL TROLL WITH SWORD
+Game: The unarmed [0m[4mtroll[0m cannot defend himself: He dies.[0m
+Almost as soon as the [0m[4mtroll[0m breathes his last breath, a cloud of sinister black fog envelops him, and when the fog lifts, the carcass has disappeared.[0m
+Your sword is no longer glowing.[0m
+> GO EAST
+Game: [1mEast-West Passage[0m
+This is a narrow east-west passageway. There is a narrow stairway leading down at the north end of the room.[0m
+[score: 39, moves: 84]
+> GO NORTH
+Game: [1mChasm[0m
+A chasm runs southwest to northeast and the path follows it. You are on the south side of the chasm, where a crack opens into a passage.[0m
+> LOOK
+Game: [1mChasm[0m
+A chasm runs southwest to northeast and the path follows it. You are on the south side of the chasm, where a crack opens into a passage.[0m
+> ENTER CRACK
+Game: You can't fit through the crack.[0m
+> GO NORTHEAST
+Game: [1mReservoir South[0m
+You are in a long room on the south shore of a large lake, far too deep and wide for crossing.[0m
+There is a path along the stream to the east or west, a steep pathway climbing southwest along the edge of a chasm, and a path leading into a canyon to the southeast.[0m
+> GO EAST
+Game: [1mDam[0m
+You are standing on the top of the Flood Control Dam #3, which was quite a tourist attraction in times far distant. There are paths to the north, south, and west, and a scramble down.[0m
+The sluice gates on the dam are closed. Behind the dam, there can be seen a wide reservoir. Water is pouring over the top of the now abandoned dam.[0m
+There is a control panel here, on which a large metal bolt is mounted. Directly above the bolt is a small green plastic bubble.[0m
+> EXAMINE PANEL
+Game: There's nothing special about the [0m[4mcontrol panel[0m.[0m
+> TURN BOLT
+Game: What do you want to turn the bolt with?[0m
+> GO DOWN
+Game: [1mDam Base[0m
+You are at the base of Flood Control Dam #3, which looms above you and to the north. The river Frigid is flowing by here. Along the river are the White Cliffs which seem to form giant walls stretching from north to south along the shores of the river as it winds its way downstream.[0m
+There is a folded pile of plastic here which has a small valve attached.[0m
+> TAKE PLASTIC
+Game: Taken.[0m
+> INFLATE PLASTIC
+Game: What do you want to inflate the plastic with?[0m
+> GO SOUTH
+Game: You can't go that way.[0m
+> GO WEST
+Game: You can't go that way.[0m
+> GO EAST
+Game: You can't go that way.[0m
+> GO NORTH
+Game: [1mDam[0m
+> PUSH BUBBLE
+Game: Pushing the [0m[4mgreen bubble[0m doesn't seem to work.[0m
+> PRESS BUBBLE
+Game: Pushing the [0m[4mgreen bubble[0m has no effect.[0m
+> TURN BOLT WITH SWORD
+Game: The bolt won't turn using the [0m[4msword[0m.[0m
+> GO NORTH
+Game: [1mDam Lobby[0m
+This room appears to have been the waiting room for groups touring the dam. There are open doorways here to the north and east marked "Private", and there is a path leading south over the top of the dam.[0m
+Some guidebooks entitled "Flood Control Dam #3" are on the reception desk.[0m
+There is a matchbook whose cover says "Visit Beautiful FCD#3" here.[0m
+> GO EAST
+Game: [1mMaintenance Room[0m
+This is what appears to have been the maintenance room for Flood Control Dam #3. Apparently, this room has been ransacked recently, for most of the valuable equipment is gone. On the wall in front of you is a group of buttons colored blue, yellow, brown, and red. There are doorways to the west and south.[0m
+There is a [0m[4mgroup of tool chests[0m here.[0m
+There is a [0m[4mwrench[0m here.[0m
+There is an object which looks like a tube of toothpaste here.[0m
+There is a [0m[4mscrewdriver[0m here.[0m
+> TAKE WRENCH
+Game: Taken.[0m
+> GO WEST
+Game: [1mDam Lobby[0m
+Some guidebooks entitled "Flood Control Dam #3" are on the reception desk.[0m
+There is a matchbook whose cover says "Visit Beautiful FCD#3" here.[0m
+> GO SOUTH
+Game: [1mDam[0m
+> TURN BOLT WITH WRENCH
+Game: The bolt won't turn with your best effort.[0m
+> USE WRENCH ON BOLT
+Game: I don't know the word "use".[0m
+> GO NORTH
+Game: [1mDam Lobby[0m
+Some guidebooks entitled "Flood Control Dam #3" are on the reception desk.[0m
+There is a matchbook whose cover says "Visit Beautiful FCD#3" here.[0m
+> GO EAST
+Game: [1mMaintenance Room[0m
+There is a [0m[4mgroup of tool chests[0m here.[0m
+There is an object which looks like a tube of toothpaste here.[0m
+There is a [0m[4mscrewdriver[0m here.[0m
+> TAKE TOOTHPASTE
+Game: I don't know the word "toothpaste".[0m
+> TAKE TUBE
+Game: Taken.[0m
+> SQUEEZE TUBE
+Game: The tube is closed.[0m
+> OPEN TUBE
+Game: Opening the [0m[4mtube[0m reveals a [0m[4mviscous material[0m.[0m
+> GO WEST
+Game: [1mDam Lobby[0m
+Some guidebooks entitled "Flood Control Dam #3" are on the reception desk.[0m
+There is a matchbook whose cover says "Visit Beautiful FCD#3" here.[0m
+> GO SOUTH
+Game: [1mDam[0m
+> RUB BOLT WITH TUBE
+Game: Fiddling with the [0m[4mbolt[0m isn't notably helpful.[0m
+> SQUEEZE TUBE ON BOLT
+Game: You can't do that.[0m
+> PUT GREASE ON BOLT
+Game: You used the word "grease" in a way that I don't understand.[0m
+> PUT PASTE ON BOLT
+Game: There's no good surface on the [0m[4mbolt[0m.[0m
+> TURN BOLT WITH WRENCH
+Game: The bolt won't turn with your best effort.[0m
+> EXAMINE TUBE
+Game: ---> Frobozz Magic Gunk Company <---[0m
+	  All-Purpose Gunk[0m
+> PUT GUNK ON BOLT
+Game: There's no good surface on the [0m[4mbolt[0m.[0m
+> LUBRICATE BOLT WITH GUNK
+Game: The all-purpose gunk isn't a lubricant.[0m
+> INVENTORY
+Game: You are carrying:[0m
+  A [0m[4mtube[0m
+  The [0m[4mtube[0m contains:[0m
+    A [0m[4mviscous material[0m
+  A [0m[4mwrench[0m
+  A [0m[4mpile of plastic[0m
+  A [0m[4msword[0m
+  A [0m[4mbrass lantern[0m (providing light)[0m
+> GO NORTH
+Game: [1mDam Lobby[0m
+Some guidebooks entitled "Flood Control Dam #3" are on the reception desk.[0m
+There is a matchbook whose cover says "Visit Beautiful FCD#3" here.[0m
+> GO EAST
+Game: [1mMaintenance Room[0m
+There is a [0m[4mgroup of tool chests[0m here.[0m
+There is a [0m[4mscrewdriver[0m here.[0m
+> TAKE SCREWDRIVER
+Game: Taken.[0m
+> GO WEST
+Game: [1mDam Lobby[0m
+Some guidebooks entitled "Flood Control Dam #3" are on the reception desk.[0m
+There is a matchbook whose cover says "Visit Beautiful FCD#3" here.[0m
+> GO SOUTH
+Game: [1mDam[0m
+> TURN BOLT WITH SCREWDRIVER
+Game: The bolt won't turn using the [0m[4mscrewdriver[0m.[0m
+> UNSCREW BOLT
+Game: I don't know the word "unscrew".[0m
+> OPEN PANEL WITH SCREWDRIVER
+Game: You must tell me how to do that to a [0m[4mcontrol panel[0m.[0m
+> GO NORTH
+Game: [1mDam Lobby[0m
+Some guidebooks entitled "Flood Control Dam #3" are on the reception desk.[0m
+There is a matchbook whose cover says "Visit Beautiful FCD#3" here.[0m
+> GO EAST
+Game: [1mMaintenance Room[0m
+There is a [0m[4mgroup of tool chests[0m here.[0m
+> PRESS BLUE BUTTON
+Game: There is a rumbling sound and a stream of water appears to burst from the east wall of the room (apparently, a leak has occurred in a pipe).[0m
+The water level here is now up to your ankles.[0m
+> PRESS RED BUTTON
+Game: The lights within the room come on.[0m
+The water level here is now up to your shin.[0m
+> PRESS BROWN BUTTON
+Game: Click.[0m
+The water level here is now up to your shin.[0m
+> PRESS YELLOW BUTTON
+Game: Click.[0m
+The water level here is now up to your knees.[0m
+> GO WEST
+Game: [1mDam Lobby[0m
+There is a matchbook whose cover says "Visit Beautiful FCD#3" here.[0m
+> GO SOUTH
+Game: [1mDam[0m
+You are standing on the top of the Flood Control Dam #3, which was quite a tourist attraction in times far distant. There are paths to the north, south, and west, and a scramble down.[0m
+The sluice gates on the dam are closed. Behind the dam, there can be seen a wide reservoir. Water is pouring over the top of the now abandoned dam.[0m
+There is a control panel here, on which a large metal bolt is mounted. Directly above the bolt is a small green plastic bubble which is glowing serenely.[0m
+There is a [0m[4mtour guidebook[0m here.[0m
+> TURN BOLT WITH WRENCH
+Game: The sluice gates open and water pours through the dam.[0m
+> GO SOUTH
+Game: [1mDeep Canyon[0m
+You are on the south edge of a deep canyon. Passages lead off to the east, northwest and southwest. A stairway leads down. You can hear a loud roaring sound, like that of rushing water, from below.[0m
+> GO DOWN
+Game: [1mLoud Room[0m
+This is a large room with a ceiling which cannot be detected from the ground. There is a narrow passage from east to west and a stone stairway leading upward. The room is deafeningly loud with an undetermined rushing sound. The sound seems to reverberate from all of the walls, making it difficult even to think.[0m
+On the ground is a large platinum bar.[0m
+It is unbearably loud here, with an ear-splitting roar seeming to come from all around you. There is a pounding in your head which won't stop. With a tremendous effort, you scramble out of the room.[0m
+
+[1mDamp Cave[0m
+This cave has exits to the west and east, and narrows to a crack toward the south. The earth is particularly damp here.[0m
+> TAKE PLATINUM BAR
+Game: You can't see any platinum bar here![0m
+> GO WEST
+Game: [1mLoud Room[0m
+On the ground is a large platinum bar.[0m
+It is unbearably loud here, with an ear-splitting roar seeming to come from all around you. There is a pounding in your head which won't stop. With a tremendous effort, you scramble out of the room.[0m
+
+[1mDeep Canyon[0m
+> TAKE BAR
+Game: You can't see any bar here![0m
+A "lean and hungry" gentleman just wandered through, carrying a large bag. Finding nothing of value, he left disgruntled.[0m
+> GO DOWN
+Game: [1mLoud Room[0m
+On the ground is a large platinum bar.[0m
+It is unbearably loud here, with an ear-splitting roar seeming to come from all around you. There is a pounding in your head which won't stop. With a tremendous effort, you scramble out of the room.[0m
+
+[1mRound Room[0m
+This is a circular stone room with passages in all directions. Several of them have unfortunately been blocked by cave-ins.[0m
+> LOOK
+Game: [1mRound Room[0m
+This is a circular stone room with passages in all directions. Several of them have unfortunately been blocked by cave-ins.[0m
+> GO EAST
+Game: [1mLoud Room[0m
+This is a large room with a ceiling which cannot be detected from the ground. There is a narrow passage from east to west and a stone stairway leading upward. The room is deafeningly loud with an undetermined rushing sound. The sound seems to reverberate from all of the walls, making it difficult even to think.[0m
+On the ground is a large platinum bar.[0m
+> TAKE PLATINUM
+Game: platinum platinum ...[0m
+> GET BAR
+Game: bar bar ...[0m
+> TAKE PLATINUM BAR
+Game: bar bar ...[0m
+> GO UP
+Game: [1mDeep Canyon[0m
+You are on the south edge of a deep canyon. Passages lead off to the east, northwest and southwest. A stairway leads down. You can hear the sound of flowing water from below.[0m
+> GO EAST
+Game: [1mDam[0m
+There is a [0m[4mtour guidebook[0m here.[0m
+> GO DOWN
+Game: [1mDam Base[0m
+> BLOW UP PLASTIC
+Game: You can't blast anything by using words.[0m
+> INFLATE PLASTIC WITH MOUTH
+Game: The boat must be on the ground to be inflated.[0m
+> DROP PLASTIC
+Game: Dropped.[0m
+> INFLATE BOAT
+Game: What do you want to inflate the boat with?[0m
+> INFLATE BOAT WITH MOUTH
+Game: You don't have enough lung power to inflate it.[0m
+> GO NORTH
+Game: [1mDam[0m
+There is a [0m[4mtour guidebook[0m here.[0m
+> GO NORTH
+Game: [1mDam Lobby[0m
+There is a matchbook whose cover says "Visit Beautiful FCD#3" here.[0m
+>>> Invalid Zork command: commands must contain only printable ASCII characters
+> GO EAST
+Game: The room is full of water and cannot be entered.[0m
+> GO NORTH
+Game: The room is full of water and cannot be entered.[0m
+> WAIT
+Game: Time passes...[0m
+> WAIT
+Game: Time passes...[0m
+> GO EAST
+Game: The room is full of water and cannot be entered.[0m
+> WAIT
+Game: Time passes...[0m
+> WAIT
+Game: Time passes...[0m
+> GO SOUTH
+Game: [1mDam[0m
+There is a [0m[4mtour guidebook[0m here.[0m
+> GO WEST
+Game: [1mReservoir South[0m
+You are in a long room, to the north of which was formerly a lake. However, with the water level lowered, there is merely a wide stream running through the center of the room.[0m
+There is a path along the stream to the east or west, a steep pathway climbing southwest along the edge of a chasm, and a path leading into a canyon to the southeast.[0m
+> GO WEST
+Game: [1mStream View[0m
+You are standing on a path beside a gently flowing stream. The path follows the stream, which flows from west to east.[0m
+> GO WEST
+Game: The stream emerges from a spot too small for you to enter.[0m
+> GO EAST
+Game: [1mReservoir South[0m
+> GO NORTH
+Game: [1mReservoir[0m
+You are on what used to be a large lake, but which is now a large mud pile. There are "shores" to the north and south.[0m
+Lying half buried in the mud is an old trunk, bulging with jewels.[0m
+> OPEN TRUNK
+Game: The jewels are safely inside; there's no need to do that.[0m
+> TAKE JEWELS
+Game: Your load is too heavy.[0m
+> DROP TUBE
+Game: Dropped.[0m
+> DROP SCREWDRIVER
+Game: Dropped.[0m
+> TAKE JEWELS
+Game: Taken.[0m
+[score: 54, moves: 178]
+> GO NORTH
+Game: [1mReservoir North[0m
+You are in a large cavernous room, the south of which was formerly a lake. However, with the water level lowered, there is merely a wide stream running through there.[0m
+There is a slimy stairway leaving the room to the north.[0m
+There is a [0m[4mhand-held air pump[0m here.[0m
+> TAKE PUMP
+Game: Taken.[0m
+> GO SOUTH
+Game: [1mReservoir[0m
+There is a [0m[4mscrewdriver[0m here.[0m
+There is an object which looks like a tube of toothpaste here.[0m
+The [0m[4mtube[0m contains:[0m
+  A [0m[4mviscous material[0m
+> GO SOUTH
+Game: [1mReservoir South[0m
+> GO EAST
+Game: [1mDam[0m
+There is a [0m[4mtour guidebook[0m here.[0m
+> GO DOWN
+Game: [1mDam Base[0m
+There is a folded pile of plastic here which has a small valve attached.[0m
+> TAKE PLASTIC
+Game: Your load is too heavy.[0m
+> DROP ROPE
+Game: You don't have that![0m
+> DROP SWORD
+Game: Dropped.[0m
+> TAKE PLASTIC
+Game: Taken.[0m
+> INFLATE BOAT WITH PUMP
+Game: The boat must be on the ground to be inflated.[0m
+> DROP PLASTIC
+Game: Dropped.[0m
+> INFLATE BOAT WITH PUMP
+Game: The boat inflates and appears seaworthy.[0m
+A tan label is lying inside the boat.[0m
+> TAKE LABEL
+Game: Taken.[0m
+> BOARD BOAT
+Game: You are now in the [0m[4mmagic boat[0m.[0m
+> GO SOUTH
+Game: Read the label for the boat's instructions.[0m
+> READ LABEL
+Game: !!!! 	FROBOZZ MAGIC BOAT COMPANY  !!!![0m
+
+Hello, Sailor![0m
+
+Instructions for use:[0m
+
+   To get into a body of water, say "Launch".[0m
+   To get to shore, say "Land" or the direction in which you want to maneuver the boat.[0m
+
+Warranty:[0m
+
+  This boat is guaranteed against all defects for a period of 76 milliseconds from date of purchase or until first used, whichever comes first.[0m
+
+Warning:[0m
+   This boat is made of thin plastic.[0m
+   Good Luck![0m
+> LAUNCH
+Game: ([0m[4mmagic boat[0m)[0m
+[4mFrigid River[0m, in the [0m[4mmagic boat[0m
+You are on the Frigid River in the vicinity of the Dam. The river flows quietly here. There is a landing on the west shore.[0m
+> GO EAST
+Game: The White Cliffs prevent your landing here.[0m
+> GO EAST
+Game: The White Cliffs prevent your landing here.[0m
+> GO SOUTH
+Game: Read the label for the boat's instructions.[0m
+The flow of the river carries you downstream.[0m
+
+[4mFrigid River[0m, in the [0m[4mmagic boat[0m
+The river turns a corner here making it impossible to see the Dam. The White Cliffs loom on the east bank and large rocks prevent landing on the west.[0m
+> GO SOUTH
+Game: Read the label for the boat's instructions.[0m
+> GO SOUTH
+Game: Read the label for the boat's instructions.[0m
+> SOUTH
+Game: Read the label for the boat's instructions.[0m
+> GO DOWNSTREAM
+Game: I don't know the word "downstream".[0m
+> WAIT
+Game: Time passes...[0m
+The flow of the river carries you downstream.[0m
+
+[4mFrigid River[0m, in the [0m[4mmagic boat[0m
+The river descends here into a valley. There is a narrow beach on the west shore below the cliffs. In the distance a faint rumbling can be heard.[0m
+> LAND WEST
+Game: You used the word "land" in a way that I don't understand.[0m
+> GO WEST
+Game: The [0m[4mmagic boat[0m comes to a rest on the shore.[0m
+
+[4mWhite Cliffs Beach[0m, in the [0m[4mmagic boat[0m
+You are on a narrow strip of beach which runs along the base of the White Cliffs. There is a narrow path heading south along the Cliffs and a tight passage leading west into the cliffs themselves.[0m
+> GO WEST
+Game: The path is too narrow.[0m
+> LAND
+Game: You can't go that way.[0m
+> GET OUT OF BOAT
+Game: You are on your own feet again.[0m
+> GO WEST
+Game: [1mDamp Cave[0m
+> GO SOUTH
+Game: It is too narrow for most insects.[0m
+> GO EAST
+Game: [1mWhite Cliffs Beach[0m
+There is a [0m[4mmagic boat[0m here.[0m
+> GO SOUTH
+Game: [1mWhite Cliffs Beach[0m
+You are on a rocky, narrow strip of beach beside the Cliffs. A narrow path leads north along the shore.[0m
+> BOARD BOAT
+Game: You can't see any boat here![0m
+> GO NORTH
+Game: [1mWhite Cliffs Beach[0m
+There is a [0m[4mmagic boat[0m here.[0m
+> BOARD BOAT
+Game: You are now in the [0m[4mmagic boat[0m.[0m
+> LAUNCH
+Game: ([0m[4mmagic boat[0m)[0m
+[4mFrigid River[0m, in the [0m[4mmagic boat[0m
+> WAIT
+Game: Time passes...[0m
+The flow of the river carries you downstream.[0m
+
+[4mFrigid River[0m, in the [0m[4mmagic boat[0m
+The river is running faster here and the sound ahead appears to be that of rushing water. On the east shore is a sandy beach. A small area of beach can also be seen below the cliffs on the west shore.[0m
+There is a red buoy here (probably a warning).[0m
+> GO EAST
+Game: The [0m[4mmagic boat[0m comes to a rest on the shore.[0m
+
+[4mSandy Beach[0m, in the [0m[4mmagic boat[0m
+You are on a large sandy beach on the east shore of the river, which is flowing quickly by. A path runs beside the river to the south here, and a passage is partially buried in sand to the northeast.[0m
+There is a [0m[4mshovel[0m here. (outside the [0m[4mmagic boat[0m)[0m
+> GET OUT OF BOAT
+Game: You are on your own feet again.[0m
+> TAKE SHOVEL
+Game: Taken.[0m
+> GO NORTHEAST
+Game: [1mSandy Cave[0m
+This is a sand-filled cave whose exit is to the southwest.[0m
+> LOOK
+Game: [1mSandy Cave[0m
+This is a sand-filled cave whose exit is to the southwest.[0m
+> DIG WITH SHOVEL
+Game: That sentence isn't one I recognize.[0m
+> DIG SAND
+Game: What do you want to dig the sand with?[0m
+> DIG SAND WITH SHOVEL
+Game: You seem to be digging a hole here.[0m
+> DIG HOLE
+Game: I don't know the word "hole".[0m
+> DIG SAND WITH SHOVEL
+Game: The hole is getting deeper, but that's about it.[0m
+> DIG SAND WITH SHOVEL
+Game: You are surrounded by a wall of sand on all sides.[0m
+> GO SOUTHWEST
+Game: [1mSandy Beach[0m
+There is a [0m[4mmagic boat[0m here.[0m
+> GO SOUTH
+Game: [1mShore[0m
+You are on the east shore of the river. The water here seems somewhat treacherous. A path travels from north to south here, the south end quickly turning around a sharp corner.[0m
+> GO SOUTH
+Game: [1mAragain Falls[0m
+You are at the top of Aragain Falls, an enormous waterfall with a drop of about 450 feet. The only path here is on the north end.[0m
+A beautiful rainbow can be seen over the falls and to the west.[0m
+> GO WEST
+Game: You can't go that way.[0m
+> FOLLOW RAINBOW
+Game: You're nuts![0m
+> GO OVER RAINBOW
+Game: That would be a good trick.[0m
+> EXAMINE RAINBOW
+Game: There's nothing special about the [0m[4mrainbow[0m.[0m
+> CLIMB RAINBOW
+Game: You can't go that way.[0m
+> WALK RAINBOW
+Game: You should supply a direction![0m
+> CROSS RAINBOW
+Game: Can you walk on water vapor?[0m
+> GO NORTH
+Game: [1mShore[0m
+> GO NORTH
+Game: [1mSandy Beach[0m
+There is a [0m[4mmagic boat[0m here.[0m
+> GO NORTHEAST
+Game: [1mSandy Cave[0m
+> GO DOWN
+Game: You can't go that way.[0m
+> GO SOUTHWEST
+Game: [1mSandy Beach[0m
+There is a [0m[4mmagic boat[0m here.[0m
+> BOARD BOAT
+Game: You are now in the [0m[4mmagic boat[0m.[0m
+> LAUNCH
+Game: ([0m[4mmagic boat[0m)[0m
+[4mFrigid River[0m, in the [0m[4mmagic boat[0m
+There is a red buoy here (probably a warning).[0m
+> GO NORTH
+Game: Read the label for the boat's instructions.[0m
+The flow of the river carries you downstream.[0m
+
+[4mFrigid River[0m, in the [0m[4mmagic boat[0m
+The sound of rushing water is nearly unbearable here. On the east shore is a large landing area.[0m
+> GO EAST
+Game: The [0m[4mmagic boat[0m comes to a rest on the shore.[0m
+
+[4mShore[0m, in the [0m[4mmagic boat[0m
+> GET OUT OF BOAT
+Game: You are on your own feet again.[0m
+> LOOK
+Game: [1mShore[0m
+You are on the east shore of the river. The water here seems somewhat treacherous. A path travels from north to south here, the south end quickly turning around a sharp corner.[0m
+There is a [0m[4mmagic boat[0m here.[0m
+> GO NORTH
+Game: [1mSandy Beach[0m
+> DIG SAND WITH SHOVEL
+Game: The ground is too hard for digging here.[0m
+> LOOK
+Game: [1mSandy Beach[0m
+You are on a large sandy beach on the east shore of the river, which is flowing quickly by. A path runs beside the river to the south here, and a passage is partially buried in sand to the northeast.[0m
+> GO NORTHEAST
+Game: [1mSandy Cave[0m
+> GO SOUTHWEST
+Game: [1mSandy Beach[0m
+> GO SOUTH
+Game: [1mShore[0m
+There is a [0m[4mmagic boat[0m here.[0m
+> GO SOUTH
+Game: [1mAragain Falls[0m
+> JUMP
+Game: This was not a very safe place to try jumping.[0m
+You should have looked before you leaped.[0m
+ [0m
+   ****  You have died  **** [0m
+
+Now, let's take a look here... Well, you probably deserve another chance. I can't quite fix you up completely, but you can't have everything.[0m
+
+[1mForest[0m
+[score: 44, moves: 253]
+> GO EAST
+Game: [1mForest Path[0m
+> GO SOUTH
+Game: [1mNorth of House[0m
+> GO WEST
+Game: [1mWest of House[0m
+There is a [0m[4mwrench[0m here.[0m
+There is a [0m[4mrope[0m here.[0m
+There is a [0m[4msmall mailbox[0m here.[0m
+> GO SOUTH
+Game: [1mSouth of House[0m
+> GO EAST
+Game: [1mBehind House[0m
+> ENTER WINDOW
+Game: [1mKitchen[0m
+> GO WEST
+Game: [1mLiving Room[0m
+There is a brass lantern (battery-powered) here.[0m
+> TAKE LANTERN
+Game: Taken.[0m
+> MOVE RUG
+Game: Having moved the carpet previously, you find it impossible to move it again.[0m
+> OPEN TRAPDOOR
+Game: The door reluctantly opens to reveal a rickety staircase descending into darkness.[0m
+> GO DOWN
+Game: The trap door crashes shut, and you hear someone barring it.[0m
+
+[1mCellar[0m
+> GO SOUTH
+Game: [1mEast of Chasm[0m
+> GO EAST
+Game: [1mGallery[0m
+> GO NORTH
+Game: [1mStudio[0m
+There is a [0m[4mglass bottle[0m here.[0m
+The [0m[4mglass bottle[0m contains:[0m
+  A [0m[4mquantity of water[0m
+There is a [0m[4mZORK owner's manual[0m here.[0m
+There is a [0m[4mbrown sack[0m here.[0m
+> GO SOUTH
+Game: [1mGallery[0m
+> GO WEST
+Game: [1mEast of Chasm[0m
+> GO NORTH
+Game: [1mCellar[0m
+> GO NORTH
+Game: [1mThe Troll Room[0m
+There is a [0m[4mbloody axe[0m here.[0m
+> GO EAST
+Game: [1mEast-West Passage[0m
+> GO NORTH
+Game: [1mChasm[0m
+> GO NORTHEAST
+Game: [1mReservoir South[0m
+There is a [0m[4mscrewdriver[0m here.[0m
+> GO NORTH
+Game: [1mReservoir[0m
+There is an object which looks like a tube of toothpaste here.[0m
+The [0m[4mtube[0m contains:[0m
+  A [0m[4mviscous material[0m
+> GO NORTH
+Game: [1mReservoir North[0m
+> TAKE PUMP
+Game: You can't see any pump here![0m
+> INVENTORY
+Game: You are carrying:[0m
+  A [0m[4mbrass lantern[0m (providing light)[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> Y
+Game: There was no verb in that sentence![0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> YES
+Game: There was no verb in that sentence![0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART GAME
+Game: I don't know the word "game".[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> AFFIRM
+Game: I don't know the word "affirm".[0m
+> Y
+Game: There was no verb in that sentence![0m
+> TYPE Y
+Game: I don't know the word "type".[0m
+> CHOOSE YES
+Game: I don't know the word "choose".[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> Y.
+Game: There was no verb in that sentence![0m
+> RESTART.
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART Y
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> Y
+Game: There was no verb in that sentence![0m
+> BEGIN AGAIN
+Game: I don't know the word "begin".[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESPOND Y
+Game: I don't know the word "respond".[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> Y IS AFFIRMATIVE
+Game: I don't know the word "affirmative".[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> CONFIRM RESTART
+Game: I don't know the word "confirm".[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> Y
+Game: There was no verb in that sentence![0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> Y
+Game: There was no verb in that sentence![0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART NOW
+Game: I don't know the word "now".[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 278 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> ANSWER Y
+Game: Nobody seems to be awaiting your answer.[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 279 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 279 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> Y
+Game: There was no verb in that sentence![0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 279 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 279 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 279 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 279 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 279 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> Y
+Game: There was no verb in that sentence![0m
+> SAY YES
+Game: Say what?[0m
+> SAY Y
+Game: Say what?[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 281 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 281 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 281 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> Y
+Game: There was no verb in that sentence![0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 281 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 281 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 281 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> Y
+Game: There was no verb in that sentence![0m
+> LEAVE GAME
+Game: I don't know the word "game".[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 281 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 281 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 281 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 281 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> LEAVE
+Game: You can't go that way.[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> Y
+Game: There was no verb in that sentence![0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> Y
+Game: There was no verb in that sentence![0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART YES
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> START OVER
+Game: I don't know the word "start".[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> Y
+Game: There was no verb in that sentence![0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> ACCEPT RESTART
+Game: I don't know the word "accept".[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> NO
+Game: There was no verb in that sentence![0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> RESTART
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to restart? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> Y
+Game: There was no verb in that sentence![0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> YES
+Game: There was no verb in that sentence![0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> Y
+Game: There was no verb in that sentence![0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 282 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> EXIT
+Game: You can't go that way.[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+> QUIT
+Game: Your score is 44 (total of 350 points), in 283 moves.[0m
+This gives you the rank of Amateur Adventurer.[0m
+Do you wish to leave the game? (Y is affirmative): >[0m
+Model-turn budget of 600 reached, ending run.
+=== Run stats ===
+wall: 4690s | model turns: 600 (latency p50 7.8s, p95 10.9s) | commands: 599
+parser rejections: 38 | world refusals: 16 | darkness warnings: 0 | deaths: 2 | restarts: 0
+score: 44 (max 54) in 283 moves | longest scoreless stretch: 338 commands
+tokens in: 21578638 uncached + 21108736 cache reads + 0 cache writes (49% cached) | tokens out: 24036 (17648 thinking)

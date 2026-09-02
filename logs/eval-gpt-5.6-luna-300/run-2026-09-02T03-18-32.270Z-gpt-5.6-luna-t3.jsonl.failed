@@ -1,0 +1,406 @@
+{"t":1788319112289,"type":"run_start","provider":"codex-cli","model":"gpt-5.6-luna","tag":"gpt-5.6-luna-t3","seed":3,"moveBudget":300,"modelTurnBudget":600,"harnessCommit":"d8ba929"}
+{"t":1788319117982,"type":"model_turn","turn":1,"latencyMs":5691,"commands":["OPEN MAILBOX"],"commentary":""}
+{"t":1788319117984,"type":"command","turn":1,"command":"OPEN MAILBOX","response":"Opening the small mailbox reveals a leaflet.","parserRejection":false,"worldRefusal":false}
+{"t":1788319122794,"type":"model_turn","turn":2,"latencyMs":4810,"commands":["TAKE LEAFLET"],"commentary":""}
+{"t":1788319122795,"type":"command","turn":2,"command":"TAKE LEAFLET","response":"Taken.","parserRejection":false,"worldRefusal":false}
+{"t":1788319122796,"type":"score","score":0,"moves":2,"commands":2}
+{"t":1788319127342,"type":"model_turn","turn":3,"latencyMs":4546,"commands":["READ LEAFLET"],"commentary":""}
+{"t":1788319127344,"type":"command","turn":3,"command":"READ LEAFLET","response":"\"WELCOME TO ZORK!\n\nZORK is a game of adventure, danger, and low cunning. In it you will explore some of the most amazing territory ever seen by mortals. No computer should be without one!\"","parserRejection":false,"worldRefusal":false}
+{"t":1788319132977,"type":"model_turn","turn":4,"latencyMs":5633,"commands":["GO NORTH"],"commentary":""}
+{"t":1788319132978,"type":"command","turn":4,"command":"GO NORTH","response":"North of House\nYou are facing the north side of a white house. There is no door here, and all the windows are boarded up. To the north a narrow path winds through the trees.","parserRejection":false,"worldRefusal":false}
+{"t":1788319138906,"type":"model_turn","turn":5,"latencyMs":5927,"commands":["GO EAST"],"commentary":""}
+{"t":1788319138908,"type":"command","turn":5,"command":"GO EAST","response":"Behind House\nYou are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is slightly ajar.","parserRejection":false,"worldRefusal":false}
+{"t":1788319143662,"type":"model_turn","turn":6,"latencyMs":4754,"commands":["OPEN WINDOW"],"commentary":""}
+{"t":1788319143663,"type":"command","turn":6,"command":"OPEN WINDOW","response":"With great effort, you open the window far enough to allow entry.","parserRejection":false,"worldRefusal":false}
+{"t":1788319147814,"type":"model_turn","turn":7,"latencyMs":4151,"commands":["ENTER WINDOW"],"commentary":""}
+{"t":1788319147814,"type":"command","turn":7,"command":"ENTER WINDOW","response":"Kitchen\nYou are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open.\nOn the table is an elongated brown sack, smelling of hot peppers.\nA bottle is sitting on the table.\nThe glass bottle contains:\n  A quantity of water","parserRejection":false,"worldRefusal":false}
+{"t":1788319147815,"type":"score","score":10,"moves":7,"commands":7}
+{"t":1788319152703,"type":"model_turn","turn":8,"latencyMs":4888,"commands":["TAKE SACK"],"commentary":""}
+{"t":1788319152705,"type":"command","turn":8,"command":"TAKE SACK","response":"Taken.","parserRejection":false,"worldRefusal":false}
+{"t":1788319157590,"type":"model_turn","turn":9,"latencyMs":4885,"commands":["TAKE BOTTLE"],"commentary":""}
+{"t":1788319157593,"type":"command","turn":9,"command":"TAKE BOTTLE","response":"Taken.","parserRejection":false,"worldRefusal":false}
+{"t":1788319162471,"type":"model_turn","turn":10,"latencyMs":4877,"commands":["GO WEST"],"commentary":""}
+{"t":1788319162471,"type":"command","turn":10,"command":"GO WEST","response":"Living Room\nYou are in the living room. There is a doorway to the east, a wooden door with strange gothic lettering to the west, which appears to be nailed shut, a trophy case, and a large oriental rug in the center of the room.\nAbove the trophy case hangs an elvish sword of great antiquity.\nA battery-powered brass lantern is on the trophy case.","parserRejection":false,"worldRefusal":false}
+{"t":1788319167519,"type":"model_turn","turn":11,"latencyMs":5047,"commands":["TAKE SWORD"],"commentary":""}
+{"t":1788319167520,"type":"command","turn":11,"command":"TAKE SWORD","response":"Taken.","parserRejection":false,"worldRefusal":false}
+{"t":1788319172373,"type":"model_turn","turn":12,"latencyMs":4853,"commands":["TAKE LANTERN"],"commentary":""}
+{"t":1788319172374,"type":"command","turn":12,"command":"TAKE LANTERN","response":"Taken.","parserRejection":false,"worldRefusal":false}
+{"t":1788319176676,"type":"model_turn","turn":13,"latencyMs":4302,"commands":["MOVE RUG"],"commentary":""}
+{"t":1788319176677,"type":"command","turn":13,"command":"MOVE RUG","response":"With a great effort, the rug is moved to one side of the room, revealing the dusty cover of a closed trap door.","parserRejection":false,"worldRefusal":false}
+{"t":1788319181119,"type":"model_turn","turn":14,"latencyMs":4442,"commands":["OPEN TRAPDOOR"],"commentary":""}
+{"t":1788319181120,"type":"command","turn":14,"command":"OPEN TRAPDOOR","response":"The door reluctantly opens to reveal a rickety staircase descending into darkness.","parserRejection":false,"worldRefusal":false}
+{"t":1788319185629,"type":"model_turn","turn":15,"latencyMs":4509,"commands":["LIGHT LANTERN"],"commentary":""}
+{"t":1788319185629,"type":"command","turn":15,"command":"LIGHT LANTERN","response":"The brass lantern is now on.","parserRejection":false,"worldRefusal":false}
+{"t":1788319190380,"type":"model_turn","turn":16,"latencyMs":4750,"commands":["GO DOWN"],"commentary":""}
+{"t":1788319190381,"type":"command","turn":16,"command":"GO DOWN","response":"The trap door crashes shut, and you hear someone barring it.\n\nCellar\nYou are in a dark and damp cellar with a narrow passageway leading north, and a crawlway to the south. On the west is the bottom of a steep metal ramp which is unclimbable.\nYour sword is glowing with a faint blue glow.","parserRejection":false,"worldRefusal":false}
+{"t":1788319190381,"type":"score","score":35,"moves":16,"commands":16}
+{"t":1788319195048,"type":"model_turn","turn":17,"latencyMs":4667,"commands":["GO NORTH"],"commentary":""}
+{"t":1788319195048,"type":"command","turn":17,"command":"GO NORTH","response":"The Troll Room\nThis is a small room with passages to the east and south and a forbidding hole leading west. Bloodstains and deep scratches (perhaps made by an axe) mar the walls.\nA nasty-looking troll, brandishing a bloody axe, blocks all passages out of the room.\nYour sword has begun to glow very brightly.","parserRejection":false,"worldRefusal":false}
+{"t":1788319200116,"type":"model_turn","turn":18,"latencyMs":5068,"commands":["KILL TROLL"],"commentary":""}
+{"t":1788319200117,"type":"command","turn":18,"command":"KILL TROLL","response":"(with the sword)\nYou charge, but the troll jumps nimbly aside.\nThe troll swings his axe, but it misses.","parserRejection":false,"worldRefusal":false}
+{"t":1788319205584,"type":"model_turn","turn":19,"latencyMs":5466,"commands":["KILL TROLL WITH SWORD"],"commentary":""}
+{"t":1788319205585,"type":"command","turn":19,"command":"KILL TROLL WITH SWORD","response":"It's curtains for the troll as your sword removes his head.\nAlmost as soon as the troll breathes his last breath, a cloud of sinister black fog envelops him, and when the fog lifts, the carcass has disappeared.\nYour sword is no longer glowing.","parserRejection":false,"worldRefusal":false}
+{"t":1788319211757,"type":"model_turn","turn":20,"latencyMs":6171,"commands":["GO EAST"],"commentary":""}
+{"t":1788319211758,"type":"command","turn":20,"command":"GO EAST","response":"East-West Passage\nThis is a narrow east-west passageway. There is a narrow stairway leading down at the north end of the room.","parserRejection":false,"worldRefusal":false}
+{"t":1788319211758,"type":"score","score":40,"moves":20,"commands":20}
+{"t":1788319217215,"type":"model_turn","turn":21,"latencyMs":5457,"commands":["GO NORTH"],"commentary":""}
+{"t":1788319217216,"type":"command","turn":21,"command":"GO NORTH","response":"Chasm\nA chasm runs southwest to northeast and the path follows it. You are on the south side of the chasm, where a crack opens into a passage.","parserRejection":false,"worldRefusal":false}
+{"t":1788319221835,"type":"model_turn","turn":22,"latencyMs":4619,"commands":["LOOK"],"commentary":""}
+{"t":1788319221835,"type":"command","turn":22,"command":"LOOK","response":"Chasm\nA chasm runs southwest to northeast and the path follows it. You are on the south side of the chasm, where a crack opens into a passage.","parserRejection":false,"worldRefusal":false}
+{"t":1788319227397,"type":"model_turn","turn":23,"latencyMs":5561,"commands":["GO NORTHEAST"],"commentary":""}
+{"t":1788319227398,"type":"command","turn":23,"command":"GO NORTHEAST","response":"Reservoir South\nYou are in a long room on the south shore of a large lake, far too deep and wide for crossing.\nThere is a path along the stream to the east or west, a steep pathway climbing southwest along the edge of a chasm, and a path leading into a canyon to the southeast.","parserRejection":false,"worldRefusal":false}
+{"t":1788319232670,"type":"model_turn","turn":24,"latencyMs":5272,"commands":["GO EAST"],"commentary":""}
+{"t":1788319232671,"type":"command","turn":24,"command":"GO EAST","response":"Dam\nYou are standing on the top of the Flood Control Dam #3, which was quite a tourist attraction in times far distant. There are paths to the north, south, and west, and a scramble down.\nThe sluice gates on the dam are closed. Behind the dam, there can be seen a wide reservoir. Water is pouring over the top of the now abandoned dam.\nThere is a control panel here, on which a large metal bolt is mounted. Directly above the bolt is a small green plastic bubble.","parserRejection":false,"worldRefusal":false}
+{"t":1788319237093,"type":"model_turn","turn":25,"latencyMs":4422,"commands":["TURN BOLT"],"commentary":""}
+{"t":1788319237094,"type":"command","turn":25,"command":"TURN BOLT","response":"What do you want to turn the bolt with?","parserRejection":false,"worldRefusal":false}
+{"t":1788319242222,"type":"model_turn","turn":26,"latencyMs":5127,"commands":["GO SOUTH"],"commentary":""}
+{"t":1788319242223,"type":"command","turn":26,"command":"GO SOUTH","response":"Deep Canyon\nYou are on the south edge of a deep canyon. Passages lead off to the east, northwest and southwest. A stairway leads down. You can hear the sound of flowing water from below.","parserRejection":false,"worldRefusal":false}
+{"t":1788319246838,"type":"model_turn","turn":27,"latencyMs":4615,"commands":["GO DOWN"],"commentary":""}
+{"t":1788319246838,"type":"command","turn":27,"command":"GO DOWN","response":"Loud Room\nThis is a large room with a ceiling which cannot be detected from the ground. There is a narrow passage from east to west and a stone stairway leading upward. The room is deafeningly loud with an undetermined rushing sound. The sound seems to reverberate from all of the walls, making it difficult even to think.\nOn the ground is a large platinum bar.","parserRejection":false,"worldRefusal":false}
+{"t":1788319251334,"type":"model_turn","turn":28,"latencyMs":4496,"commands":["TAKE PLATINUM"],"commentary":""}
+{"t":1788319251335,"type":"command","turn":28,"command":"TAKE PLATINUM","response":"platinum platinum ...","parserRejection":false,"worldRefusal":false}
+{"t":1788319256326,"type":"model_turn","turn":29,"latencyMs":4991,"commands":["TAKE BAR"],"commentary":""}
+{"t":1788319256327,"type":"command","turn":29,"command":"TAKE BAR","response":"bar bar ...","parserRejection":false,"worldRefusal":false}
+{"t":1788319261868,"type":"model_turn","turn":30,"latencyMs":5541,"commands":["GO WEST"],"commentary":""}
+{"t":1788319261869,"type":"command","turn":30,"command":"GO WEST","response":"Round Room\nThis is a circular stone room with passages in all directions. Several of them have unfortunately been blocked by cave-ins.","parserRejection":false,"worldRefusal":false}
+{"t":1788319267547,"type":"model_turn","turn":31,"latencyMs":5678,"commands":["GO NORTH"],"commentary":""}
+{"t":1788319267548,"type":"command","turn":31,"command":"GO NORTH","response":"North-South Passage\nThis is a high north-south passage, which forks to the northeast.","parserRejection":false,"worldRefusal":false}
+{"t":1788319272321,"type":"model_turn","turn":32,"latencyMs":4773,"commands":["GO NORTHEAST"],"commentary":""}
+{"t":1788319272321,"type":"command","turn":32,"command":"GO NORTHEAST","response":"Deep Canyon","parserRejection":false,"worldRefusal":false}
+{"t":1788319278451,"type":"model_turn","turn":33,"latencyMs":6129,"commands":["GO NORTHWEST"],"commentary":""}
+{"t":1788319278452,"type":"command","turn":33,"command":"GO NORTHWEST","response":"Reservoir South","parserRejection":false,"worldRefusal":false}
+{"t":1788319285147,"type":"model_turn","turn":34,"latencyMs":6695,"commands":["GO WEST"],"commentary":""}
+{"t":1788319285148,"type":"command","turn":34,"command":"GO WEST","response":"Stream View\nYou are standing on a path beside a gently flowing stream. The path follows the stream, which flows from west to east.","parserRejection":false,"worldRefusal":false}
+{"t":1788319289634,"type":"model_turn","turn":35,"latencyMs":4486,"commands":["GO WEST"],"commentary":""}
+{"t":1788319289634,"type":"command","turn":35,"command":"GO WEST","response":"The stream emerges from a spot too small for you to enter.","parserRejection":false,"worldRefusal":false}
+{"t":1788319296478,"type":"model_turn","turn":36,"latencyMs":6843,"commands":["GO EAST"],"commentary":""}
+{"t":1788319296478,"type":"command","turn":36,"command":"GO EAST","response":"Reservoir South","parserRejection":false,"worldRefusal":false}
+{"t":1788319301426,"type":"model_turn","turn":37,"latencyMs":4947,"commands":["GO EAST"],"commentary":""}
+{"t":1788319301426,"type":"command","turn":37,"command":"GO EAST","response":"Dam","parserRejection":false,"worldRefusal":false}
+{"t":1788319306741,"type":"model_turn","turn":38,"latencyMs":5315,"commands":["GO NORTH"],"commentary":""}
+{"t":1788319306741,"type":"command","turn":38,"command":"GO NORTH","response":"Dam Lobby\nThis room appears to have been the waiting room for groups touring the dam. There are open doorways here to the north and east marked \"Private\", and there is a path leading south over the top of the dam.\nSome guidebooks entitled \"Flood Control Dam #3\" are on the reception desk.\nThere is a matchbook whose cover says \"Visit Beautiful FCD#3\" here.","parserRejection":false,"worldRefusal":false}
+{"t":1788319311790,"type":"model_turn","turn":39,"latencyMs":5048,"commands":["TAKE MATCHBOOK"],"commentary":""}
+{"t":1788319311791,"type":"command","turn":39,"command":"TAKE MATCHBOOK","response":"Taken.","parserRejection":false,"worldRefusal":false}
+{"t":1788319316531,"type":"model_turn","turn":40,"latencyMs":4740,"commands":["GO EAST"],"commentary":""}
+{"t":1788319316532,"type":"command","turn":40,"command":"GO EAST","response":"Maintenance Room\nThis is what appears to have been the maintenance room for Flood Control Dam #3. Apparently, this room has been ransacked recently, for most of the valuable equipment is gone. On the wall in front of you is a group of buttons colored blue, yellow, brown, and red. There are doorways to the west and south.\nThere is a group of tool chests here.\nThere is a wrench here.\nThere is an object which looks like a tube of toothpaste here.\nThere is a screwdriver here.","parserRejection":false,"worldRefusal":false}
+{"t":1788319321688,"type":"model_turn","turn":41,"latencyMs":5155,"commands":["TAKE WRENCH"],"commentary":""}
+{"t":1788319321689,"type":"command","turn":41,"command":"TAKE WRENCH","response":"Taken.","parserRejection":false,"worldRefusal":false}
+{"t":1788319328668,"type":"model_turn","turn":42,"latencyMs":6979,"commands":["GO WEST"],"commentary":""}
+{"t":1788319328669,"type":"command","turn":42,"command":"GO WEST","response":"Dam Lobby\nSome guidebooks entitled \"Flood Control Dam #3\" are on the reception desk.","parserRejection":false,"worldRefusal":false}
+{"t":1788319334308,"type":"model_turn","turn":43,"latencyMs":5639,"commands":["GO SOUTH"],"commentary":""}
+{"t":1788319334308,"type":"command","turn":43,"command":"GO SOUTH","response":"Dam","parserRejection":false,"worldRefusal":false}
+{"t":1788319339064,"type":"model_turn","turn":44,"latencyMs":4756,"commands":["TURN BOLT WITH WRENCH"],"commentary":""}
+{"t":1788319339066,"type":"command","turn":44,"command":"TURN BOLT WITH WRENCH","response":"The bolt won't turn with your best effort.","parserRejection":false,"worldRefusal":false}
+{"t":1788319344279,"type":"model_turn","turn":45,"latencyMs":5213,"commands":["EXAMINE PANEL"],"commentary":""}
+{"t":1788319344280,"type":"command","turn":45,"command":"EXAMINE PANEL","response":"There's nothing special about the control panel.","parserRejection":false,"worldRefusal":false}
+{"t":1788319349470,"type":"model_turn","turn":46,"latencyMs":5189,"commands":["LOOSEN BOLT WITH WRENCH"],"commentary":""}
+{"t":1788319349470,"type":"command","turn":46,"command":"LOOSEN BOLT WITH WRENCH","response":"I don't know the word \"loosen\".","parserRejection":true,"worldRefusal":false}
+{"t":1788319357740,"type":"model_turn","turn":47,"latencyMs":8269,"commands":["PUSH BLUE BUTTON"],"commentary":""}
+{"t":1788319357740,"type":"command","turn":47,"command":"PUSH BLUE BUTTON","response":"You can't see any blue button here!","parserRejection":false,"worldRefusal":true}
+{"t":1788319363191,"type":"model_turn","turn":48,"latencyMs":5450,"commands":["GO NORTH"],"commentary":""}
+{"t":1788319363192,"type":"command","turn":48,"command":"GO NORTH","response":"Dam Lobby\nSome guidebooks entitled \"Flood Control Dam #3\" are on the reception desk.","parserRejection":false,"worldRefusal":false}
+{"t":1788319368810,"type":"model_turn","turn":49,"latencyMs":5618,"commands":["GO EAST"],"commentary":""}
+{"t":1788319368811,"type":"command","turn":49,"command":"GO EAST","response":"Maintenance Room\nThere is a group of tool chests here.\nThere is an object which looks like a tube of toothpaste here.\nThere is a screwdriver here.","parserRejection":false,"worldRefusal":false}
+{"t":1788319373994,"type":"model_turn","turn":50,"latencyMs":5182,"commands":["EXAMINE BUTTONS"],"commentary":""}
+{"t":1788319373995,"type":"command","turn":50,"command":"EXAMINE BUTTONS","response":"Which buttons do you mean, the blue button, the red button, the brown button, or the yellow button?","parserRejection":false,"worldRefusal":true}
+{"t":1788319378932,"type":"model_turn","turn":51,"latencyMs":4937,"commands":["PUSH BLUE BUTTON"],"commentary":""}
+{"t":1788319378934,"type":"command","turn":51,"command":"PUSH BLUE BUTTON","response":"There is a rumbling sound and a stream of water appears to burst from the east wall of the room (apparently, a leak has occurred in a pipe).\nThe water level here is now up to your ankles.","parserRejection":false,"worldRefusal":false}
+{"t":1788319389144,"type":"model_turn","turn":52,"latencyMs":10210,"commands":["PUSH BLUE BUTTON"],"commentary":""}
+{"t":1788319389145,"type":"command","turn":52,"command":"PUSH BLUE BUTTON","response":"The blue button appears to be jammed.\nThe water level here is now up to your shin.","parserRejection":false,"worldRefusal":false}
+{"t":1788319395249,"type":"model_turn","turn":53,"latencyMs":6103,"commands":["GO WEST"],"commentary":""}
+{"t":1788319395250,"type":"command","turn":53,"command":"GO WEST","response":"Dam Lobby\nSome guidebooks entitled \"Flood Control Dam #3\" are on the reception desk.","parserRejection":false,"worldRefusal":false}
+{"t":1788319400514,"type":"model_turn","turn":54,"latencyMs":5264,"commands":["GO SOUTH"],"commentary":""}
+{"t":1788319400515,"type":"command","turn":54,"command":"GO SOUTH","response":"Dam","parserRejection":false,"worldRefusal":false}
+{"t":1788319405306,"type":"model_turn","turn":55,"latencyMs":4791,"commands":["TURN BOLT WITH WRENCH"],"commentary":""}
+{"t":1788319405307,"type":"command","turn":55,"command":"TURN BOLT WITH WRENCH","response":"The bolt won't turn with your best effort.","parserRejection":false,"worldRefusal":false}
+{"t":1788319411646,"type":"model_turn","turn":56,"latencyMs":6339,"commands":["GO NORTH"],"commentary":""}
+{"t":1788319411647,"type":"command","turn":56,"command":"GO NORTH","response":"Dam Lobby\nSome guidebooks entitled \"Flood Control Dam #3\" are on the reception desk.","parserRejection":false,"worldRefusal":false}
+{"t":1788319416858,"type":"model_turn","turn":57,"latencyMs":5211,"commands":["GO EAST"],"commentary":""}
+{"t":1788319416859,"type":"command","turn":57,"command":"GO EAST","response":"Maintenance Room\nThere is a group of tool chests here.\nThere is an object which looks like a tube of toothpaste here.\nThere is a screwdriver here.\nThe water level here is now up to your hips.","parserRejection":false,"worldRefusal":false}
+{"t":1788319421906,"type":"model_turn","turn":58,"latencyMs":5047,"commands":["TAKE TOOTHPASTE"],"commentary":""}
+{"t":1788319421906,"type":"command","turn":58,"command":"TAKE TOOTHPASTE","response":"I don't know the word \"toothpaste\".","parserRejection":true,"worldRefusal":false}
+{"t":1788319426712,"type":"model_turn","turn":59,"latencyMs":4805,"commands":["TAKE TUBE"],"commentary":""}
+{"t":1788319426713,"type":"command","turn":59,"command":"TAKE TUBE","response":"Taken.\nThe water level here is now up to your waist.","parserRejection":false,"worldRefusal":false}
+{"t":1788319431921,"type":"model_turn","turn":60,"latencyMs":5207,"commands":["GO WEST"],"commentary":""}
+{"t":1788319431922,"type":"command","turn":60,"command":"GO WEST","response":"Dam Lobby\nSome guidebooks entitled \"Flood Control Dam #3\" are on the reception desk.","parserRejection":false,"worldRefusal":false}
+{"t":1788319436815,"type":"model_turn","turn":61,"latencyMs":4893,"commands":["GO SOUTH"],"commentary":""}
+{"t":1788319436817,"type":"command","turn":61,"command":"GO SOUTH","response":"Dam","parserRejection":false,"worldRefusal":false}
+{"t":1788319443400,"type":"model_turn","turn":62,"latencyMs":6583,"commands":["PUT TUBE ON BOLT"],"commentary":""}
+{"t":1788319443401,"type":"command","turn":62,"command":"PUT TUBE ON BOLT","response":"There's no good surface on the bolt.","parserRejection":false,"worldRefusal":false}
+{"t":1788319452664,"type":"model_turn","turn":63,"latencyMs":9263,"commands":["TURN BOLT WITH SCREWDRIVER"],"commentary":""}
+{"t":1788319452665,"type":"command","turn":63,"command":"TURN BOLT WITH SCREWDRIVER","response":"You don't have that!","parserRejection":false,"worldRefusal":false}
+{"t":1788319458447,"type":"model_turn","turn":64,"latencyMs":5782,"commands":["GO NORTH"],"commentary":""}
+{"t":1788319458447,"type":"command","turn":64,"command":"GO NORTH","response":"Dam Lobby\nSome guidebooks entitled \"Flood Control Dam #3\" are on the reception desk.","parserRejection":false,"worldRefusal":false}
+{"t":1788319463103,"type":"model_turn","turn":65,"latencyMs":4656,"commands":["GO EAST"],"commentary":""}
+{"t":1788319463104,"type":"command","turn":65,"command":"GO EAST","response":"Maintenance Room\nThere is a group of tool chests here.\nThere is a screwdriver here.\nThe water level here is now up to your neck.\nI'm afraid you have done drowned yourself.\n \n   ****  You have died  **** \n\nNow, let's take a look here... Well, you probably deserve another chance. I can't quite fix you up completely, but you can't have everything.\n\nForest\nThis is a forest, with trees in all directions. To the east, there appears to be sunlight.","parserRejection":false,"worldRefusal":false}
+{"t":1788319463105,"type":"score","score":30,"moves":57,"commands":65}
+{"t":1788319469272,"type":"model_turn","turn":66,"latencyMs":6167,"commands":["INVENTORY"],"commentary":""}
+{"t":1788319469273,"type":"command","turn":66,"command":"INVENTORY","response":"You are empty-handed.","parserRejection":false,"worldRefusal":false}
+{"t":1788319474656,"type":"model_turn","turn":67,"latencyMs":5383,"commands":["GO EAST"],"commentary":""}
+{"t":1788319474656,"type":"command","turn":67,"command":"GO EAST","response":"Forest Path\nThis is a path winding through a dimly lit forest. The path heads north-south here. One particularly large tree with some low branches stands at the edge of the path.\nThere is a glass bottle here.\nThe glass bottle contains:\n  A quantity of water","parserRejection":false,"worldRefusal":false}
+{"t":1788319480666,"type":"model_turn","turn":68,"latencyMs":6009,"commands":["GO SOUTH"],"commentary":""}
+{"t":1788319480666,"type":"command","turn":68,"command":"GO SOUTH","response":"North of House\nThere is a sword here.","parserRejection":false,"worldRefusal":false}
+{"t":1788319486434,"type":"model_turn","turn":69,"latencyMs":5768,"commands":["TAKE SWORD"],"commentary":""}
+{"t":1788319486435,"type":"command","turn":69,"command":"TAKE SWORD","response":"Taken.","parserRejection":false,"worldRefusal":false}
+{"t":1788319493271,"type":"model_turn","turn":70,"latencyMs":6836,"commands":["GO SOUTH"],"commentary":""}
+{"t":1788319493272,"type":"command","turn":70,"command":"GO SOUTH","response":"The windows are all boarded.","parserRejection":false,"worldRefusal":false}
+{"t":1788319499922,"type":"model_turn","turn":71,"latencyMs":6650,"commands":["GO WEST"],"commentary":""}
+{"t":1788319499923,"type":"command","turn":71,"command":"GO WEST","response":"West of House\nA small leaflet is on the ground.\nThere is a small mailbox here.","parserRejection":false,"worldRefusal":false}
+{"t":1788319505256,"type":"model_turn","turn":72,"latencyMs":5333,"commands":["GO NORTH"],"commentary":""}
+{"t":1788319505257,"type":"command","turn":72,"command":"GO NORTH","response":"North of House","parserRejection":false,"worldRefusal":false}
+{"t":1788319511362,"type":"model_turn","turn":73,"latencyMs":6105,"commands":["GO EAST"],"commentary":""}
+{"t":1788319511363,"type":"command","turn":73,"command":"GO EAST","response":"Behind House\nThere is a matchbook whose cover says \"Visit Beautiful FCD#3\" here.","parserRejection":false,"worldRefusal":false}
+{"t":1788319516992,"type":"model_turn","turn":74,"latencyMs":5629,"commands":["TAKE MATCHBOOK"],"commentary":""}
+{"t":1788319516993,"type":"command","turn":74,"command":"TAKE MATCHBOOK","response":"Taken.","parserRejection":false,"worldRefusal":false}
+{"t":1788319522735,"type":"model_turn","turn":75,"latencyMs":5742,"commands":["OPEN WINDOW"],"commentary":""}
+{"t":1788319522736,"type":"command","turn":75,"command":"OPEN WINDOW","response":"Look around.","parserRejection":false,"worldRefusal":false}
+{"t":1788319529170,"type":"model_turn","turn":76,"latencyMs":6434,"commands":["ENTER WINDOW"],"commentary":""}
+{"t":1788319529171,"type":"command","turn":76,"command":"ENTER WINDOW","response":"Kitchen","parserRejection":false,"worldRefusal":false}
+{"t":1788319534771,"type":"model_turn","turn":77,"latencyMs":5600,"commands":["TAKE SACK"],"commentary":""}
+{"t":1788319534772,"type":"command","turn":77,"command":"TAKE SACK","response":"You can't see any sack here!","parserRejection":false,"worldRefusal":true}
+{"t":1788319539764,"type":"model_turn","turn":78,"latencyMs":4992,"commands":["LOOK"],"commentary":""}
+{"t":1788319539765,"type":"command","turn":78,"command":"LOOK","response":"Kitchen\nYou are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open.","parserRejection":false,"worldRefusal":false}
+{"t":1788319545277,"type":"model_turn","turn":79,"latencyMs":5512,"commands":["GO WEST"],"commentary":""}
+{"t":1788319545277,"type":"command","turn":79,"command":"GO WEST","response":"Living Room\nThere is a brass lantern (battery-powered) here.","parserRejection":false,"worldRefusal":false}
+{"t":1788319550820,"type":"model_turn","turn":80,"latencyMs":5542,"commands":["TAKE LANTERN"],"commentary":""}
+{"t":1788319550821,"type":"command","turn":80,"command":"TAKE LANTERN","response":"Taken.","parserRejection":false,"worldRefusal":false}
+{"t":1788319556987,"type":"model_turn","turn":81,"latencyMs":6166,"commands":["MOVE RUG"],"commentary":""}
+{"t":1788319556988,"type":"command","turn":81,"command":"MOVE RUG","response":"Having moved the carpet previously, you find it impossible to move it again.","parserRejection":false,"worldRefusal":false}
+{"t":1788319563880,"type":"model_turn","turn":82,"latencyMs":6891,"commands":["OPEN TRAPDOOR"],"commentary":""}
+{"t":1788319563881,"type":"command","turn":82,"command":"OPEN TRAPDOOR","response":"The door reluctantly opens to reveal a rickety staircase descending into darkness.","parserRejection":false,"worldRefusal":false}
+{"t":1788319569604,"type":"model_turn","turn":83,"latencyMs":5723,"commands":["LIGHT LANTERN"],"commentary":""}
+{"t":1788319569605,"type":"command","turn":83,"command":"LIGHT LANTERN","response":"It is already on.","parserRejection":false,"worldRefusal":false}
+{"t":1788319574530,"type":"model_turn","turn":84,"latencyMs":4925,"commands":["GO DOWN"],"commentary":""}
+{"t":1788319574530,"type":"command","turn":84,"command":"GO DOWN","response":"The trap door crashes shut, and you hear someone barring it.\n\nCellar","parserRejection":false,"worldRefusal":false}
+{"t":1788319579980,"type":"model_turn","turn":85,"latencyMs":5449,"commands":["GO NORTH"],"commentary":""}
+{"t":1788319579980,"type":"command","turn":85,"command":"GO NORTH","response":"The Troll Room\nThere is a bloody axe here.","parserRejection":false,"worldRefusal":false}
+{"t":1788319586663,"type":"model_turn","turn":86,"latencyMs":6682,"commands":["TAKE AXE"],"commentary":""}
+{"t":1788319586663,"type":"command","turn":86,"command":"TAKE AXE","response":"Taken.","parserRejection":false,"worldRefusal":false}
+{"t":1788319591906,"type":"model_turn","turn":87,"latencyMs":5242,"commands":["GO EAST"],"commentary":""}
+{"t":1788319591907,"type":"command","turn":87,"command":"GO EAST","response":"East-West Passage","parserRejection":false,"worldRefusal":false}
+{"t":1788319597912,"type":"model_turn","turn":88,"latencyMs":6005,"commands":["GO NORTH"],"commentary":"、】【assistant  unerquicklich? \nWe need continue but one command. Need get through."}
+{"t":1788319597913,"type":"command","turn":88,"command":"GO NORTH","response":"Chasm","parserRejection":false,"worldRefusal":false}
+{"t":1788319603715,"type":"model_turn","turn":89,"latencyMs":5802,"commands":["GO NORTHEAST"],"commentary":""}
+{"t":1788319603717,"type":"command","turn":89,"command":"GO NORTHEAST","response":"Reservoir South","parserRejection":false,"worldRefusal":false}
+{"t":1788319608974,"type":"model_turn","turn":90,"latencyMs":5257,"commands":["GO EAST"],"commentary":""}
+{"t":1788319608975,"type":"command","turn":90,"command":"GO EAST","response":"Dam","parserRejection":false,"worldRefusal":false}
+{"t":1788319615214,"type":"model_turn","turn":91,"latencyMs":6238,"commands":["GO NORTH"],"commentary":""}
+{"t":1788319615215,"type":"command","turn":91,"command":"GO NORTH","response":"Dam Lobby\nSome guidebooks entitled \"Flood Control Dam #3\" are on the reception desk.","parserRejection":false,"worldRefusal":false}
+{"t":1788319621719,"type":"model_turn","turn":92,"latencyMs":6504,"commands":["GO EAST"],"commentary":""}
+{"t":1788319621720,"type":"command","turn":92,"command":"GO EAST","response":"The room is full of water and cannot be entered.","parserRejection":false,"worldRefusal":false}
+{"t":1788319629870,"type":"model_turn","turn":93,"latencyMs":8150,"commands":["RESTART"],"commentary":""}
+{"t":1788319629871,"type":"command","turn":93,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 84 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319635122,"type":"model_turn","turn":94,"latencyMs":5251,"commands":["Y"],"commentary":""}
+{"t":1788319635123,"type":"command","turn":94,"command":"Y","response":"There was no verb in that sentence!","parserRejection":true,"worldRefusal":false}
+{"t":1788319641665,"type":"model_turn","turn":95,"latencyMs":6542,"commands":["RESTART"],"commentary":""}
+{"t":1788319641666,"type":"command","turn":95,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 84 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319648492,"type":"model_turn","turn":96,"latencyMs":6825,"commands":["YES"],"commentary":""}
+{"t":1788319648493,"type":"command","turn":96,"command":"YES","response":"There was no verb in that sentence!","parserRejection":true,"worldRefusal":false}
+{"t":1788319654562,"type":"model_turn","turn":97,"latencyMs":6069,"commands":["RESTART GAME"],"commentary":""}
+{"t":1788319654563,"type":"command","turn":97,"command":"RESTART GAME","response":"I don't know the word \"game\".","parserRejection":true,"worldRefusal":false}
+{"t":1788319665529,"type":"model_turn","turn":98,"latencyMs":10966,"commands":["ANSWER YES"],"commentary":""}
+{"t":1788319665530,"type":"command","turn":98,"command":"ANSWER YES","response":"Nobody seems to be awaiting your answer.","parserRejection":false,"worldRefusal":false}
+{"t":1788319677503,"type":"model_turn","turn":99,"latencyMs":11972,"commands":["YES, RESTART"],"commentary":""}
+{"t":1788319677505,"type":"command","turn":99,"command":"YES, RESTART","response":"Your score is 30 (total of 350 points), in 85 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319684838,"type":"model_turn","turn":100,"latencyMs":7333,"commands":["RESTART Y"],"commentary":""}
+{"t":1788319684839,"type":"command","turn":100,"command":"RESTART Y","response":"Your score is 30 (total of 350 points), in 85 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319694769,"type":"model_turn","turn":101,"latencyMs":9930,"commands":["BEGIN"],"commentary":""}
+{"t":1788319694769,"type":"command","turn":101,"command":"BEGIN","response":"I don't know the word \"begin\".","parserRejection":true,"worldRefusal":false}
+{"t":1788319701113,"type":"model_turn","turn":102,"latencyMs":6344,"commands":["RESTART"],"commentary":""}
+{"t":1788319701114,"type":"command","turn":102,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 85 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319706788,"type":"model_turn","turn":103,"latencyMs":5674,"commands":["Y"],"commentary":""}
+{"t":1788319706789,"type":"command","turn":103,"command":"Y","response":"There was no verb in that sentence!","parserRejection":true,"worldRefusal":false}
+{"t":1788319714523,"type":"model_turn","turn":104,"latencyMs":7733,"commands":["CONFIRM RESTART"],"commentary":""}
+{"t":1788319714524,"type":"command","turn":104,"command":"CONFIRM RESTART","response":"I don't know the word \"confirm\".","parserRejection":true,"worldRefusal":false}
+{"t":1788319719738,"type":"model_turn","turn":105,"latencyMs":5214,"commands":["RESTART"],"commentary":""}
+{"t":1788319719739,"type":"command","turn":105,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 85 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319725780,"type":"model_turn","turn":106,"latencyMs":6041,"commands":["QUIT"],"commentary":""}
+{"t":1788319725781,"type":"command","turn":106,"command":"QUIT","response":"Your score is 30 (total of 350 points), in 85 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to leave the game? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319732432,"type":"model_turn","turn":107,"latencyMs":6651,"commands":["Y"],"commentary":""}
+{"t":1788319732433,"type":"command","turn":107,"command":"Y","response":"There was no verb in that sentence!","parserRejection":true,"worldRefusal":false}
+{"t":1788319738642,"type":"model_turn","turn":108,"latencyMs":6209,"commands":["LEAVE"],"commentary":""}
+{"t":1788319738643,"type":"command","turn":108,"command":"LEAVE","response":"You can't go that way.","parserRejection":false,"worldRefusal":true}
+{"t":1788319744804,"type":"model_turn","turn":109,"latencyMs":6160,"commands":["RESTART"],"commentary":""}
+{"t":1788319744805,"type":"command","turn":109,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 86 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319752233,"type":"model_turn","turn":110,"latencyMs":7428,"commands":["RESTART"],"commentary":""}
+{"t":1788319752233,"type":"command","turn":110,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 86 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319760239,"type":"model_turn","turn":111,"latencyMs":8006,"commands":["AFFIRM"],"commentary":""}
+{"t":1788319760240,"type":"command","turn":111,"command":"AFFIRM","response":"I don't know the word \"affirm\".","parserRejection":true,"worldRefusal":false}
+{"t":1788319766043,"type":"model_turn","turn":112,"latencyMs":5803,"commands":["RESTART"],"commentary":""}
+{"t":1788319766044,"type":"command","turn":112,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 86 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319772290,"type":"model_turn","turn":113,"latencyMs":6246,"commands":["RESTART"],"commentary":""}
+{"t":1788319772290,"type":"command","turn":113,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 86 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319779482,"type":"model_turn","turn":114,"latencyMs":7191,"commands":["Y"],"commentary":""}
+{"t":1788319779483,"type":"command","turn":114,"command":"Y","response":"There was no verb in that sentence!","parserRejection":true,"worldRefusal":false}
+{"t":1788319785672,"type":"model_turn","turn":115,"latencyMs":6189,"commands":["RESTART"],"commentary":""}
+{"t":1788319785673,"type":"command","turn":115,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 86 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319792960,"type":"model_turn","turn":116,"latencyMs":7287,"commands":["RESTART"],"commentary":""}
+{"t":1788319792961,"type":"command","turn":116,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 86 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319800359,"type":"model_turn","turn":117,"latencyMs":7398,"commands":["N"],"commentary":""}
+{"t":1788319800360,"type":"command","turn":117,"command":"N","response":"The room is full of water and cannot be entered.","parserRejection":false,"worldRefusal":false}
+{"t":1788319814377,"type":"model_turn","turn":118,"latencyMs":14017,"commands":["GO SOUTH"],"commentary":""}
+{"t":1788319814378,"type":"command","turn":118,"command":"GO SOUTH","response":"Dam","parserRejection":false,"worldRefusal":false}
+{"t":1788319822766,"type":"model_turn","turn":119,"latencyMs":8388,"commands":["TURN BOLT WITH WRENCH"],"commentary":""}
+{"t":1788319822767,"type":"command","turn":119,"command":"TURN BOLT WITH WRENCH","response":"You don't have that!","parserRejection":false,"worldRefusal":false}
+{"t":1788319835571,"type":"model_turn","turn":120,"latencyMs":12804,"commands":["RESTART"],"commentary":""}
+{"t":1788319835572,"type":"command","turn":120,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 88 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319841663,"type":"model_turn","turn":121,"latencyMs":6090,"commands":["yes"],"commentary":""}
+{"t":1788319841664,"type":"command","turn":121,"command":"yes","response":"There was no verb in that sentence!","parserRejection":true,"worldRefusal":false}
+{"t":1788319849140,"type":"model_turn","turn":122,"latencyMs":7476,"commands":["RESTART"],"commentary":""}
+{"t":1788319849140,"type":"command","turn":122,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 88 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319858175,"type":"model_turn","turn":123,"latencyMs":9034,"commands":["N"],"commentary":""}
+{"t":1788319858176,"type":"command","turn":123,"command":"N","response":"Dam Lobby\nSome guidebooks entitled \"Flood Control Dam #3\" are on the reception desk.","parserRejection":false,"worldRefusal":false}
+{"t":1788319867795,"type":"model_turn","turn":124,"latencyMs":9619,"commands":["GO SOUTH"],"commentary":""}
+{"t":1788319867796,"type":"command","turn":124,"command":"GO SOUTH","response":"Dam","parserRejection":false,"worldRefusal":false}
+{"t":1788319877364,"type":"model_turn","turn":125,"latencyMs":9568,"commands":["RESTART"],"commentary":""}
+{"t":1788319877364,"type":"command","turn":125,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 90 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319886931,"type":"model_turn","turn":126,"latencyMs":9566,"commands":["Y"],"commentary":""}
+{"t":1788319886931,"type":"command","turn":126,"command":"Y","response":"There was no verb in that sentence!","parserRejection":true,"worldRefusal":false}
+{"t":1788319894469,"type":"model_turn","turn":127,"latencyMs":7537,"commands":["RESTART"],"commentary":""}
+{"t":1788319894470,"type":"command","turn":127,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 90 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319900850,"type":"model_turn","turn":128,"latencyMs":6380,"commands":["N"],"commentary":""}
+{"t":1788319900851,"type":"command","turn":128,"command":"N","response":"Dam Lobby\nSome guidebooks entitled \"Flood Control Dam #3\" are on the reception desk.","parserRejection":false,"worldRefusal":false}
+{"t":1788319909598,"type":"model_turn","turn":129,"latencyMs":8747,"commands":["QUIT"],"commentary":""}
+{"t":1788319909599,"type":"command","turn":129,"command":"QUIT","response":"Your score is 30 (total of 350 points), in 91 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to leave the game? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319916700,"type":"model_turn","turn":130,"latencyMs":7101,"commands":["Y QUIT"],"commentary":""}
+{"t":1788319916701,"type":"command","turn":130,"command":"Y QUIT","response":"Your score is 30 (total of 350 points), in 91 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to leave the game? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319923017,"type":"model_turn","turn":131,"latencyMs":6315,"commands":["QUIT"],"commentary":""}
+{"t":1788319923018,"type":"command","turn":131,"command":"QUIT","response":"Your score is 30 (total of 350 points), in 91 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to leave the game? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319932189,"type":"model_turn","turn":132,"latencyMs":9171,"commands":["Y"],"commentary":""}
+{"t":1788319932189,"type":"command","turn":132,"command":"Y","response":"There was no verb in that sentence!","parserRejection":true,"worldRefusal":false}
+{"t":1788319937694,"type":"model_turn","turn":133,"latencyMs":5504,"commands":["QUIT"],"commentary":""}
+{"t":1788319937694,"type":"command","turn":133,"command":"QUIT","response":"Your score is 30 (total of 350 points), in 91 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to leave the game? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319944248,"type":"model_turn","turn":134,"latencyMs":6553,"commands":["RESTART"],"commentary":""}
+{"t":1788319944249,"type":"command","turn":134,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 91 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319950926,"type":"model_turn","turn":135,"latencyMs":6676,"commands":["Y"],"commentary":""}
+{"t":1788319950927,"type":"command","turn":135,"command":"Y","response":"There was no verb in that sentence!","parserRejection":true,"worldRefusal":false}
+{"t":1788319960054,"type":"model_turn","turn":136,"latencyMs":9127,"commands":["RESTART"],"commentary":""}
+{"t":1788319960054,"type":"command","turn":136,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 91 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319969549,"type":"model_turn","turn":137,"latencyMs":9494,"commands":[],"commentary":"The game interface is not accepting the required restart confirmation (`Y`); it treats it as a normal command. The game is currently stuck at the restart prompt."}
+{"t":1788319978113,"type":"model_turn","turn":138,"latencyMs":8563,"commands":["RESTART"],"commentary":""}
+{"t":1788319978114,"type":"command","turn":138,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 91 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788319984042,"type":"model_turn","turn":139,"latencyMs":5928,"commands":["Y"],"commentary":""}
+{"t":1788319984042,"type":"command","turn":139,"command":"Y","response":"There was no verb in that sentence!","parserRejection":true,"worldRefusal":false}
+{"t":1788319990712,"type":"model_turn","turn":140,"latencyMs":6669,"commands":["ACCEPT RESTART"],"commentary":""}
+{"t":1788319990712,"type":"command","turn":140,"command":"ACCEPT RESTART","response":"I don't know the word \"accept\".","parserRejection":true,"worldRefusal":false}
+{"t":1788319998403,"type":"model_turn","turn":141,"latencyMs":7690,"commands":["N"],"commentary":""}
+{"t":1788319998404,"type":"command","turn":141,"command":"N","response":"The room is full of water and cannot be entered.","parserRejection":false,"worldRefusal":false}
+{"t":1788320006703,"type":"model_turn","turn":142,"latencyMs":8298,"commands":["GO SOUTH"],"commentary":""}
+{"t":1788320006704,"type":"command","turn":142,"command":"GO SOUTH","response":"Dam","parserRejection":false,"worldRefusal":false}
+{"t":1788320016763,"type":"model_turn","turn":143,"latencyMs":10059,"commands":["GO DOWN"],"commentary":""}
+{"t":1788320016764,"type":"command","turn":143,"command":"GO DOWN","response":"Dam Base\nYou are at the base of Flood Control Dam #3, which looms above you and to the north. The river Frigid is flowing by here. Along the river are the White Cliffs which seem to form giant walls stretching from north to south along the shores of the river as it winds its way downstream.\nThere is a folded pile of plastic here which has a small valve attached.","parserRejection":false,"worldRefusal":false}
+{"t":1788320023726,"type":"model_turn","turn":144,"latencyMs":6962,"commands":["TAKE PLASTIC"],"commentary":""}
+{"t":1788320023727,"type":"command","turn":144,"command":"TAKE PLASTIC","response":"Taken.","parserRejection":false,"worldRefusal":false}
+{"t":1788320030606,"type":"model_turn","turn":145,"latencyMs":6878,"commands":["LOOK"],"commentary":""}
+{"t":1788320030607,"type":"command","turn":145,"command":"LOOK","response":"Dam Base\nYou are at the base of Flood Control Dam #3, which looms above you and to the north. The river Frigid is flowing by here. Along the river are the White Cliffs which seem to form giant walls stretching from north to south along the shores of the river as it winds its way downstream.","parserRejection":false,"worldRefusal":false}
+{"t":1788320036568,"type":"model_turn","turn":146,"latencyMs":5961,"commands":["GO EAST"],"commentary":""}
+{"t":1788320036570,"type":"command","turn":146,"command":"GO EAST","response":"You can't go that way.","parserRejection":false,"worldRefusal":true}
+{"t":1788320042813,"type":"model_turn","turn":147,"latencyMs":6243,"commands":["GO WEST"],"commentary":""}
+{"t":1788320042813,"type":"command","turn":147,"command":"GO WEST","response":"You can't go that way.","parserRejection":false,"worldRefusal":true}
+{"t":1788320048489,"type":"model_turn","turn":148,"latencyMs":5675,"commands":["INFLATE RAFT"],"commentary":""}
+{"t":1788320048490,"type":"command","turn":148,"command":"INFLATE RAFT","response":"What do you want to inflate the raft with?","parserRejection":false,"worldRefusal":false}
+{"t":1788320055829,"type":"model_turn","turn":149,"latencyMs":7339,"commands":["INFLATE RAFT WITH AIR"],"commentary":""}
+{"t":1788320055830,"type":"command","turn":149,"command":"INFLATE RAFT WITH AIR","response":"You can't see any raft here!","parserRejection":false,"worldRefusal":true}
+{"t":1788320063101,"type":"model_turn","turn":150,"latencyMs":7271,"commands":["INFLATE PLASTIC"],"commentary":""}
+{"t":1788320063102,"type":"command","turn":150,"command":"INFLATE PLASTIC","response":"What do you want to inflate the plastic with?","parserRejection":false,"worldRefusal":false}
+{"t":1788320069679,"type":"model_turn","turn":151,"latencyMs":6577,"commands":["INFLATE PLASTIC WITH AIR"],"commentary":""}
+{"t":1788320069680,"type":"command","turn":151,"command":"INFLATE PLASTIC WITH AIR","response":"The boat must be on the ground to be inflated.","parserRejection":false,"worldRefusal":false}
+{"t":1788320077440,"type":"model_turn","turn":152,"latencyMs":7759,"commands":["DROP PLASTIC"],"commentary":""}
+{"t":1788320077441,"type":"command","turn":152,"command":"DROP PLASTIC","response":"Dropped.","parserRejection":false,"worldRefusal":false}
+{"t":1788320083097,"type":"model_turn","turn":153,"latencyMs":5656,"commands":["INFLATE PLASTIC WITH AIR"],"commentary":""}
+{"t":1788320083098,"type":"command","turn":153,"command":"INFLATE PLASTIC WITH AIR","response":"You don't have enough lung power to inflate it.","parserRejection":false,"worldRefusal":false}
+{"t":1788320091745,"type":"model_turn","turn":154,"latencyMs":8647,"commands":["GO NORTH"],"commentary":""}
+{"t":1788320091746,"type":"command","turn":154,"command":"GO NORTH","response":"Dam","parserRejection":false,"worldRefusal":false}
+{"t":1788320100735,"type":"model_turn","turn":155,"latencyMs":8988,"commands":["GO NORTH"],"commentary":""}
+{"t":1788320100735,"type":"command","turn":155,"command":"GO NORTH","response":"Dam Lobby\nSome guidebooks entitled \"Flood Control Dam #3\" are on the reception desk.","parserRejection":false,"worldRefusal":false}
+{"t":1788320108274,"type":"model_turn","turn":156,"latencyMs":7538,"commands":["RESTART"],"commentary":""}
+{"t":1788320108275,"type":"command","turn":156,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 104 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788320118736,"type":"model_turn","turn":157,"latencyMs":10461,"commands":["RESTART"],"commentary":""}
+{"t":1788320118737,"type":"command","turn":157,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 104 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788320124266,"type":"model_turn","turn":158,"latencyMs":5529,"commands":["QUIT"],"commentary":""}
+{"t":1788320124266,"type":"command","turn":158,"command":"QUIT","response":"Your score is 30 (total of 350 points), in 104 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to leave the game? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788320130954,"type":"model_turn","turn":159,"latencyMs":6688,"commands":["Y"],"commentary":""}
+{"t":1788320130954,"type":"command","turn":159,"command":"Y","response":"There was no verb in that sentence!","parserRejection":true,"worldRefusal":false}
+{"t":1788320137573,"type":"model_turn","turn":160,"latencyMs":6618,"commands":["RESTART"],"commentary":""}
+{"t":1788320137573,"type":"command","turn":160,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 104 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788320146737,"type":"model_turn","turn":161,"latencyMs":9163,"commands":["N"],"commentary":""}
+{"t":1788320146738,"type":"command","turn":161,"command":"N","response":"The room is full of water and cannot be entered.","parserRejection":false,"worldRefusal":false}
+{"t":1788320153118,"type":"model_turn","turn":162,"latencyMs":6380,"commands":["RESTART"],"commentary":""}
+{"t":1788320153119,"type":"command","turn":162,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 105 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788320160522,"type":"model_turn","turn":163,"latencyMs":7403,"commands":["RESET"],"commentary":""}
+{"t":1788320160522,"type":"command","turn":163,"command":"RESET","response":"I don't know the word \"reset\".","parserRejection":true,"worldRefusal":false}
+{"t":1788320165907,"type":"model_turn","turn":164,"latencyMs":5385,"commands":["RESTART"],"commentary":""}
+{"t":1788320165908,"type":"command","turn":164,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 105 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788320172650,"type":"model_turn","turn":165,"latencyMs":6742,"commands":["Y"],"commentary":""}
+{"t":1788320172650,"type":"command","turn":165,"command":"Y","response":"There was no verb in that sentence!","parserRejection":true,"worldRefusal":false}
+{"t":1788320178841,"type":"model_turn","turn":166,"latencyMs":6190,"commands":["SAY YES"],"commentary":""}
+{"t":1788320178841,"type":"command","turn":166,"command":"SAY YES","response":"Say what?","parserRejection":false,"worldRefusal":false}
+{"t":1788320187171,"type":"model_turn","turn":167,"latencyMs":8329,"commands":[],"commentary":"The game is stuck at its restart confirmation: `Y` is being parsed as a gameplay command instead of a confirmation response, so no valid `COMMAND:` line can advance it."}
+{"t":1788320192883,"type":"model_turn","turn":168,"latencyMs":5712,"commands":["RESTART"],"commentary":""}
+{"t":1788320192883,"type":"command","turn":168,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 106 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788320201100,"type":"model_turn","turn":169,"latencyMs":8216,"commands":["N"],"commentary":""}
+{"t":1788320201100,"type":"command","turn":169,"command":"N","response":"The room is full of water and cannot be entered.","parserRejection":false,"worldRefusal":false}
+{"t":1788320207516,"type":"model_turn","turn":170,"latencyMs":6415,"commands":["GO SOUTH"],"commentary":""}
+{"t":1788320207516,"type":"command","turn":170,"command":"GO SOUTH","response":"Dam","parserRejection":false,"worldRefusal":false}
+{"t":1788320216539,"type":"model_turn","turn":171,"latencyMs":9023,"commands":["GO DOWN"],"commentary":""}
+{"t":1788320216540,"type":"command","turn":171,"command":"GO DOWN","response":"Dam Base\nThere is a folded pile of plastic here which has a small valve attached.","parserRejection":false,"worldRefusal":false}
+{"t":1788320222605,"type":"model_turn","turn":172,"latencyMs":6065,"commands":["BLOW PLASTIC"],"commentary":""}
+{"t":1788320222606,"type":"command","turn":172,"command":"BLOW PLASTIC","response":"That sentence isn't one I recognize.","parserRejection":true,"worldRefusal":false}
+{"t":1788320229853,"type":"model_turn","turn":173,"latencyMs":7247,"commands":["BLOW UP PLASTIC"],"commentary":""}
+{"t":1788320229854,"type":"command","turn":173,"command":"BLOW UP PLASTIC","response":"You can't blast anything by using words.","parserRejection":false,"worldRefusal":false}
+{"t":1788320235365,"type":"model_turn","turn":174,"latencyMs":5511,"commands":["GO NORTH"],"commentary":""}
+{"t":1788320235365,"type":"command","turn":174,"command":"GO NORTH","response":"Dam","parserRejection":false,"worldRefusal":false}
+{"t":1788320242619,"type":"model_turn","turn":175,"latencyMs":7254,"commands":["TAKE PLASTIC"],"commentary":""}
+{"t":1788320242620,"type":"command","turn":175,"command":"TAKE PLASTIC","response":"You can't see any plastic here!","parserRejection":false,"worldRefusal":true}
+{"t":1788320249199,"type":"model_turn","turn":176,"latencyMs":6579,"commands":["GO DOWN"],"commentary":""}
+{"t":1788320249200,"type":"command","turn":176,"command":"GO DOWN","response":"Dam Base\nThere is a folded pile of plastic here which has a small valve attached.","parserRejection":false,"worldRefusal":false}
+{"t":1788320257024,"type":"model_turn","turn":177,"latencyMs":7824,"commands":["TAKE PLASTIC"],"commentary":""}
+{"t":1788320257025,"type":"command","turn":177,"command":"TAKE PLASTIC","response":"Taken.","parserRejection":false,"worldRefusal":false}
+{"t":1788320263571,"type":"model_turn","turn":178,"latencyMs":6546,"commands":["OPEN VALVE"],"commentary":""}
+{"t":1788320263571,"type":"command","turn":178,"command":"OPEN VALVE","response":"You must tell me how to do that to a pile of plastic.","parserRejection":false,"worldRefusal":false}
+{"t":1788320270074,"type":"model_turn","turn":179,"latencyMs":6502,"commands":["EXAMINE PLASTIC"],"commentary":""}
+{"t":1788320270075,"type":"command","turn":179,"command":"EXAMINE PLASTIC","response":"There's nothing special about the pile of plastic.","parserRejection":false,"worldRefusal":false}
+{"t":1788320276778,"type":"model_turn","turn":180,"latencyMs":6703,"commands":["INFLATE PILE WITH AIR"],"commentary":""}
+{"t":1788320276780,"type":"command","turn":180,"command":"INFLATE PILE WITH AIR","response":"The boat must be on the ground to be inflated.","parserRejection":false,"worldRefusal":false}
+{"t":1788320283732,"type":"model_turn","turn":181,"latencyMs":6952,"commands":["DROP PLASTIC"],"commentary":""}
+{"t":1788320283732,"type":"command","turn":181,"command":"DROP PLASTIC","response":"Dropped.","parserRejection":false,"worldRefusal":false}
+{"t":1788320293122,"type":"model_turn","turn":182,"latencyMs":9390,"commands":["INFLATE BOAT WITH AIR"],"commentary":""}
+{"t":1788320293122,"type":"command","turn":182,"command":"INFLATE BOAT WITH AIR","response":"You don't have enough lung power to inflate it.","parserRejection":false,"worldRefusal":false}
+{"t":1788320302746,"type":"model_turn","turn":183,"latencyMs":9623,"commands":["RESTART"],"commentary":""}
+{"t":1788320302747,"type":"command","turn":183,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 119 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788320308839,"type":"model_turn","turn":184,"latencyMs":6092,"commands":["N"],"commentary":""}
+{"t":1788320308840,"type":"command","turn":184,"command":"N","response":"Dam","parserRejection":false,"worldRefusal":false}
+{"t":1788320314826,"type":"model_turn","turn":185,"latencyMs":5986,"commands":["RESTART"],"commentary":""}
+{"t":1788320314826,"type":"command","turn":185,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 120 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788320324186,"type":"model_turn","turn":186,"latencyMs":9359,"commands":["RESTART"],"commentary":""}
+{"t":1788320324187,"type":"command","turn":186,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 120 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788320332050,"type":"model_turn","turn":187,"latencyMs":7863,"commands":["N"],"commentary":""}
+{"t":1788320332050,"type":"command","turn":187,"command":"N","response":"Dam Lobby\nSome guidebooks entitled \"Flood Control Dam #3\" are on the reception desk.","parserRejection":false,"worldRefusal":false}
+{"t":1788320340619,"type":"model_turn","turn":188,"latencyMs":8569,"commands":["RESTART"],"commentary":""}
+{"t":1788320340620,"type":"command","turn":188,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 121 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788320347402,"type":"model_turn","turn":189,"latencyMs":6781,"commands":["N"],"commentary":""}
+{"t":1788320347402,"type":"command","turn":189,"command":"N","response":"The room is full of water and cannot be entered.","parserRejection":false,"worldRefusal":false}
+{"t":1788320353877,"type":"model_turn","turn":190,"latencyMs":6474,"commands":["RESTART"],"commentary":""}
+{"t":1788320353877,"type":"command","turn":190,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 122 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788320362488,"type":"model_turn","turn":191,"latencyMs":8611,"commands":["RESTART"],"commentary":""}
+{"t":1788320362490,"type":"command","turn":191,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 122 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788320368399,"type":"model_turn","turn":192,"latencyMs":5909,"commands":["RESTART"],"commentary":""}
+{"t":1788320368400,"type":"command","turn":192,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 122 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788320374436,"type":"model_turn","turn":193,"latencyMs":6036,"commands":["Y IS AFFIRMATIVE"],"commentary":""}
+{"t":1788320374436,"type":"command","turn":193,"command":"Y IS AFFIRMATIVE","response":"I don't know the word \"affirmative\".","parserRejection":true,"worldRefusal":false}
+{"t":1788320380926,"type":"model_turn","turn":194,"latencyMs":6489,"commands":["RESTART"],"commentary":""}
+{"t":1788320380926,"type":"command","turn":194,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 122 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788320386771,"type":"model_turn","turn":195,"latencyMs":5845,"commands":["Y"],"commentary":""}
+{"t":1788320386772,"type":"command","turn":195,"command":"Y","response":"There was no verb in that sentence!","parserRejection":true,"worldRefusal":false}
+{"t":1788320394265,"type":"model_turn","turn":196,"latencyMs":7493,"commands":["START OVER"],"commentary":""}
+{"t":1788320394265,"type":"command","turn":196,"command":"START OVER","response":"I don't know the word \"start\".","parserRejection":true,"worldRefusal":false}
+{"t":1788320400360,"type":"model_turn","turn":197,"latencyMs":6094,"commands":["RESTART"],"commentary":""}
+{"t":1788320400361,"type":"command","turn":197,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 122 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788320407023,"type":"model_turn","turn":198,"latencyMs":6662,"commands":["Y"],"commentary":""}
+{"t":1788320407024,"type":"command","turn":198,"command":"Y","response":"There was no verb in that sentence!","parserRejection":true,"worldRefusal":false}
+{"t":1788320414530,"type":"model_turn","turn":199,"latencyMs":7505,"commands":["RESTART"],"commentary":""}
+{"t":1788320414531,"type":"command","turn":199,"command":"RESTART","response":"Your score is 30 (total of 350 points), in 122 moves.\nThis gives you the rank of Amateur Adventurer.\nDo you wish to restart? (Y is affirmative): >","parserRejection":false,"worldRefusal":false}
+{"t":1788320420966,"type":"model_turn","turn":200,"latencyMs":6435,"commands":["RESTORE"],"commentary":""}
+{"t":1788320420966,"type":"command","turn":200,"command":"RESTORE","response":"","parserRejection":false,"worldRefusal":false}
+{"t":1788320420967,"type":"run_error","error":"unreachable"}
+{"t":1788320420967,"type":"run_end","endReason":"error","budgetReached":false,"runStats":{"startedAt":1788319112269,"modelTurns":200,"commands":198,"parserRejections":25,"worldRefusals":8,"darknessWarnings":0,"deaths":1,"gameRestarts":0,"score":30,"maxScore":40,"moves":122,"movesBeforeRestarts":0,"totalMoves":122,"commandsAtLastScoreChange":65,"maxCommandsWithoutScore":45,"turnLatenciesMs":[5691,4810,4546,5633,5927,4754,4151,4888,4885,4877,5047,4853,4302,4442,4509,4750,4667,5068,5466,6171,5457,4619,5561,5272,4422,5127,4615,4496,4991,5541,5678,4773,6129,6695,4486,6843,4947,5315,5048,4740,5155,6979,5639,4756,5213,5189,8269,5450,5618,5182,4937,10210,6103,5264,4791,6339,5211,5047,4805,5207,4893,6583,9263,5782,4656,6167,5383,6009,5768,6836,6650,5333,6105,5629,5742,6434,5600,4992,5512,5542,6166,6891,5723,4925,5449,6682,5242,6005,5802,5257,6238,6504,8150,5251,6542,6825,6069,10966,11972,7333,9930,6344,5674,7733,5214,6041,6651,6209,6160,7428,8006,5803,6246,7191,6189,7287,7398,14017,8388,12804,6090,7476,9034,9619,9568,9566,7537,6380,8747,7101,6315,9171,5504,6553,6676,9127,9494,8563,5928,6669,7690,8298,10059,6962,6878,5961,6243,5675,7339,7271,6577,7759,5656,8647,8988,7538,10461,5529,6688,6618,9163,6380,7403,5385,6742,6190,8329,5712,8216,6415,9023,6065,7247,5511,7254,6579,7824,6546,6502,6703,6952,9390,9623,6092,5986,9359,7863,8569,6781,6474,8611,5909,6036,6489,5845,7493,6094,6662,7505,6435]},"usage":{"turns":200,"inputTokens":4311905,"outputTokens":11421,"cacheReadTokens":4146176,"cacheWriteTokens":0,"thinkingTokens":9187,"costUsd":null,"apiMs":0}}
