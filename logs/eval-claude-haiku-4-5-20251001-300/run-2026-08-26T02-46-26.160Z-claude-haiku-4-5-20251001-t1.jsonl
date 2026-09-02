@@ -1,4 +1,4 @@
-{"t":1787712386187,"type":"run_start","provider":"claude-cli","model":"haiku","tag":"haiku-t1","seed":1,"moveBudget":300,"harnessCommit":"3bcce59"}
+{"t":1787712386187,"type":"run_start","provider":"claude-cli","model":"claude-haiku-4-5-20251001","tag":"claude-haiku-4-5-20251001-t1","seed":1,"moveBudget":300,"harnessCommit":"3bcce59"}
 {"t":1787712391167,"type":"model_turn","turn":1,"latencyMs":4971,"commands":["INVENTORY"],"commentary":"I'm starting the classic text adventure game Zork! I'm standing in an open field west of a white house. Let me begin by checking my inventory and then exploring the area systematically."}
 {"t":1787712391172,"type":"command","turn":1,"command":"INVENTORY","response":"You are empty-handed.","parserRejection":false,"worldRefusal":false}
 {"t":1787712393388,"type":"model_turn","turn":2,"latencyMs":2214,"commands":["LOOK"],"commentary":"I'm starting with nothing. Let me look around to see what I can interact with and where I can go."}

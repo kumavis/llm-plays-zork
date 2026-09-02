@@ -2,14 +2,15 @@
 // Each run gets a fixed move budget and a per-trial RNG seed shared across
 // models, so trial k is the same game for every model.
 //
-// Usage: node src/eval.js --models haiku,sonnet --trials 3 --moves 300
+// Usage: node src/eval.js --models claude-haiku-4-5-20251001,claude-sonnet-5
+//        --trials 3 --moves 300
 //        [--provider claude-cli] [--max-minutes 60] [--max-model-turns 1200]
 //        [--name my-eval]
 //        [--seeds 2,3]  -- rerun specific trials into an existing batch
 //
 // A --models entry may name its own backend and reasoning effort, so one
 // batch can span harnesses and land in a single report:
-//   --models claude-cli:sonnet,codex-cli:gpt-5.6-sol@medium
+//   --models claude-cli:claude-sonnet-5,codex-cli:gpt-5.6-sol@medium
 // The bare form uses --provider and the backend's default effort.
 import { spawn } from 'node:child_process';
 import { openSync, closeSync } from 'node:fs';
@@ -21,7 +22,10 @@ import { reportDirectory } from './eval-report.js';
 
 const { values } = parseArgs({
   options: {
-    models: { type: 'string', default: 'haiku,sonnet' },
+    models: {
+      type: 'string',
+      default: 'claude-haiku-4-5-20251001,claude-sonnet-5',
+    },
     trials: { type: 'string', default: '3' },
     moves: { type: 'string', default: '300' },
     provider: { type: 'string', default: 'claude-cli' },
@@ -46,6 +50,17 @@ const models = values.models
       ? { provider: values.provider, name: head, effort }
       : { provider: head.slice(0, colon), name: head.slice(colon + 1), effort };
   });
+for (const model of models) {
+  if (
+    ['claude-cli', 'anthropic'].includes(model.provider) &&
+    ['opus', 'sonnet', 'haiku'].includes(model.name)
+  ) {
+    throw new Error(
+      `Moving model alias "${model.name}" is not allowed in evals; ` +
+        'use a versioned Claude model ID so later runs remain distinguishable.',
+    );
+  }
+}
 // Trial index doubles as the RNG seed, so every model plays the same game in
 // trial k. --seeds reruns just those trials (e.g. after a failed run).
 const trialNumbers = values.seeds

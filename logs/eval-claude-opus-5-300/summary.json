@@ -1,10 +1,10 @@
 {
   "rows": [
     {
-      "model": "opus",
+      "model": "claude-opus-5",
       "resolvedModel": "claude-opus-5",
       "provider": "claude-cli",
-      "tag": "opus-t1",
+      "tag": "claude-opus-5-t1",
       "seed": 1,
       "wallMin": 36.532833333333336,
       "turns": 311,
@@ -21,10 +21,10 @@
       "costEstimate": null
     },
     {
-      "model": "opus",
+      "model": "claude-opus-5",
       "resolvedModel": "claude-opus-5",
       "provider": "claude-cli",
-      "tag": "opus-t2",
+      "tag": "claude-opus-5-t2",
       "seed": 2,
       "wallMin": 24.602816666666666,
       "turns": 311,
@@ -44,7 +44,7 @@
   "aggregates": [
     {
       "model": "claude-opus-5",
-      "alias": "opus",
+      "alias": "claude-opus-5",
       "provider": "claude-cli",
       "trials": 2,
       "medianScore": 119,

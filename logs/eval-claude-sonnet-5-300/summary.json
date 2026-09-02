@@ -1,10 +1,10 @@
 {
   "rows": [
     {
-      "model": "sonnet",
+      "model": "claude-sonnet-5",
       "resolvedModel": null,
       "provider": "claude-cli",
-      "tag": "sonnet-t1",
+      "tag": "claude-sonnet-5-t1",
       "seed": 1,
       "wallMin": 18.995866666666668,
       "turns": 308,
@@ -21,10 +21,10 @@
       "costEstimate": null
     },
     {
-      "model": "sonnet",
+      "model": "claude-sonnet-5",
       "resolvedModel": null,
       "provider": "claude-cli",
-      "tag": "sonnet-t2",
+      "tag": "claude-sonnet-5-t2",
       "seed": 2,
       "wallMin": 18.6628,
       "turns": 306,
@@ -41,10 +41,10 @@
       "costEstimate": null
     },
     {
-      "model": "sonnet",
+      "model": "claude-sonnet-5",
       "resolvedModel": null,
       "provider": "claude-cli",
-      "tag": "sonnet-t3",
+      "tag": "claude-sonnet-5-t3",
       "seed": 3,
       "wallMin": 21.23435,
       "turns": 307,
@@ -63,8 +63,8 @@
   ],
   "aggregates": [
     {
-      "model": "sonnet",
-      "alias": "sonnet",
+      "model": "claude-sonnet-5",
+      "alias": "claude-sonnet-5",
       "provider": "claude-cli",
       "trials": 3,
       "medianScore": 75,

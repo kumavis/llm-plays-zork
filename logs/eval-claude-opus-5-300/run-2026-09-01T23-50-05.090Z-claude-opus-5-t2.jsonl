@@ -1,4 +1,4 @@
-{"t":1788306605109,"type":"run_start","provider":"claude-cli","model":"opus","tag":"opus-t2","seed":2,"moveBudget":300,"harnessCommit":"23648c4"}
+{"t":1788306605109,"type":"run_start","provider":"claude-cli","model":"claude-opus-5","tag":"claude-opus-5-t2","seed":2,"moveBudget":300,"harnessCommit":"23648c4"}
 {"t":1788306607423,"type":"model_turn","turn":1,"latencyMs":2311,"commands":["OPEN MAILBOX"],"commentary":""}
 {"t":1788306607425,"type":"command","turn":1,"command":"OPEN MAILBOX","response":"Opening the small mailbox reveals a leaflet.","parserRejection":false,"worldRefusal":false}
 {"t":1788306609122,"type":"model_turn","turn":2,"latencyMs":1697,"commands":["READ LEAFLET"],"commentary":""}

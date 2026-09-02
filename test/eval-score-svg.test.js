@@ -45,12 +45,15 @@ test('renders all completed runs as lines in one comparable SVG', () => {
   assert.match(svg, /Zork score progression — all completed runs/);
   assert.match(svg, /2 runs · 300 game moves/);
   assert.match(svg, /y-axis maximum 100/);
-  assert.match(svg, /haiku-t1/);
-  assert.match(svg, /opus-t2/);
+  assert.match(svg, /Claude Haiku 4.5 · t1/);
+  assert.match(svg, /Claude Opus 5 · t2/);
   assert.match(svg, />25 \/ 25</);
   assert.match(svg, />80 \/ 80</);
   assert.match(svg, /Anthropic · strongest → lightest/);
-  assert.ok(svg.indexOf('opus-t2') < svg.indexOf('haiku-t1'));
+  assert.ok(
+    svg.indexOf('Claude Opus 5 · t2') <
+      svg.indexOf('Claude Haiku 4.5 · t1'),
+  );
   assert.equal(svg.match(/class="score-line /g)?.length, 2);
   assert.match(svg, /Game moves/);
   assert.match(svg, /Score \(points\)/);

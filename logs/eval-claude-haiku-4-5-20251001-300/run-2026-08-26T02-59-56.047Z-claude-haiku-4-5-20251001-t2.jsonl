@@ -1,4 +1,4 @@
-{"t":1787713196056,"type":"run_start","provider":"claude-cli","model":"haiku","tag":"haiku-t2","seed":2,"moveBudget":300,"harnessCommit":"3bcce59"}
+{"t":1787713196056,"type":"run_start","provider":"claude-cli","model":"claude-haiku-4-5-20251001","tag":"claude-haiku-4-5-20251001-t2","seed":2,"moveBudget":300,"harnessCommit":"3bcce59"}
 {"t":1787713201291,"type":"model_turn","turn":1,"latencyMs":5229,"commands":["LOOK"],"commentary":"I'm starting the classic text adventure game Zork! I'm west of a white house in an open field. There's a mailbox here which is typically important in Zork. Let me first get my bearings and see what's around me."}
 {"t":1787713201295,"type":"command","turn":1,"command":"LOOK","response":"West of House\nYou are standing in an open field west of a white house, with a boarded front door.\nThere is a small mailbox here.","parserRejection":false,"worldRefusal":false}
 {"t":1787713203440,"type":"model_turn","turn":2,"latencyMs":2143,"commands":["EXAMINE MAILBOX"],"commentary":"The mailbox is a classic Zork item. Let me examine it to see what's inside."}

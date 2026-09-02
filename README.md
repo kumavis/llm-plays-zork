@@ -72,7 +72,7 @@ replay, failure recovery, and the tools fallback).
 `yarn eval` runs a models × trials matrix and reports how they compare:
 
 ```sh
-yarn eval --models haiku,sonnet --trials 3 --moves 300 --name my-eval
+yarn eval --models claude-haiku-4-5-20251001,claude-sonnet-5 --trials 3 --moves 300 --name my-eval
 yarn eval:cost logs/eval-gpt-5.6-sol-300/*.jsonl
 yarn eval:report logs/eval-my-eval        # re-aggregate a batch
 yarn eval:report logs/eval-a logs/eval-b  # one table across batches
@@ -83,7 +83,7 @@ A `--models` entry may carry its own backend and reasoning effort, so a
 single batch can span harnesses:
 
 ```sh
-yarn eval --models claude-cli:sonnet,codex-cli:gpt-5.6-sol@medium --trials 3
+yarn eval --models claude-cli:claude-sonnet-5,codex-cli:gpt-5.6-sol@medium --trials 3
 ```
 
 Each run is bounded by **game moves**, not wall-clock, so a slower model
@@ -120,9 +120,11 @@ So cross-harness numbers compare *harness plus model*, which is what a
 subscription actually buys; only within a backend is the model the single
 variable.
 
-The report groups runs by the model name they requested, so pin one
-reasoning effort per model within a batch (`gpt-5.6-sol@medium`) — the two
-Codex efforts of one model would otherwise share a row.
+The report groups runs by the model name they requested, so use versioned
+Claude IDs rather than the moving `opus`, `sonnet`, and `haiku` aliases. Eval
+runs reject those aliases to keep later model generations in separate rows.
+Also pin one reasoning effort per model within a batch
+(`gpt-5.6-sol@medium`) — two Codex efforts otherwise share a row.
 
 The Claude CLI reports its own API-equivalent cost. The Codex CLI reports
 tokens but no dollar amount because these runs use a ChatGPT subscription,
@@ -155,33 +157,34 @@ formula, token breakdown, and assumptions for every estimated run.
 ### Results
 
 All runs use a 300-game-move budget and deterministic seeds, with a maximum
-Zork score of 350. Opus currently has two completed trials; every other model
-has three. Full transcripts, event logs, and summaries are under the matching
-`logs/eval-<model>-300/` directory.
+Zork score of 350. Claude Opus 5 currently has two completed trials; every
+other model has three. Full transcripts, event logs, and summaries are under
+the matching `logs/eval-<model>-300/` directory.
 
-| provider  | model         | seed 1 | seed 2 | seed 3 |
-| --------- | ------------- | -----: | -----: | -----: |
-| Anthropic | Opus          |    144 |     94 |      — |
-| Anthropic | Sonnet        |     95 |     75 |     69 |
-| Anthropic | Haiku         |     15 |     49 |     40 |
-| OpenAI    | GPT-5.6 Sol   |    104 |    129 |    115 |
-| OpenAI    | GPT-5.6 Terra |     55 |     50 |     59 |
-| OpenAI    | GPT-5.6 Luna  |     40 |     35 |     49 |
+| provider  | model            | seed 1 | seed 2 | seed 3 |
+| --------- | ---------------- | -----: | -----: | -----: |
+| Anthropic | Claude Opus 5    |    144 |     94 |      — |
+| Anthropic | Claude Sonnet 5  |     95 |     75 |     69 |
+| Anthropic | Claude Haiku 4.5 |     15 |     49 |     40 |
+| OpenAI    | GPT-5.6 Sol      |    104 |    129 |    115 |
+| OpenAI    | GPT-5.6 Terra    |     55 |     50 |     59 |
+| OpenAI    | GPT-5.6 Luna     |     40 |     35 |     49 |
 
-| provider  | model         | trials | median | mean  | mean cost/run | score per $ | mean wall/run |
-| --------- | ------------- | -----: | -----: | ----: | -------------: | ----------: | -------------: |
-| Anthropic | Opus          |      2 |    119 | 119.0 |         $10.23 |        11.6 |       30.6 min |
-| Anthropic | Sonnet        |      3 |     75 |  79.7 |          $1.76 |        45.3 |       19.6 min |
-| Anthropic | Haiku         |      3 |     40 |  34.7 |          $1.04 |        33.5 |       13.7 min |
-| OpenAI    | GPT-5.6 Sol   |      3 |    115 | 116.0 |         ~$4.93 |        23.5 |       59.4 min |
-| OpenAI    | GPT-5.6 Terra |      3 |     55 |  54.7 |         ~$2.41 |        22.7 |       37.5 min |
-| OpenAI    | GPT-5.6 Luna  |      3 |     40 |  41.3 |         ~$0.21 |       193.2 |       36.2 min |
+| provider  | model            | trials | median | mean  | mean cost/run | score per $ | mean wall/run |
+| --------- | ---------------- | -----: | -----: | ----: | ------------: | ----------: | ------------: |
+| Anthropic | Claude Opus 5    |      2 |    119 | 119.0 |        $10.23 |        11.6 |      30.6 min |
+| Anthropic | Claude Sonnet 5  |      3 |     75 |  79.7 |         $1.76 |        45.3 |      19.6 min |
+| Anthropic | Claude Haiku 4.5 |      3 |     40 |  34.7 |         $1.04 |        33.5 |      13.7 min |
+| OpenAI    | GPT-5.6 Sol      |      3 |    115 | 116.0 |        ~$4.93 |        23.5 |      59.4 min |
+| OpenAI    | GPT-5.6 Terra    |      3 |     55 |  54.7 |        ~$2.41 |        22.7 |      37.5 min |
+| OpenAI    | GPT-5.6 Luna     |      3 |     40 |  41.3 |        ~$0.21 |       193.2 |      36.2 min |
 
-Opus and GPT-5.6 Sol reached the highest median scores, though the Opus
-estimate has only two trials. Sonnet has the best score per reported dollar
-among the Anthropic runs, while Luna has the best score per estimated API
-dollar among the OpenAI runs. Seed-to-seed variance remains substantial, so
-single runs are anecdotes rather than reliable rankings.
+Claude Opus 5 and GPT-5.6 Sol reached the highest median scores, though the
+Claude Opus 5 result has only two trials. Claude Sonnet 5 has the best score per
+reported dollar among the Anthropic runs, while GPT-5.6 Luna has the best
+score per estimated API dollar among the OpenAI runs. Seed-to-seed variance
+remains substantial, so single runs are anecdotes rather than reliable
+rankings.
 
 ## How it works
 

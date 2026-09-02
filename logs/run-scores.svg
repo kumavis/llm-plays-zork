@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
   <title id="title">Zork score progression — all completed runs</title>
-  <desc id="desc">Step line chart of 17 completed Zork runs over 300 game moves with a y-axis maximum of 150 points. opus-t1, final 134, maximum 144; opus-t2, final 84, maximum 94; sonnet-t1, final 95, maximum 95; sonnet-t2, final 65, maximum 75; sonnet-t3, final 59, maximum 69; haiku-t1, final 15, maximum 15; haiku-t2, final 49, maximum 49; haiku-t3, final 39, maximum 40; gpt-5.6-sol-t1, final 104, maximum 104; gpt-5.6-sol-t2, final 103, maximum 129; gpt-5.6-sol-t3, final 105, maximum 115; gpt-5.6-terra-t1, final 55, maximum 55; gpt-5.6-terra-t2, final 40, maximum 50; gpt-5.6-terra-t3, final 59, maximum 59; gpt-5.6-luna-t1, final 39, maximum 40; gpt-5.6-luna-t2, final 34, maximum 35; gpt-5.6-luna-t3, final 49, maximum 49.</desc>
+  <desc id="desc">Step line chart of 17 completed Zork runs over 300 game moves with a y-axis maximum of 150 points. Claude Opus 5 · t1, final 134, maximum 144; Claude Opus 5 · t2, final 84, maximum 94; Claude Sonnet 5 · t1, final 95, maximum 95; Claude Sonnet 5 · t2, final 65, maximum 75; Claude Sonnet 5 · t3, final 59, maximum 69; Claude Haiku 4.5 · t1, final 15, maximum 15; Claude Haiku 4.5 · t2, final 49, maximum 49; Claude Haiku 4.5 · t3, final 39, maximum 40; GPT-5.6 Sol · t1, final 104, maximum 104; GPT-5.6 Sol · t2, final 103, maximum 129; GPT-5.6 Sol · t3, final 105, maximum 115; GPT-5.6 Terra · t1, final 55, maximum 55; GPT-5.6 Terra · t2, final 40, maximum 50; GPT-5.6 Terra · t3, final 59, maximum 59; GPT-5.6 Luna · t1, final 39, maximum 40; GPT-5.6 Luna · t2, final 34, maximum 35; GPT-5.6 Luna · t3, final 49, maximum 49.</desc>
   <style>
     :root { color-scheme: light dark; }
     svg { color: #18212f; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
@@ -47,111 +47,111 @@
   <text class="subtitle" x="76" y="64">17 runs · 300 game moves · y-axis maximum 150</text>
   <g><line class="grid" x1="76" y1="626" x2="850" y2="626"/><text class="tick" x="64" y="630" text-anchor="end">0</text><line class="grid" x1="76" y1="452" x2="850" y2="452"/><text class="tick" x="64" y="456" text-anchor="end">50</text><line class="grid" x1="76" y1="278" x2="850" y2="278"/><text class="tick" x="64" y="282" text-anchor="end">100</text><line class="grid" x1="76" y1="104" x2="850" y2="104"/><text class="tick" x="64" y="108" text-anchor="end">150</text><line class="grid" x1="76" y1="104" x2="76" y2="626"/><text class="tick" x="76" y="650" text-anchor="middle">0</text><line class="grid" x1="205" y1="104" x2="205" y2="626"/><text class="tick" x="205" y="650" text-anchor="middle">50</text><line class="grid" x1="334" y1="104" x2="334" y2="626"/><text class="tick" x="334" y="650" text-anchor="middle">100</text><line class="grid" x1="463" y1="104" x2="463" y2="626"/><text class="tick" x="463" y="650" text-anchor="middle">150</text><line class="grid" x1="592" y1="104" x2="592" y2="626"/><text class="tick" x="592" y="650" text-anchor="middle">200</text><line class="grid" x1="721" y1="104" x2="721" y2="626"/><text class="tick" x="721" y="650" text-anchor="middle">250</text><line class="grid" x1="850" y1="104" x2="850" y2="626"/><text class="tick" x="850" y="650" text-anchor="middle">300</text></g>
   <rect class="frame" x="76" y="104" width="774" height="522"/>
-  <path class="score-line family-opus trial-1" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 591.20 H 106.96 V 504.20 H 122.44 V 490.28 H 145.66 V 469.40 H 171.46 V 452.00 H 215.32 V 403.28 H 238.54 V 368.48 H 248.86 V 354.56 H 266.92 V 302.36 H 269.50 V 281.48 H 272.08 V 302.36 H 295.30 V 267.56 H 315.94 V 232.76 H 318.52 V 211.88 H 643.60 V 194.48 H 687.46 V 142.28 H 723.58 V 124.88 H 826.78 V 159.68 H 850.00 V 159.68"><title>opus-t1: final 134, max 144</title></path>
-  <path class="score-line family-opus trial-2" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 591.20 H 112.12 V 504.20 H 122.44 V 486.80 H 130.18 V 452.00 H 163.72 V 417.20 H 189.52 V 399.80 H 192.10 V 382.40 H 235.96 V 333.68 H 274.66 V 316.28 H 349.48 V 298.88 H 488.80 V 333.68 H 850.00 V 333.68"><title>opus-t2: final 84, max 94</title></path>
-  <path class="score-line family-sonnet trial-1" d="M 76.00 626.00 H 81.16 V 626.00 H 94.06 V 591.20 H 122.44 V 504.20 H 132.76 V 486.80 H 140.50 V 452.00 H 292.72 V 399.80 H 408.82 V 365.00 H 584.26 V 351.08 H 666.82 V 330.20 H 775.18 V 295.40 H 850.00 V 295.40"><title>sonnet-t1: final 95, max 95</title></path>
-  <path class="score-line family-sonnet trial-2" d="M 76.00 626.00 H 81.16 V 626.00 H 99.22 V 591.20 H 127.60 V 504.20 H 140.50 V 486.80 H 148.24 V 452.00 H 233.38 V 438.08 H 266.92 V 417.20 H 403.66 V 365.00 H 545.56 V 399.80 H 850.00 V 399.80"><title>sonnet-t2: final 65, max 75</title></path>
-  <path class="score-line family-sonnet trial-3" d="M 76.00 626.00 H 81.16 V 626.00 H 94.06 V 591.20 H 117.28 V 504.20 H 130.18 V 486.80 H 137.92 V 452.00 H 256.60 V 399.80 H 514.60 V 385.88 H 545.56 V 420.68 H 850.00 V 420.68"><title>sonnet-t3: final 59, max 69</title></path>
-  <path class="score-line family-haiku trial-1" d="M 76.00 626.00 H 81.16 V 626.00 H 117.28 V 608.60 H 140.50 V 573.80 H 850.00 V 573.80"><title>haiku-t1: final 15, max 15</title></path>
-  <path class="score-line family-haiku trial-2" d="M 76.00 626.00 H 81.16 V 626.00 H 122.44 V 591.20 H 315.94 V 573.80 H 444.94 V 486.80 H 473.32 V 469.40 H 700.36 V 455.48 H 850.00 V 455.48"><title>haiku-t2: final 49, max 49</title></path>
-  <path class="score-line family-haiku trial-3" d="M 76.00 626.00 H 81.16 V 626.00 H 112.12 V 608.60 H 130.18 V 573.80 H 155.98 V 486.80 H 202.42 V 521.60 H 246.28 V 507.68 H 318.52 V 542.48 H 457.84 V 525.08 H 710.68 V 490.28 H 850.00 V 490.28"><title>haiku-t3: final 39, max 40</title></path>
-  <path class="score-line family-sol trial-1" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 591.20 H 114.70 V 504.20 H 122.44 V 486.80 H 150.82 V 472.88 H 210.16 V 438.08 H 225.64 V 351.08 H 233.38 V 385.88 H 295.30 V 368.48 H 362.38 V 351.08 H 398.50 V 368.48 H 519.76 V 403.28 H 656.50 V 354.56 H 788.08 V 319.76 H 834.52 V 284.96 H 837.10 V 264.08 H 850.00 V 264.08"><title>gpt-5.6-sol-t1: final 104, max 104</title></path>
-  <path class="score-line family-sol trial-2" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 591.20 H 114.70 V 504.20 H 125.02 V 486.80 H 143.08 V 472.88 H 179.20 V 452.00 H 326.26 V 399.80 H 375.28 V 382.40 H 416.56 V 365.00 H 432.04 V 347.60 H 470.74 V 298.88 H 493.96 V 284.96 H 517.18 V 250.16 H 540.40 V 197.96 H 542.98 V 177.08 H 545.56 V 197.96 H 659.08 V 232.76 H 718.42 V 267.56 H 850.00 V 267.56"><title>gpt-5.6-sol-t2: final 103, max 129</title></path>
-  <path class="score-line family-sol trial-3" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 591.20 H 114.70 V 504.20 H 125.02 V 486.80 H 132.76 V 452.00 H 349.48 V 434.60 H 354.64 V 417.20 H 406.24 V 452.00 H 491.38 V 438.08 H 545.56 V 424.16 H 573.94 V 403.28 H 597.16 V 365.00 H 671.98 V 403.28 H 708.10 V 385.88 H 728.74 V 347.60 H 785.50 V 312.80 H 800.98 V 225.80 H 821.62 V 260.60 H 850.00 V 260.60"><title>gpt-5.6-sol-t3: final 105, max 115</title></path>
-  <path class="score-line family-terra trial-1" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 608.60 H 104.38 V 573.80 H 145.66 V 486.80 H 155.98 V 521.60 H 261.76 V 504.20 H 424.30 V 469.40 H 496.54 V 504.20 H 615.22 V 626.00 H 625.54 V 608.60 H 638.44 V 573.80 H 674.56 V 486.80 H 687.46 V 469.40 H 705.52 V 434.60 H 850.00 V 434.60"><title>gpt-5.6-terra-t1: final 55, max 55</title></path>
-  <path class="score-line family-terra trial-2" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 608.60 H 104.38 V 573.80 H 125.02 V 486.80 H 137.92 V 469.40 H 354.64 V 504.20 H 406.24 V 539.00 H 442.36 V 626.00 H 452.68 V 608.60 H 465.58 V 573.80 H 506.86 V 486.80 H 568.78 V 452.00 H 586.84 V 486.80 H 620.38 V 472.88 H 713.26 V 452.00 H 790.66 V 486.80 H 850.00 V 486.80"><title>gpt-5.6-terra-t2: final 40, max 50</title></path>
-  <path class="score-line family-terra trial-3" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 591.20 H 140.50 V 504.20 H 150.82 V 486.80 H 279.82 V 452.00 H 310.78 V 438.08 H 359.80 V 472.88 H 370.12 V 455.48 H 393.34 V 438.08 H 403.66 V 472.88 H 432.04 V 626.00 H 442.36 V 591.20 H 463.00 V 504.20 H 473.32 V 490.28 H 499.12 V 472.88 H 563.62 V 438.08 H 834.52 V 420.68 H 850.00 V 420.68"><title>gpt-5.6-terra-t3: final 59, max 59</title></path>
-  <path class="score-line family-luna trial-1" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 608.60 H 119.86 V 573.80 H 143.08 V 486.80 H 145.66 V 521.60 H 210.16 V 504.20 H 491.38 V 490.28 H 850.00 V 490.28"><title>gpt-5.6-luna-t1: final 39, max 40</title></path>
-  <path class="score-line family-luna trial-2" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 591.20 H 112.12 V 504.20 H 114.70 V 539.00 H 158.56 V 525.08 H 334.00 V 507.68 H 850.00 V 507.68"><title>gpt-5.6-luna-t2: final 34, max 35</title></path>
-  <path class="score-line family-luna trial-3" d="M 76.00 626.00 H 81.16 V 626.00 H 94.06 V 608.60 H 117.28 V 573.80 H 140.50 V 486.80 H 148.24 V 472.88 H 176.62 V 455.48 H 346.90 V 490.28 H 581.68 V 455.48 H 850.00 V 455.48"><title>gpt-5.6-luna-t3: final 49, max 49</title></path>
+  <path class="score-line family-opus trial-1" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 591.20 H 106.96 V 504.20 H 122.44 V 490.28 H 145.66 V 469.40 H 171.46 V 452.00 H 215.32 V 403.28 H 238.54 V 368.48 H 248.86 V 354.56 H 266.92 V 302.36 H 269.50 V 281.48 H 272.08 V 302.36 H 295.30 V 267.56 H 315.94 V 232.76 H 318.52 V 211.88 H 643.60 V 194.48 H 687.46 V 142.28 H 723.58 V 124.88 H 826.78 V 159.68 H 850.00 V 159.68"><title>Claude Opus 5 · t1: final 134, max 144</title></path>
+  <path class="score-line family-opus trial-2" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 591.20 H 112.12 V 504.20 H 122.44 V 486.80 H 130.18 V 452.00 H 163.72 V 417.20 H 189.52 V 399.80 H 192.10 V 382.40 H 235.96 V 333.68 H 274.66 V 316.28 H 349.48 V 298.88 H 488.80 V 333.68 H 850.00 V 333.68"><title>Claude Opus 5 · t2: final 84, max 94</title></path>
+  <path class="score-line family-sonnet trial-1" d="M 76.00 626.00 H 81.16 V 626.00 H 94.06 V 591.20 H 122.44 V 504.20 H 132.76 V 486.80 H 140.50 V 452.00 H 292.72 V 399.80 H 408.82 V 365.00 H 584.26 V 351.08 H 666.82 V 330.20 H 775.18 V 295.40 H 850.00 V 295.40"><title>Claude Sonnet 5 · t1: final 95, max 95</title></path>
+  <path class="score-line family-sonnet trial-2" d="M 76.00 626.00 H 81.16 V 626.00 H 99.22 V 591.20 H 127.60 V 504.20 H 140.50 V 486.80 H 148.24 V 452.00 H 233.38 V 438.08 H 266.92 V 417.20 H 403.66 V 365.00 H 545.56 V 399.80 H 850.00 V 399.80"><title>Claude Sonnet 5 · t2: final 65, max 75</title></path>
+  <path class="score-line family-sonnet trial-3" d="M 76.00 626.00 H 81.16 V 626.00 H 94.06 V 591.20 H 117.28 V 504.20 H 130.18 V 486.80 H 137.92 V 452.00 H 256.60 V 399.80 H 514.60 V 385.88 H 545.56 V 420.68 H 850.00 V 420.68"><title>Claude Sonnet 5 · t3: final 59, max 69</title></path>
+  <path class="score-line family-haiku trial-1" d="M 76.00 626.00 H 81.16 V 626.00 H 117.28 V 608.60 H 140.50 V 573.80 H 850.00 V 573.80"><title>Claude Haiku 4.5 · t1: final 15, max 15</title></path>
+  <path class="score-line family-haiku trial-2" d="M 76.00 626.00 H 81.16 V 626.00 H 122.44 V 591.20 H 315.94 V 573.80 H 444.94 V 486.80 H 473.32 V 469.40 H 700.36 V 455.48 H 850.00 V 455.48"><title>Claude Haiku 4.5 · t2: final 49, max 49</title></path>
+  <path class="score-line family-haiku trial-3" d="M 76.00 626.00 H 81.16 V 626.00 H 112.12 V 608.60 H 130.18 V 573.80 H 155.98 V 486.80 H 202.42 V 521.60 H 246.28 V 507.68 H 318.52 V 542.48 H 457.84 V 525.08 H 710.68 V 490.28 H 850.00 V 490.28"><title>Claude Haiku 4.5 · t3: final 39, max 40</title></path>
+  <path class="score-line family-sol trial-1" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 591.20 H 114.70 V 504.20 H 122.44 V 486.80 H 150.82 V 472.88 H 210.16 V 438.08 H 225.64 V 351.08 H 233.38 V 385.88 H 295.30 V 368.48 H 362.38 V 351.08 H 398.50 V 368.48 H 519.76 V 403.28 H 656.50 V 354.56 H 788.08 V 319.76 H 834.52 V 284.96 H 837.10 V 264.08 H 850.00 V 264.08"><title>GPT-5.6 Sol · t1: final 104, max 104</title></path>
+  <path class="score-line family-sol trial-2" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 591.20 H 114.70 V 504.20 H 125.02 V 486.80 H 143.08 V 472.88 H 179.20 V 452.00 H 326.26 V 399.80 H 375.28 V 382.40 H 416.56 V 365.00 H 432.04 V 347.60 H 470.74 V 298.88 H 493.96 V 284.96 H 517.18 V 250.16 H 540.40 V 197.96 H 542.98 V 177.08 H 545.56 V 197.96 H 659.08 V 232.76 H 718.42 V 267.56 H 850.00 V 267.56"><title>GPT-5.6 Sol · t2: final 103, max 129</title></path>
+  <path class="score-line family-sol trial-3" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 591.20 H 114.70 V 504.20 H 125.02 V 486.80 H 132.76 V 452.00 H 349.48 V 434.60 H 354.64 V 417.20 H 406.24 V 452.00 H 491.38 V 438.08 H 545.56 V 424.16 H 573.94 V 403.28 H 597.16 V 365.00 H 671.98 V 403.28 H 708.10 V 385.88 H 728.74 V 347.60 H 785.50 V 312.80 H 800.98 V 225.80 H 821.62 V 260.60 H 850.00 V 260.60"><title>GPT-5.6 Sol · t3: final 105, max 115</title></path>
+  <path class="score-line family-terra trial-1" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 608.60 H 104.38 V 573.80 H 145.66 V 486.80 H 155.98 V 521.60 H 261.76 V 504.20 H 424.30 V 469.40 H 496.54 V 504.20 H 615.22 V 626.00 H 625.54 V 608.60 H 638.44 V 573.80 H 674.56 V 486.80 H 687.46 V 469.40 H 705.52 V 434.60 H 850.00 V 434.60"><title>GPT-5.6 Terra · t1: final 55, max 55</title></path>
+  <path class="score-line family-terra trial-2" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 608.60 H 104.38 V 573.80 H 125.02 V 486.80 H 137.92 V 469.40 H 354.64 V 504.20 H 406.24 V 539.00 H 442.36 V 626.00 H 452.68 V 608.60 H 465.58 V 573.80 H 506.86 V 486.80 H 568.78 V 452.00 H 586.84 V 486.80 H 620.38 V 472.88 H 713.26 V 452.00 H 790.66 V 486.80 H 850.00 V 486.80"><title>GPT-5.6 Terra · t2: final 40, max 50</title></path>
+  <path class="score-line family-terra trial-3" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 591.20 H 140.50 V 504.20 H 150.82 V 486.80 H 279.82 V 452.00 H 310.78 V 438.08 H 359.80 V 472.88 H 370.12 V 455.48 H 393.34 V 438.08 H 403.66 V 472.88 H 432.04 V 626.00 H 442.36 V 591.20 H 463.00 V 504.20 H 473.32 V 490.28 H 499.12 V 472.88 H 563.62 V 438.08 H 834.52 V 420.68 H 850.00 V 420.68"><title>GPT-5.6 Terra · t3: final 59, max 59</title></path>
+  <path class="score-line family-luna trial-1" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 608.60 H 119.86 V 573.80 H 143.08 V 486.80 H 145.66 V 521.60 H 210.16 V 504.20 H 491.38 V 490.28 H 850.00 V 490.28"><title>GPT-5.6 Luna · t1: final 39, max 40</title></path>
+  <path class="score-line family-luna trial-2" d="M 76.00 626.00 H 81.16 V 626.00 H 91.48 V 591.20 H 112.12 V 504.20 H 114.70 V 539.00 H 158.56 V 525.08 H 334.00 V 507.68 H 850.00 V 507.68"><title>GPT-5.6 Luna · t2: final 34, max 35</title></path>
+  <path class="score-line family-luna trial-3" d="M 76.00 626.00 H 81.16 V 626.00 H 94.06 V 608.60 H 117.28 V 573.80 H 140.50 V 486.80 H 148.24 V 472.88 H 176.62 V 455.48 H 346.90 V 490.28 H 581.68 V 455.48 H 850.00 V 455.48"><title>GPT-5.6 Luna · t3: final 49, max 49</title></path>
   <text class="axis-title" x="463" y="682" text-anchor="middle">Game moves</text>
   <text class="axis-title" transform="translate(20 365) rotate(-90)" text-anchor="middle">Score (points)</text>
   <text class="axis-title" x="888" y="92">Completed runs · final / max</text>
   <text class="provider-heading" x="888" y="116">Anthropic · strongest → lightest</text>
     <g transform="translate(888 142)">
       <line class="legend-line family-opus trial-1" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">opus-t1</text>
+      <text class="legend-name" x="48" y="4">Claude Opus 5 · t1</text>
       <text class="legend-stat" x="206" y="4">134 / 144</text>
     </g>
     <g transform="translate(888 170)">
       <line class="legend-line family-opus trial-2" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">opus-t2</text>
+      <text class="legend-name" x="48" y="4">Claude Opus 5 · t2</text>
       <text class="legend-stat" x="206" y="4">84 / 94</text>
     </g>
     <g transform="translate(888 198)">
       <line class="legend-line family-sonnet trial-1" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">sonnet-t1</text>
+      <text class="legend-name" x="48" y="4">Claude Sonnet 5 · t1</text>
       <text class="legend-stat" x="206" y="4">95 / 95</text>
     </g>
     <g transform="translate(888 226)">
       <line class="legend-line family-sonnet trial-2" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">sonnet-t2</text>
+      <text class="legend-name" x="48" y="4">Claude Sonnet 5 · t2</text>
       <text class="legend-stat" x="206" y="4">65 / 75</text>
     </g>
     <g transform="translate(888 254)">
       <line class="legend-line family-sonnet trial-3" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">sonnet-t3</text>
+      <text class="legend-name" x="48" y="4">Claude Sonnet 5 · t3</text>
       <text class="legend-stat" x="206" y="4">59 / 69</text>
     </g>
     <g transform="translate(888 282)">
       <line class="legend-line family-haiku trial-1" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">haiku-t1</text>
+      <text class="legend-name" x="48" y="4">Claude Haiku 4.5 · t1</text>
       <text class="legend-stat" x="206" y="4">15 / 15</text>
     </g>
     <g transform="translate(888 310)">
       <line class="legend-line family-haiku trial-2" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">haiku-t2</text>
+      <text class="legend-name" x="48" y="4">Claude Haiku 4.5 · t2</text>
       <text class="legend-stat" x="206" y="4">49 / 49</text>
     </g>
     <g transform="translate(888 338)">
       <line class="legend-line family-haiku trial-3" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">haiku-t3</text>
+      <text class="legend-name" x="48" y="4">Claude Haiku 4.5 · t3</text>
       <text class="legend-stat" x="206" y="4">39 / 40</text>
     </g>
     <text class="provider-heading" x="888" y="376">OpenAI · strongest → lightest</text>
     <g transform="translate(888 402)">
       <line class="legend-line family-sol trial-1" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">gpt-5.6-sol-t1</text>
+      <text class="legend-name" x="48" y="4">GPT-5.6 Sol · t1</text>
       <text class="legend-stat" x="206" y="4">104 / 104</text>
     </g>
     <g transform="translate(888 430)">
       <line class="legend-line family-sol trial-2" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">gpt-5.6-sol-t2</text>
+      <text class="legend-name" x="48" y="4">GPT-5.6 Sol · t2</text>
       <text class="legend-stat" x="206" y="4">103 / 129</text>
     </g>
     <g transform="translate(888 458)">
       <line class="legend-line family-sol trial-3" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">gpt-5.6-sol-t3</text>
+      <text class="legend-name" x="48" y="4">GPT-5.6 Sol · t3</text>
       <text class="legend-stat" x="206" y="4">105 / 115</text>
     </g>
     <g transform="translate(888 486)">
       <line class="legend-line family-terra trial-1" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">gpt-5.6-terra-t1</text>
+      <text class="legend-name" x="48" y="4">GPT-5.6 Terra · t1</text>
       <text class="legend-stat" x="206" y="4">55 / 55</text>
     </g>
     <g transform="translate(888 514)">
       <line class="legend-line family-terra trial-2" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">gpt-5.6-terra-t2</text>
+      <text class="legend-name" x="48" y="4">GPT-5.6 Terra · t2</text>
       <text class="legend-stat" x="206" y="4">40 / 50</text>
     </g>
     <g transform="translate(888 542)">
       <line class="legend-line family-terra trial-3" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">gpt-5.6-terra-t3</text>
+      <text class="legend-name" x="48" y="4">GPT-5.6 Terra · t3</text>
       <text class="legend-stat" x="206" y="4">59 / 59</text>
     </g>
     <g transform="translate(888 570)">
       <line class="legend-line family-luna trial-1" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">gpt-5.6-luna-t1</text>
+      <text class="legend-name" x="48" y="4">GPT-5.6 Luna · t1</text>
       <text class="legend-stat" x="206" y="4">39 / 40</text>
     </g>
     <g transform="translate(888 598)">
       <line class="legend-line family-luna trial-2" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">gpt-5.6-luna-t2</text>
+      <text class="legend-name" x="48" y="4">GPT-5.6 Luna · t2</text>
       <text class="legend-stat" x="206" y="4">34 / 35</text>
     </g>
     <g transform="translate(888 626)">
       <line class="legend-line family-luna trial-3" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">gpt-5.6-luna-t3</text>
+      <text class="legend-name" x="48" y="4">GPT-5.6 Luna · t3</text>
       <text class="legend-stat" x="206" y="4">49 / 49</text>
     </g>
 </svg>

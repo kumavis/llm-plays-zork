@@ -75,6 +75,18 @@ function strengthFor(family) {
   }[family] ?? 99;
 }
 
+function labelFor(family, trial) {
+  const model = {
+    opus: 'Claude Opus 5',
+    sonnet: 'Claude Sonnet 5',
+    haiku: 'Claude Haiku 4.5',
+    sol: 'GPT-5.6 Sol',
+    terra: 'GPT-5.6 Terra',
+    luna: 'GPT-5.6 Luna',
+  }[family];
+  return model ? `${model} · t${trial}` : null;
+}
+
 export function completedRun(events) {
   const start = events.find((event) => event.type === 'run_start');
   const end = events.filter((event) => event.type === 'run_end').at(-1);
@@ -129,12 +141,14 @@ function seriesFrom(events, sourceName) {
   );
   const tag = start.tag ?? basename(sourceName, '.jsonl');
   const family = familyFor(start);
+  const trial = trialFor(tag);
   return {
     tag,
+    label: labelFor(family, trial) ?? tag,
     family,
     provider: providerFor(start, family),
     strength: strengthFor(family),
-    trial: trialFor(tag),
+    trial,
     points,
     finalScore,
     maxScore: stats.maxScore ?? observedMax,
@@ -179,7 +193,7 @@ export function renderScoreSvg(runs) {
     .join('');
   const lines = series
     .map(
-      (run) => `<path class="score-line family-${run.family} trial-${run.trial}" d="${stepPath(run.points, x, y)}"><title>${escapeXml(run.tag)}: final ${run.finalScore}, max ${run.maxScore}</title></path>`,
+      (run) => `<path class="score-line family-${run.family} trial-${run.trial}" d="${stepPath(run.points, x, y)}"><title>${escapeXml(run.label)}: final ${run.finalScore}, max ${run.maxScore}</title></path>`,
     )
     .join('\n  ');
   const groups = [];
@@ -197,7 +211,7 @@ export function renderScoreSvg(runs) {
         .map((run) => {
           const row = `<g transform="translate(${LEGEND.left} ${legendY})">
       <line class="legend-line family-${run.family} trial-${run.trial}" x1="0" y1="0" x2="36" y2="0"/>
-      <text class="legend-name" x="48" y="4">${escapeXml(run.tag)}</text>
+      <text class="legend-name" x="48" y="4">${escapeXml(run.label)}</text>
       <text class="legend-stat" x="206" y="4">${run.finalScore} / ${run.maxScore}</text>
     </g>`;
           legendY += 28;
@@ -209,7 +223,7 @@ export function renderScoreSvg(runs) {
     })
     .join('\n    ');
   const description = series
-    .map((run) => `${run.tag}, final ${run.finalScore}, maximum ${run.maxScore}`)
+    .map((run) => `${run.label}, final ${run.finalScore}, maximum ${run.maxScore}`)
     .join('; ');
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}" role="img" aria-labelledby="title desc">

@@ -1,4 +1,4 @@
-{"t":1787808307207,"type":"run_start","provider":"claude-cli","model":"haiku","tag":"haiku-t3","seed":3,"moveBudget":300,"harnessCommit":"0498ec8"}
+{"t":1787808307207,"type":"run_start","provider":"claude-cli","model":"claude-haiku-4-5-20251001","tag":"claude-haiku-4-5-20251001-t3","seed":3,"moveBudget":300,"harnessCommit":"0498ec8"}
 {"t":1787808311697,"type":"model_turn","turn":1,"latencyMs":4486,"commands":["INVENTORY"],"commentary":"I'm starting the classic text adventure Zork! I'm in an open field west of a white house with a boarded front door. There's a mailbox here. Let me begin by checking my inventory and examining my surroundings."}
 {"t":1787808311699,"type":"command","turn":1,"command":"INVENTORY","response":"You are empty-handed.","parserRejection":false,"worldRefusal":false}
 {"t":1787808313976,"type":"model_turn","turn":2,"latencyMs":2276,"commands":["EXAMINE MAILBOX"],"commentary":"I'm starting with nothing. Let me examine the mailbox to see what's inside."}

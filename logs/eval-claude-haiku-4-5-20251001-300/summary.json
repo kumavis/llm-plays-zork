@@ -1,10 +1,10 @@
 {
   "rows": [
     {
-      "model": "haiku",
+      "model": "claude-haiku-4-5-20251001",
       "resolvedModel": null,
       "provider": "claude-cli",
-      "tag": "haiku-t1",
+      "tag": "claude-haiku-4-5-20251001-t1",
       "seed": 1,
       "wallMin": 13.484766666666667,
       "turns": 314,
@@ -21,10 +21,10 @@
       "costEstimate": null
     },
     {
-      "model": "haiku",
+      "model": "claude-haiku-4-5-20251001",
       "resolvedModel": null,
       "provider": "claude-cli",
-      "tag": "haiku-t2",
+      "tag": "claude-haiku-4-5-20251001-t2",
       "seed": 2,
       "wallMin": 13.501816666666667,
       "turns": 316,
@@ -41,10 +41,10 @@
       "costEstimate": null
     },
     {
-      "model": "haiku",
+      "model": "claude-haiku-4-5-20251001",
       "resolvedModel": "claude-haiku-4-5-20251001",
       "provider": "claude-cli",
-      "tag": "haiku-t3",
+      "tag": "claude-haiku-4-5-20251001-t3",
       "seed": 3,
       "wallMin": 13.9714,
       "turns": 333,
@@ -64,7 +64,7 @@
   "aggregates": [
     {
       "model": "claude-haiku-4-5-20251001",
-      "alias": "haiku",
+      "alias": "claude-haiku-4-5-20251001",
       "provider": "claude-cli",
       "trials": 3,
       "medianScore": 40,

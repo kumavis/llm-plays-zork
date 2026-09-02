@@ -1,4 +1,4 @@
-{"t":1787807032881,"type":"run_start","provider":"claude-cli","model":"sonnet","tag":"sonnet-t3","seed":3,"moveBudget":300,"harnessCommit":"2e1df3b"}
+{"t":1787807032881,"type":"run_start","provider":"claude-cli","model":"claude-sonnet-5","tag":"claude-sonnet-5-t3","seed":3,"moveBudget":300,"harnessCommit":"2e1df3b"}
 {"t":1787807036400,"type":"model_turn","turn":1,"latencyMs":3515,"commands":["OPEN MAILBOX"],"commentary":"I'll start by exploring my surroundings and checking the mailbox."}
 {"t":1787807036404,"type":"command","turn":1,"command":"OPEN MAILBOX","response":"Opening the small mailbox reveals a leaflet.","parserRejection":false,"worldRefusal":false}
 {"t":1787807039534,"type":"model_turn","turn":2,"latencyMs":3129,"commands":["READ LEAFLET"],"commentary":"Let me read the leaflet first."}
