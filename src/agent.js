@@ -4,6 +4,7 @@
 import { createOpenAIProvider } from './providers/openai.js';
 import { createAnthropicProvider } from './providers/anthropic.js';
 import { createClaudeCliProvider } from './providers/claude-cli.js';
+import { createCodexCliProvider } from './providers/codex-cli.js';
 
 // Provider selection: LLM_PROVIDER wins; otherwise infer from which API key
 // is present in the environment.
@@ -17,11 +18,13 @@ export function createAgent({ systemPrompt }) {
       return createAnthropicProvider(options);
     case 'claude-cli':
       return createClaudeCliProvider(options);
+    case 'codex-cli':
+      return createCodexCliProvider(options);
     case '':
       break;
     default:
       throw new Error(
-        `Unknown LLM_PROVIDER "${choice}". Use "openai", "anthropic", or "claude-cli".`,
+        `Unknown LLM_PROVIDER "${choice}". Use "openai", "anthropic", "claude-cli", or "codex-cli".`,
       );
   }
 

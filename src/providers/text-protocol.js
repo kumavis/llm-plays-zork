@@ -36,3 +36,21 @@ export function parseTextTurn(raw) {
     commentary: commentary.join('\n').trim(),
   };
 }
+
+// Rebuilds a single prompt from a shadow transcript. Used by the CLI
+// backends when their process or thread is lost mid-run and the whole
+// conversation has to be replayed into a fresh one.
+export function withTranscript(history, prompt) {
+  return formatTranscript([...history, { role: 'user', content: prompt }]);
+}
+
+export function formatTranscript(history) {
+  const transcript = history
+    .map(({ role, content }) =>
+      role === 'assistant'
+        ? `[Your previous turn]\n${content}`
+        : `[Game]\n${content}`,
+    )
+    .join('\n\n');
+  return `${transcript}\n\nRespond with your next turn.`;
+}

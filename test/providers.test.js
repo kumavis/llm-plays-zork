@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { formatTranscript } from '../src/providers/claude-cli.js';
+import { formatTranscript } from '../src/providers/text-protocol.js';
 
 test('formatTranscript labels game and player turns', () => {
   const prompt = formatTranscript([

@@ -7,7 +7,7 @@ tool: each turn the model submits one command via a `submit_command` tool
 call, and the game's printed response comes back as the tool result. Text
 the model writes outside the tool call is its "out loud" commentary.
 
-Three interchangeable player backends are supported:
+Four interchangeable player backends are supported:
 
 - **OpenAI** — or any OpenAI-compatible endpoint (LM Studio, Ollama, etc.)
   via `OPENAI_BASE_URL`. Uses the `submit_command` tool; endpoints without
@@ -19,6 +19,11 @@ Three interchangeable player backends are supported:
   whatever login the CLI already has; no API key needed. Uses the
   `COMMAND:` text protocol over one persistent CLI process per game, so
   the CLI's multi-second startup is paid once rather than every turn.
+- **Codex CLI** — headless `codex exec` on whatever ChatGPT login the CLI
+  already has; no API key needed. Also the `COMMAND:` text protocol, but
+  `codex exec` has no persistent stdin channel, so each turn is its own
+  process continuing the thread with `codex exec resume <id>` — boot is
+  paid per turn (~2s of wall time, no move budget).
 
 Each backend owns its conversation history in its API's native format, so
 thinking blocks and tool calls are retained and replayed where the API
@@ -33,9 +38,11 @@ cp .env.example .env   # pick a backend and add a key (not needed for claude-cli
 yarn                   # install dependencies
 ```
 
-The backend is chosen with `LLM_PROVIDER` (`openai`, `anthropic`, or
-`claude-cli`); when unset, it is inferred from which API key is present.
-See `.env.example` for all knobs (models, base URL, reasoning effort).
+The backend is chosen with `LLM_PROVIDER` (`openai`, `anthropic`,
+`claude-cli`, or `codex-cli`); when unset, it is inferred from which API
+key is present. The two CLI backends need their tool installed and logged
+in (`claude`, or `brew install codex && codex login`) but no key here. See
+`.env.example` for all knobs (models, base URL, reasoning effort).
 
 ## Run
 
@@ -65,6 +72,14 @@ replay, failure recovery, and the tools fallback).
 ```sh
 yarn eval --models haiku,sonnet --trials 3 --moves 300 --name my-eval
 yarn eval:report logs/eval-my-eval        # re-aggregate a batch
+yarn eval:report logs/eval-a logs/eval-b  # one table across batches
+```
+
+A `--models` entry may carry its own backend and reasoning effort, so a
+single batch can span harnesses:
+
+```sh
+yarn eval --models claude-cli:sonnet,codex-cli:gpt-5.6-sol@medium --trials 3
 ```
 
 Each run is bounded by **game moves**, not wall-clock, so a slower model
@@ -84,7 +99,31 @@ those logs, so new questions can be asked of old runs.
 Model comparisons hold the backend constant. The `claude-cli` backend
 spawns with no tools, no MCP servers, no setting sources, and a neutral
 working directory, so a run cannot search the web, read files, or keep
-notes between turns: its only effector is the game.
+notes between turns: its only effector is the game. The `codex-cli`
+backend gets the same treatment it can ask for — `--ignore-user-config`
+(no plugins, skills, or MCP servers), `--ignore-rules`, web search off, a
+read-only sandbox, and an empty scratch directory of its own per game —
+with two differences worth stating rather than papering over:
+
+- Codex's shell tool cannot be turned off the way `claude --tools ''`
+  removes Claude's, so the model *can* run read-only commands. There is
+  nothing in its working directory to find, but the capability is there.
+- `codex exec` has no equivalent of `claude --system-prompt`, so Codex's
+  own agent instructions stay in the request and the player prompt rides
+  on top of them as `developer_instructions`.
+
+So cross-harness numbers compare *harness plus model*, which is what a
+subscription actually buys; only within a backend is the model the single
+variable.
+
+The report groups runs by the model name they requested, so pin one
+reasoning effort per model within a batch (`gpt-5.6-sol@medium`) — the two
+Codex efforts of one model would otherwise share a row.
+
+Cost is reported only where the backend reports it. The Claude CLI
+estimates each run at API list prices; the Codex CLI reports tokens but no
+price, so its cost and score-per-dollar columns read `n/a` rather than
+`$0.00` — a subscription run is not a free one.
 
 ### Results
 
@@ -112,10 +151,10 @@ anecdotes — the seeded, repeated matrix exists for that reason.
 - `src/zork.js` — bridges the WASM z-machine via `wasm-ffi`: loads the
   story file, feeds commands, and emits the game's printed output.
 - `src/agent.js` — selects the provider backend.
-- `src/providers/` — the backends: `openai.js`, `anthropic.js`, and
-  `claude-cli.js`. Each owns its native conversation history and exposes
-  the same interface: `requestCommands(gameOutputs)` returns the model's
-  submitted commands plus its out-loud commentary.
+- `src/providers/` — the backends: `openai.js`, `anthropic.js`,
+  `claude-cli.js`, and `codex-cli.js`. Each owns its native conversation
+  history and exposes the same interface: `requestCommands(gameOutputs)`
+  returns the model's submitted commands plus its out-loud commentary.
 - `src/index.js` — the game loop: runs submitted commands in the game,
   feeds the printed output back as the next tool result, and restarts
   the game when it ends.
@@ -132,4 +171,6 @@ Anthropic backend sets a cache breakpoint each request so the previous
 turn's prefix bills at cache-read rates; OpenAI endpoints cache stable
 prefixes automatically; the Claude CLI backend resumes one CLI session
 per game and only sends new game output, letting the CLI manage its own
-history and caching.
+history and caching. The Codex backend cannot hold a process open, so each
+turn re-enters the same thread with `codex exec resume`; the Responses API
+still cache-reads the replayed prefix, which is most of the request.

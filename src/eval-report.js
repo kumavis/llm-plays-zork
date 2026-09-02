@@ -1,10 +1,22 @@
 // Aggregates an eval batch's run-*.jsonl event logs into a comparison table.
-// Usage: node src/eval-report.js [logs/eval-<name>]  (defaults to the latest batch)
+// Usage: node src/eval-report.js [logs/eval-<name> ...] [--out <dir>]
+//        (no argument: the latest batch)
+//
+// Several batch directories can be reported together, so models run in
+// separate batches — a different harness, or a later top-up — still land in
+// one table. A combined report writes summary.json only where --out says to,
+// so it cannot overwrite a single batch's own summary.
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
+// Reports one batch directory, writing its summary.json back into it.
 export async function reportDirectory(dir) {
+  return reportDirectories([dir], dir);
+}
+
+// Reads one batch directory's completed and incomplete runs into rows.
+async function collectRows(dir) {
   const files = (await readdir(dir))
     .filter((f) => f.startsWith('run-') && f.endsWith('.jsonl'))
     .sort();
@@ -34,6 +46,7 @@ export async function reportDirectory(dir) {
     if (!end || !budgetReached) {
       rows.push({
         model: start.model ?? '?',
+        provider: start.provider ?? '?',
         tag: start.tag ?? file,
         incomplete: true,
         endReason: end ? (end.endReason ?? 'stopped early') : 'no run_end',
@@ -49,6 +62,7 @@ export async function reportDirectory(dir) {
       // with the exact model the API served, when any run recorded it.
       model: start.model ?? '?',
       resolvedModel: u.resolvedModel ?? null,
+      provider: start.provider ?? '?',
       tag: start.tag ?? file,
       seed: start.seed ?? null,
       // Time actually spent playing: a resumed run is idle between attempts,
@@ -66,12 +80,20 @@ export async function reportDirectory(dir) {
         (s.commands ?? 0) - (s.commandsAtLastScoreChange ?? 0),
       ),
       tokensOut: u.outputTokens ?? null,
+      // Subscription backends report tokens but no price; null means "no
+      // cost data", which is not the same as a run that cost nothing.
       costUsd: u.costUsd ?? null,
     });
   }
+  return rows;
+}
+
+export async function reportDirectories(dirs, outDir = null) {
+  const rows = (await Promise.all(dirs.map(collectRows))).flat();
 
   const columns = [
     ['run', (r) => r.tag],
+    ['backend', (r) => r.provider],
     ['score', (r) => (r.incomplete ? `INCOMPLETE(${r.endReason})` : r.maxScore)],
     ['moves', (r) => r.moves],
     ['cmds', (r) => r.commands],
@@ -81,7 +103,7 @@ export async function reportDirectory(dir) {
     ['stale', (r) => r.staleness],
     ['wall(m)', (r) => r.wallMin?.toFixed(1)],
     ['out-tok', (r) => r.tokensOut],
-    ['cost($)', (r) => r.costUsd?.toFixed(2)],
+    ['cost($)', (r) => r.costUsd?.toFixed(2) ?? 'n/a'],
   ];
   printTable(columns, rows);
 
@@ -89,37 +111,49 @@ export async function reportDirectory(dir) {
     rows.filter((r) => !r.incomplete),
     (r) => r.model,
   );
-  const aggregates = [...byModel.entries()].map(([model, runs]) => ({
-    model: runs.find((r) => r.resolvedModel)?.resolvedModel ?? model,
-    alias: model,
-    trials: runs.length,
-    medianScore: median(runs.map((r) => r.maxScore ?? 0)),
-    meanScore: mean(runs.map((r) => r.maxScore ?? 0)),
-    meanCommands: mean(runs.map((r) => r.commands)),
-    meanWallMin: mean(runs.map((r) => r.wallMin)),
-    meanCostUsd: mean(runs.map((r) => r.costUsd ?? 0)),
-    scorePerDollar:
-      sum(runs.map((r) => r.maxScore ?? 0)) /
-      (sum(runs.map((r) => r.costUsd ?? 0)) || 1),
-  }));
+  const aggregates = [...byModel.entries()].map(([model, runs]) => {
+    // Only runs that reported a price contribute to the money columns; a
+    // subscription backend reports none, so its cost columns stay null
+    // rather than averaging in zeros and inflating score-per-dollar.
+    const costed = runs.filter((r) => r.costUsd != null);
+    return {
+      model: runs.find((r) => r.resolvedModel)?.resolvedModel ?? model,
+      alias: model,
+      provider: runs[0]?.provider ?? '?',
+      trials: runs.length,
+      medianScore: median(runs.map((r) => r.maxScore ?? 0)),
+      meanScore: mean(runs.map((r) => r.maxScore ?? 0)),
+      meanCommands: mean(runs.map((r) => r.commands)),
+      meanWallMin: mean(runs.map((r) => r.wallMin)),
+      meanCostUsd: costed.length > 0 ? mean(costed.map((r) => r.costUsd)) : null,
+      scorePerDollar:
+        costed.length > 0
+          ? sum(costed.map((r) => r.maxScore ?? 0)) /
+            (sum(costed.map((r) => r.costUsd)) || 1)
+          : null,
+    };
+  });
   console.log('\nPer-model aggregates:');
   printTable(
     [
       ['model', (a) => a.model],
+      ['backend', (a) => a.provider],
       ['trials', (a) => a.trials],
       ['median score', (a) => a.medianScore],
       ['mean score', (a) => a.meanScore.toFixed(1)],
       ['mean cmds', (a) => a.meanCommands.toFixed(0)],
       ['mean wall(m)', (a) => a.meanWallMin.toFixed(1)],
-      ['mean cost($)', (a) => a.meanCostUsd.toFixed(2)],
-      ['score/$', (a) => a.scorePerDollar.toFixed(1)],
+      ['mean cost($)', (a) => a.meanCostUsd?.toFixed(2) ?? 'n/a'],
+      ['score/$', (a) => a.scorePerDollar?.toFixed(1) ?? 'n/a'],
     ],
     aggregates,
   );
 
-  const summaryPath = join(dir, 'summary.json');
-  await writeFile(summaryPath, JSON.stringify({ rows, aggregates }, null, 2));
-  console.log(`\nSummary written to ${summaryPath}`);
+  if (outDir !== null) {
+    const summaryPath = join(outDir, 'summary.json');
+    await writeFile(summaryPath, JSON.stringify({ rows, aggregates }, null, 2));
+    console.log(`\nSummary written to ${summaryPath}`);
+  }
   return { rows, aggregates };
 }
 
@@ -170,8 +204,14 @@ if (
   process.argv[1] &&
   import.meta.url === pathToFileURL(process.argv[1]).href
 ) {
-  let dir = process.argv[2];
-  if (!dir) {
+  const argv = process.argv.slice(2);
+  const outFlag = argv.indexOf('--out');
+  const outDir = outFlag === -1 ? null : argv[outFlag + 1];
+  const dirs = argv.filter(
+    (arg, i) =>
+      !arg.startsWith('--') && (outFlag === -1 || (i !== outFlag && i !== outFlag + 1)),
+  );
+  if (dirs.length === 0) {
     const logsDir = fileURLToPath(new URL('../logs/', import.meta.url));
     const batches = (await readdir(logsDir))
       .filter((f) => f.startsWith('eval-'))
@@ -180,7 +220,9 @@ if (
       console.error('No logs/eval-* batches found.');
       process.exit(1);
     }
-    dir = join(logsDir, batches.at(-1));
+    dirs.push(join(logsDir, batches.at(-1)));
   }
-  await reportDirectory(dir);
+  // A single batch keeps its summary.json; a combined report writes one only
+  // where it is asked to, so it never clobbers a batch's own summary.
+  await reportDirectories(dirs, outDir ?? (dirs.length === 1 ? dirs[0] : null));
 }

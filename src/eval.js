@@ -3,8 +3,13 @@
 // models, so trial k is the same game for every model.
 //
 // Usage: node src/eval.js --models haiku,sonnet --trials 3 --moves 300
-//        [--provider claude-cli] [--max-minutes 30] [--name my-eval]
+//        [--provider claude-cli] [--max-minutes 60] [--name my-eval]
 //        [--seeds 2,3]  -- rerun specific trials into an existing batch
+//
+// A --models entry may name its own backend and reasoning effort, so one
+// batch can span harnesses and land in a single report:
+//   --models claude-cli:sonnet,codex-cli:gpt-5.6-sol@medium
+// The bare form uses --provider and the backend's default effort.
 import { spawn } from 'node:child_process';
 import { openSync, closeSync } from 'node:fs';
 import { mkdir, readdir, readFile, rename } from 'node:fs/promises';
@@ -19,16 +24,26 @@ const { values } = parseArgs({
     trials: { type: 'string', default: '3' },
     moves: { type: 'string', default: '300' },
     provider: { type: 'string', default: 'claude-cli' },
-    'max-minutes': { type: 'string', default: '30' },
+    'max-minutes': { type: 'string', default: '60' },
     name: { type: 'string' },
     seeds: { type: 'string' },
   },
 });
 
+// "[provider:]model[@effort]" — a backend and reasoning effort may travel
+// with the model, so a batch can mix harnesses. The model name alone is the
+// run's tag and the report's row, since names don't collide across backends.
 const models = values.models
   .split(',')
-  .map((m) => m.trim())
-  .filter(Boolean);
+  .map((entry) => entry.trim())
+  .filter(Boolean)
+  .map((entry) => {
+    const [head, effort = null] = entry.split('@');
+    const colon = head.indexOf(':');
+    return colon === -1
+      ? { provider: values.provider, name: head, effort }
+      : { provider: head.slice(0, colon), name: head.slice(colon + 1), effort };
+  });
 // Trial index doubles as the RNG seed, so every model plays the same game in
 // trial k. --seeds reruns just those trials (e.g. after a failed run).
 const trialNumbers = values.seeds
@@ -46,14 +61,15 @@ await mkdir(batchDir, { recursive: true });
 console.log(
   styleText(
     'blue',
-    `Eval batch "${batchName}": models [${models.join(', ')}] × trials [${trialNumbers.join(', ')}], ` +
-      `${moves} moves each, provider ${values.provider}\nLogs: ${batchDir}`,
+    `Eval batch "${batchName}": ` +
+      `models [${models.map(describe).join(', ')}] × trials [${trialNumbers.join(', ')}], ` +
+      `${moves} moves each\nLogs: ${batchDir}`,
   ),
 );
 
 for (const model of models) {
   for (const trial of trialNumbers) {
-    const tag = `${model}-t${trial}`;
+    const tag = `${model.name}-t${trial}`;
     // Resume: a trial that already spent its budget is left alone, so an
     // interrupted batch can be relaunched with the same command.
     if (await isTrialComplete(tag)) {
@@ -95,17 +111,25 @@ async function isTrialComplete(tag) {
           return [];
         }
       });
-    const end = events.find((e) => e.type === 'run_end');
-    if (!end) continue;
-    // Logs written before run_end carried budgetReached fall back to the
-    // move count, matching how the report decides a run is complete.
-    if (end.budgetReached) return true;
-    if (end.budgetReached === undefined) {
-      const played = end.runStats?.totalMoves || end.runStats?.moves || 0;
-      if (played >= moves) return true;
+    // A resumed run writes one run_end per interrupted attempt before the
+    // completing one, so every run_end has to be considered — checking only
+    // the first would see an interrupted attempt and replay a finished trial.
+    for (const end of events.filter((e) => e.type === 'run_end')) {
+      if (end.budgetReached) return true;
+      // Logs written before run_end carried budgetReached fall back to the
+      // move count, matching how the report decides a run is complete.
+      if (end.budgetReached === undefined) {
+        const played = end.runStats?.totalMoves || end.runStats?.moves || 0;
+        if (played >= moves) return true;
+      }
     }
   }
   return false;
+}
+
+// A model spec as written on the command line, for the batch banner.
+function describe({ provider, name, effort }) {
+  return `${provider}:${name}${effort ? `@${effort}` : ''}`;
 }
 
 // Runs one harness process to completion, with a wall-clock safety limit.
@@ -118,9 +142,15 @@ function runOne(model, trial, tag) {
       {
         env: {
           ...process.env,
-          LLM_PROVIDER: values.provider,
-          CLAUDE_CLI_MODEL: model,
-          ANTHROPIC_MODEL: model,
+          LLM_PROVIDER: model.provider,
+          // Each backend reads its own model variable, and only the selected
+          // one is consulted, so setting all three is harmless.
+          CLAUDE_CLI_MODEL: model.name,
+          CODEX_CLI_MODEL: model.name,
+          ANTHROPIC_MODEL: model.name,
+          ...(model.effort
+            ? { CODEX_CLI_EFFORT: model.effort, ANTHROPIC_EFFORT: model.effort }
+            : {}),
           MAX_MOVES: String(moves),
           ZORK_SEED: String(trial),
           RUN_TAG: tag,

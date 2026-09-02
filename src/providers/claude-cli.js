@@ -9,7 +9,11 @@
 import { spawn } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { createInterface } from 'node:readline';
-import { TEXT_PROTOCOL_APPENDIX, parseTextTurn } from './text-protocol.js';
+import {
+  TEXT_PROTOCOL_APPENDIX,
+  parseTextTurn,
+  withTranscript,
+} from './text-protocol.js';
 
 const TURN_TIMEOUT_MS = 5 * 60 * 1000;
 
@@ -250,20 +254,4 @@ export function createClaudeCliProvider({ systemPrompt }) {
 function primaryModel(modelOutputTokens) {
   const ranked = Object.entries(modelOutputTokens).sort((a, b) => b[1] - a[1]);
   return ranked[0]?.[0] ?? null;
-}
-
-function withTranscript(history, prompt) {
-  return formatTranscript([...history, { role: 'user', content: prompt }]);
-}
-
-// Rebuilds a single prompt from the shadow transcript when the process is lost.
-export function formatTranscript(history) {
-  const transcript = history
-    .map(({ role, content }) =>
-      role === 'assistant'
-        ? `[Your previous turn]\n${content}`
-        : `[Game]\n${content}`,
-    )
-    .join('\n\n');
-  return `${transcript}\n\nRespond with your next turn.`;
 }

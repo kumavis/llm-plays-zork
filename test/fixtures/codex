@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+// Fake `codex` CLI for tests: speaks just enough of the `exec --json` event
+// stream. Echoes the received prompt and whether the invocation was a
+// resume, so tests can assert thread continuity and transcript replay.
+// Exits without a message when the prompt is exactly "DIE", simulating a
+// failed turn.
+import { readFileSync } from 'node:fs';
+
+const args = process.argv.slice(2);
+const resumed = args[1] === 'resume' ? args[2] : null;
+const prompt = readFileSync(0, 'utf8');
+
+const emit = (event) => process.stdout.write(JSON.stringify(event) + '\n');
+
+emit({ type: 'thread.started', thread_id: resumed ?? 'thread-1' });
+emit({ type: 'turn.started' });
+if (prompt === 'DIE') {
+  emit({ type: 'turn.failed', error: { message: 'simulated failure' } });
+  process.exit(1);
+}
+emit({
+  type: 'item.completed',
+  item: { id: 'r0', type: 'reasoning', text: 'ignored' },
+});
+emit({
+  type: 'item.completed',
+  item: {
+    id: 'item_0',
+    type: 'agent_message',
+    text: `thread:${resumed ?? 'new'}\nreceived:${prompt.split('\n')[0]}\nCOMMAND: LOOK`,
+  },
+});
+emit({
+  type: 'turn.completed',
+  usage: {
+    input_tokens: 100,
+    output_tokens: 10,
+    cached_input_tokens: 50,
+    cache_write_input_tokens: 5,
+    reasoning_output_tokens: 4,
+  },
+});
